@@ -1,0 +1,4 @@
+Naam: Renzo Remmers
+Leeftijd: 20
+StudentNr: 2173909
+StudentEmail: rjacg.remmers@student.avans.nl
