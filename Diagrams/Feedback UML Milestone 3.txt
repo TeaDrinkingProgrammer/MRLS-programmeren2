@@ -1,0 +1,5 @@
+De GUI mag ook gebruik maken van de Domain classes. Dat is juist handig om met de applogic class te praten in termen van die entiteiten.
+[10-12 21:36] Ruud Hermans
+    Hoe ga je ervoor zorgen dat applogic de DAO kent? 
+​[10-12 21:38] Ruud Hermans
+    Het is altijd een goed idee om applogic alleen methoden van de DAO aan te laten roepen, niet andersom, dan is die makkelijk te wisselen. Eventueel via een interface koppelen, zodat je nog van DAO kan wisselen, bijvoorbeeld in je testen.

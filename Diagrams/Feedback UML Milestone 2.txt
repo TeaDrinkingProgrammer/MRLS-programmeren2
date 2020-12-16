@@ -1,0 +1,20 @@
+Milestone 2 (29-11-2020)
+V - Wat is contentPerc in Participant, moet dit opgeslagen worden, of berekend? Als het opgeslagen moet worden, is het dan wel deel van een Participant? Het gaat om een percentage per contentitem, mind you.
+
+V - Waarom heb je van ContentItemList een aparte class gemaakt? Wat voegt dat toe ten opzichte van een ArrayList in Participant?
+
+V - Let op met solid driehoekpijltjes, die betekenen iets anders dan het open pijltje ( > )
+
+V - Webcast en Module hebben allebei een title, moet die dan niet naar ContentItem?
+
+V - Wat is het verschil tussen name en title in Module?
+
+V - Je hebt een beperkt aantal waarden voor level in Course, is een String dan het meest geschikt?
+
+V - Ik verwacht een zelfverwijzing bij Course. Let op de richting! Het is een stuk lastiger om voor alle courses uit te zoeken of ze relevant zijn voor de huidige course, dan dat het is om op de huidige course bij te houden wat de relvante courses zijn.
+
+V - Toevoegen van attributen die andere classes bevatten deden we op een andere manier, op de associatie.
+
+V - Goed dat je onderbouwing toegevoegd hebt!
+
+V - Goed gebruik van de aggregation.
