@@ -1,4 +1,5 @@
 package CCStatistics.GUI;
-public class Courses {
-    
-}
+
+// public class Courses {
+ //   public void 
+//}

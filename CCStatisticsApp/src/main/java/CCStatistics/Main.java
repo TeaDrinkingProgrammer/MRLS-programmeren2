@@ -4,12 +4,22 @@ import java.util.ArrayList;
 
 import CCStatistics.DAO.CourseDAO;
 import CCStatistics.Domain.Course;
+
+
+
+
 public class Main {
-    public static void main(String[] args) throws Exception {
-        CourseDAO test = new CourseDAO();
-        ArrayList<Course> courses = test.getAll();
-        for (Course course : courses) {
-            System.out.println(course.getName());
-        }
+    // public static void main(String[] args) {
+    // CourseDAO test = new CourseDAO();
+    // ArrayList<String> courses = test.getCoursesInterestingTo("TestCourse");
+    //      for (String course : courses) {
+    //          System.out.println(course);
+    //      }
+    //     }
+    // }
+
+    
+    public static void main(String[] args) {
+        Application.launch(CourseInteresting.class);
     }
-}
+
