@@ -31,6 +31,7 @@ public class CourseInteresting extends Application {
         layout.add(recomCoursesTitle, 0, 4);
         layout.add(recommendedCourses, 0, 5);
 
+        layout.setPrefSize(300, 180);
         layout.setAlignment(Pos.CENTER);
         layout.setVgap(10);
         layout.setHgap(10);
