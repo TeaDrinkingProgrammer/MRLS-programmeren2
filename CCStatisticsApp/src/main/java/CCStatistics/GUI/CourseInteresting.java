@@ -47,7 +47,7 @@ public class CourseInteresting extends Application {
                 }
                 recommendedCourses.setText(courses.toString());
             } else {
-                recommendedCourses.setText("No such course, fool!");
+                courseNotExist.setText("No such course, fool!");
             }
             
         });
