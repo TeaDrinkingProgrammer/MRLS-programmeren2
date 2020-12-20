@@ -102,7 +102,7 @@ public class CourseDAO{
             con = DriverManager.getConnection(connectionUrl);
 
             // Neemt de courses die interesant zijn voor de geinputte course uit InterestingToCourse en geeft alle info uit de Course tabel terug.
-            String SQL = "SELECT * FROM Course WHERE Name IN( SELECT InterestingCourseName FROM InterestingToCourse WHERE CourseName = '" + courseName + "'";
+            String SQL = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourseName FROM InterestingToCourse WHERE CourseName = '" + courseName + "')";
             stmt = con.createStatement();
             // Voer de query uit op de database.
             rs = stmt.executeQuery(SQL);
