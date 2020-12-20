@@ -13,10 +13,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 public class CourseInteresting extends Application {
 
     public void start(Stage window) {
+        Label enterUser = new Label("User:");
+        TextField inputUser = new TextField();
         Label enterCourse = new Label("Enter course:");
         TextField inputCourse = new TextField();
         Label courseNotExist = new Label();
@@ -24,18 +27,23 @@ public class CourseInteresting extends Application {
         Label recomCoursesTitle = new Label("Recommended course(s):");
         Label recommendedCourses = new Label("");
         ScrollPane scroller = new ScrollPane(recommendedCourses);
-        
+                
         recommendedCourses.setPadding(new Insets(5, 5, 5, 5));
         scroller.setMinHeight(120.0);
 
+        HBox toLogin = new HBox();
+        toLogin.getChildren().addAll(enterUser, inputUser);
+        toLogin.setSpacing(20);
+
         GridPane layout = new GridPane();
-        layout.add(enterCourse, 0, 0);
-        layout.add(inputCourse, 0, 1);
-        layout.add(submitButton, 0, 2);
-        layout.add(courseNotExist, 0, 3);
-        layout.add(recomCoursesTitle, 0, 5);
-        layout.add(recommendedCourses, 0, 6);
-        layout.add(scroller, 0, 7);
+        layout.add(toLogin, 0, 0);
+        layout.add(enterCourse, 0, 1);
+        layout.add(inputCourse, 0, 2);
+        layout.add(submitButton, 0, 3);
+        layout.add(courseNotExist, 0, 4);
+        layout.add(recomCoursesTitle, 0, 6);
+        layout.add(recommendedCourses, 0, 7);
+        layout.add(scroller, 0, 8);
 
         layout.setPrefSize(315, 320);
         layout.setAlignment(Pos.CENTER);
@@ -45,7 +53,7 @@ public class CourseInteresting extends Application {
 
         submitButton.setOnAction((event) -> {
             CourseInterestingToLogic interesting = new CourseInterestingToLogic();
-            ArrayList<Course> coursesList = interesting.getAllInterestingCourses(inputCourse.getText());
+            ArrayList<Course> coursesList = interesting.getAllInterestingCourses(inputCourse.getText(), inputUser.getText());
             StringBuilder courses = new StringBuilder();
 
             if (coursesList != null) {
@@ -55,7 +63,7 @@ public class CourseInteresting extends Application {
                 }
                 recommendedCourses.setText(courses.toString());
             } else {
-                courseNotExist.setText("No such course, fool!");
+                courseNotExist.setText("No such course or wrong user!");
             }
 
         });

@@ -14,11 +14,11 @@ public class CourseDAO{
     Login login = new Login();
 
 
-    public ArrayList<Course> getAll() {
+    public ArrayList<Course> getAll(String loginName) {
         
         
         // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
-        String connectionUrl = login.getLogin();
+        String connectionUrl = login.getLogin(loginName);
 
         // Connection beheert informatie over de connectie met de database.
         Connection con = null;
@@ -77,11 +77,17 @@ public class CourseDAO{
         return courses;
     }
 
-    public ArrayList<Course> getCoursesInterestingTo(String courseName){
+    public ArrayList<Course> getCoursesInterestingTo(String courseName, String loginName){
                 
-        
         // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
-        String connectionUrl = login.getLogin();
+        String connectionUrl = "";
+        
+        connectionUrl = login.getLogin(loginName);
+        
+        if (connectionUrl.equals("wrongUser")) {
+            return new ArrayList<>();
+        }
+        
 
         // Connection beheert informatie over de connectie met de database.
         Connection con = null;
