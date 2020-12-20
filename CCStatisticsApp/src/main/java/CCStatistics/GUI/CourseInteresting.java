@@ -69,7 +69,7 @@ public class CourseInteresting extends Application {
                 }
                 
             } else {
-                courseNotExist.setText("Wrong user!");
+                courseNotExist.setText("User not found!");
                 recommendedCourses.setText("");
             }
 
