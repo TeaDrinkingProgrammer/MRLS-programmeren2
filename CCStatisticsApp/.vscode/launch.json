@@ -6,17 +6,24 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "CCStatistics.Main",
+            "projectName": "CCStatisticsApp_6b3a1074"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
         },
-        {
-            "type": "java",
-            "request": "launch",
-            "name": "CodeLens JavaFx",
-            "vmArgs": "-p \"C:\\Program Files\\JavaFx\\lib\" --add-modules javafx.controls",
-            "mainClass": "${file}"
-        },
+        // {
+        //     "type": "java",
+        //     "request": "launch",
+        //     "name": "CodeLens JavaFx",
+        //     "vmArgs": "-p \"C:\\Program Files\\JavaFx\\lib\" --add-modules javafx.controls",
+        //     "mainClass": "${file}"
+        // },
         {
             "type": "java",
             "name": "Launch Main",
