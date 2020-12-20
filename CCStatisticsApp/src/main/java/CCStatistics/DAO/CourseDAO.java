@@ -123,6 +123,10 @@ public class CourseDAO{
                 //Cast de individuele items uit het queryresultaat als course in de arraylist
                 courses.add(new Course(name,subject,introText,level));
             }
+
+            if (courses.isEmpty()) {
+                courses.add(new Course("No courses found!", "Subject", "IntroText", LevelEnum.valueOf("Beginner")));
+            }
         }
 
         // Handles mogelijke errors

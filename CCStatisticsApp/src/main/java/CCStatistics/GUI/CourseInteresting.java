@@ -58,12 +58,19 @@ public class CourseInteresting extends Application {
 
             if (coursesList != null) {
                 for (Course course : coursesList) {
-                    courseNotExist.setText("Success!");
+                    courseNotExist.setText("Success! Connection established.");
                     courses.append(course.getName() + "\n");
                 }
-                recommendedCourses.setText(courses.toString());
+
+                if (courses.toString().equals("No courses found!")) {
+                    recommendedCourses.setText("No courses found!");
+                } else {
+                    recommendedCourses.setText(courses.toString());
+                }
+                
             } else {
-                courseNotExist.setText("No such course or wrong user!");
+                courseNotExist.setText("Wrong user!");
+                recommendedCourses.setText("");
             }
 
         });
