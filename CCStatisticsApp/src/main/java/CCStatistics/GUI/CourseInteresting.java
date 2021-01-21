@@ -18,8 +18,8 @@ import javafx.scene.layout.HBox;
 public class CourseInteresting extends Application {
 
     public void start(Stage window) {
-        Label enterUser = new Label("User:");
-        TextField inputUser = new TextField();
+        // Label enterUser = new Label("User:");
+        // TextField inputUser = new TextField();
         Label enterCourse = new Label("Enter course:");
         TextField inputCourse = new TextField();
         Label courseNotExist = new Label();
@@ -31,12 +31,12 @@ public class CourseInteresting extends Application {
         recommendedCourses.setPadding(new Insets(5, 5, 5, 5));
         scroller.setMinHeight(120.0);
 
-        HBox toLogin = new HBox();
-        toLogin.getChildren().addAll(enterUser, inputUser);
-        toLogin.setSpacing(20);
+       // HBox toLogin = new HBox();
+       // toLogin.getChildren().addAll(enterUser, inputUser);
+       // toLogin.setSpacing(20);
 
         GridPane layout = new GridPane();
-        layout.add(toLogin, 0, 0);
+       // layout.add(toLogin, 0, 0);
         layout.add(enterCourse, 0, 1);
         layout.add(inputCourse, 0, 2);
         layout.add(submitButton, 0, 3);
@@ -53,7 +53,7 @@ public class CourseInteresting extends Application {
 
         submitButton.setOnAction((event) -> {
             CourseInterestingToLogic interesting = new CourseInterestingToLogic();
-            ArrayList<Course> coursesList = interesting.getAllInterestingCourses(inputCourse.getText(), inputUser.getText());
+            ArrayList<Course> coursesList = interesting.getAllInterestingCourses(inputCourse.getText());
             StringBuilder courses = new StringBuilder();
 
             if (coursesList != null) {

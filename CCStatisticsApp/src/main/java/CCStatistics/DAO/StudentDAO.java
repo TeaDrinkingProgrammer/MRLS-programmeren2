@@ -1,38 +1,45 @@
 package CCStatistics.DAO;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-import CCStatistics.Domain.Course;
-import CCStatistics.Domain.LevelEnum;
+import CCStatistics.Domain.Student;
 
-public class CourseDAO{
+public class StudentDAO{
     //Pakt de connectionURL van login zodat deze aan te passen is. Geeft ook de mogelijkheid voor bijv. meerdere connectionURLS
     SQL sql = new SQL();
     
-    public ArrayList<Course> genericReadQuery(String query){
-        ArrayList<ArrayList<String>> tableList = sql.readQuery("Course",query);
-        ArrayList<Course> courses = new ArrayList<>();
+    public ArrayList<Student> genericReadQuery(String query){
+        ArrayList<ArrayList<String>> tableList = sql.readQuery("Student",query);
+        ArrayList<Student> students = new ArrayList<>();
         if(tableList.size() > 0){
             for(ArrayList<String> row : tableList){
-                String name = row.get(0);
-                String subject = row.get(1);
-                String introText = row.get(2);
-                LevelEnum level = LevelEnum.valueOf(row.get(3));
-                courses.add(new Course(name,subject,introText,level));
+                String email = row.get(0);
+                String firstName = row.get(1);
+                String lastName = row.get(2);
+                Date dateOfBirth = java.sql.Date.valueOf(row.get(3));
+                String gender = row.get(4);
+                String street = row.get(5);
+                String houseNumber = row.get(6);
+                String city = row.get(7);
+                String country = row.get(8);
+                String postalcode = row.get(9);
+                students.add(new Student(email, firstName, lastName, dateOfBirth, gender, street, houseNumber, city, country, postalcode));
             }
         } else{
-            courses.add(new Course("No courses found!", "Subject", "IntroText", LevelEnum.valueOf("Beginner")));
+            //Date nullDate = ;
+            //students.add(new Student("No Students found!", "null", "null",date,"null","null","null","null","null","null"));
         }
-        return courses;
+        return students;
     }
-    public ArrayList<Course> getAll() {
+    public ArrayList<Student> getAll() {
         String query = "SELECT * FROM Course";
-        return genericReadQuery(query);
+        return this.genericReadQuery(query);
     }
 
-    public ArrayList<Course> getCoursesInterestingTo(String courseName) {
+    public ArrayList<Student> getCoursesInterestingTo(String courseName) {
         String query = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourseName FROM InterestingToCourse WHERE CourseName = '" + courseName + "')";
-        return genericReadQuery(query);
+        return this.genericReadQuery(query);
     }
     
     public void updateCourse(String courseName,String column, String changeInto) {

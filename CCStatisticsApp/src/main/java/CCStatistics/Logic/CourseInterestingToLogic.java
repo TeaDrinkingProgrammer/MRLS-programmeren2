@@ -10,14 +10,14 @@ public class CourseInterestingToLogic {
     CourseDAO courseDAO = new CourseDAO();
 
     public ArrayList<Course> getAllCourses(String loginName) {
-        return courseDAO.getAll(loginName);
+        return courseDAO.getAll();
     }
 
-    public ArrayList<Course> getAllInterestingCourses(String courseName, String loginName) {
-        if (courseDAO.getCoursesInterestingTo(courseName, loginName).isEmpty()) {
+    public ArrayList<Course> getAllInterestingCourses(String courseName) {
+        if (courseDAO.getCoursesInterestingTo(courseName).isEmpty()) {
             return null;
         }
         
-        return courseDAO.getCoursesInterestingTo(courseName, loginName);
+        return courseDAO.getCoursesInterestingTo(courseName);
     }
 }

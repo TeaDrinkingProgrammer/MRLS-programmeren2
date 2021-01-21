@@ -15,6 +15,7 @@ public class Login {
    public String getLogin() throws IOException {
       FileInputStream file = null;
       Properties prop = null;
+      //C:\\Users\\Stijn\\Documents\\MRLS-programmeren2\\CCStatisticsApp\\src\\
       String fileName = "login.properties";
       try {
          file = new FileInputStream(fileName);
@@ -35,6 +36,7 @@ public class Login {
          }
       } catch (Exception e) {
          System.out.println("Het bestand heeft niet alle goede waarden, probeer nog een keer de instructies te lezen en ze toe te passen");
+         //TODO handle exceptions properly
       }
       return null;
    }

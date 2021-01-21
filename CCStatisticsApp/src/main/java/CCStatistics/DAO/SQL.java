@@ -1,5 +1,6 @@
 package CCStatistics.DAO;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -7,18 +8,24 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class SQL {
-    public ArrayList<ArrayList<String>> readQuery(String table, String loginName,String query){
+    public ArrayList<ArrayList<String>> readQuery(String table,String query){
         Login login = new Login();
 
-        ArrayList<String> columns = this.getColumns(table,loginName);
+        ArrayList<String> columns = this.getColumns(table);
         // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
         String connectionUrl = null;
         try {
-            connectionUrl = login.getLogin();  
-        } catch (Exception e) {
-            System.out.println("IOExeption");
+           if(login.getLogin().equals(null)){
+            throw new NullPointerException();
+           } else{
+            connectionUrl = login.getLogin();
+           }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch(NullPointerException npe){
+            npe.printStackTrace();
         }
-
+        //TODO: Handle exception properly
         // Connection beheert informatie over de connectie met de database.
         Connection con = null;
 
@@ -70,12 +77,23 @@ public class SQL {
         return tableList;
     }
 
-    public ArrayList<String> getColumns(String table, String loginName){
-        OldLogin login = new OldLogin();
+    public ArrayList<String> getColumns(String table){
+        Login login = new Login();
         
 
         // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
-        String connectionUrl = login.getLogin(loginName);
+        String connectionUrl = null;
+        try {
+           if(login.getLogin().equals(null)){
+            throw new NullPointerException();
+           } else{
+            connectionUrl = login.getLogin();
+           }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch(NullPointerException npe){
+            npe.printStackTrace();
+        }
 
         // Connection beheert informatie over de connectie met de database.
         Connection con = null;
@@ -122,22 +140,33 @@ public class SQL {
         return columns;
     }
 
-    public void updateQuery(String table, String loginName,String query){
-        this.cudquery(table, loginName, query);
+    public void updateQuery(String table,String query){
+        this.cudquery(table, query);
     }
 
-    public void deleteQuery(String table, String loginName,String query){
-        this.cudquery(table, loginName, query);
+    public void deleteQuery(String table,String query){
+        this.cudquery(table, query);
     }
 
-    public void createQuery(String table, String loginName,String query){
-        this.cudquery(table, loginName, query);
+    public void createQuery(String table,String query){
+        this.cudquery(table, query);
     }
     
-    public void cudquery(String table, String loginName,String query){
-        OldLogin login = new OldLogin();
+    public void cudquery(String table,String query){
+        Login login = new Login();
         // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
-        String connectionUrl = login.getLogin(loginName);
+        String connectionUrl = null;
+        try {
+           if(login.getLogin().equals(null)){
+            throw new NullPointerException();
+           } else{
+            connectionUrl = login.getLogin();
+           }
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        } catch(NullPointerException npe){
+            npe.printStackTrace();
+        }
 
         // Connection beheert informatie over de connectie met de database.
         Connection con = null;
