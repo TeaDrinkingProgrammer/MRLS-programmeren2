@@ -31,7 +31,7 @@ public class Login {
          if(prop.getProperty("windowsUserLogin").equalsIgnoreCase("true")){
             return String.format("jdbc:sqlserver://%s;databaseName=QuatroOpdracht;integratedSecurity=true",prop.getProperty("windowsDeviceName"));
          } else if(prop.getProperty("windowsUserLogin").equalsIgnoreCase("false")){
-            return String.format("jdbc:sqlserver://localhost;databaseName=QuatroOpdracht;user=%s;password=%s",prop.getProperty("username"),prop.getProperty("password"))
+            return String.format("jdbc:sqlserver://localhost;databaseName=QuatroOpdracht;user=%s;password=%s",prop.getProperty("username"),prop.getProperty("password"));
          }
       } catch (Exception e) {
          System.out.println("Het bestand heeft niet alle goede waarden, probeer nog een keer de instructies te lezen en ze toe te passen");
