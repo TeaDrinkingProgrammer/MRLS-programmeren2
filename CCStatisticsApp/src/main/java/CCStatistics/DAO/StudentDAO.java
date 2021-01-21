@@ -17,7 +17,7 @@ public class StudentDAO{
                 String email = row.get(0);
                 String firstName = row.get(1);
                 String lastName = row.get(2);
-                Date dateOfBirth = java.sql.Date.valueOf(row.get(3));
+                String dateOfBirth = row.get(3);
                 String gender = row.get(4);
                 String street = row.get(5);
                 String houseNumber = row.get(6);
@@ -27,8 +27,8 @@ public class StudentDAO{
                 students.add(new Student(email, firstName, lastName, dateOfBirth, gender, street, houseNumber, city, country, postalcode));
             }
         } else{
-            //Date nullDate = ;
-            //students.add(new Student("No Students found!", "null", "null",date,"null","null","null","null","null","null"));
+            String nullDate = "1-1-1000";
+            students.add(new Student("No Students found!", "null", "null",nullDate,"null","null","null","null","null","null"));
         }
         return students;
     }
