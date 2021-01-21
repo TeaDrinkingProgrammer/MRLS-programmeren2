@@ -12,7 +12,12 @@ public class SQL {
 
         ArrayList<String> columns = this.getColumns(table,loginName);
         // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
-        String connectionUrl = login.getLogin(loginName);
+        String connectionUrl = null;
+        try {
+            connectionUrl = login.getLogin();  
+        } catch (Exception e) {
+            System.out.println("IOExeption");
+        }
 
         // Connection beheert informatie over de connectie met de database.
         Connection con = null;
@@ -66,7 +71,7 @@ public class SQL {
     }
 
     public ArrayList<String> getColumns(String table, String loginName){
-        Login login = new Login();
+        OldLogin login = new OldLogin();
         
 
         // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
@@ -130,7 +135,7 @@ public class SQL {
     }
     
     public void cudquery(String table, String loginName,String query){
-        Login login = new Login();
+        OldLogin login = new OldLogin();
         // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
         String connectionUrl = login.getLogin(loginName);
 
