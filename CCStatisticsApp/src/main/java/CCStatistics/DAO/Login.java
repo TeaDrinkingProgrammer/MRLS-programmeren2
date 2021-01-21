@@ -36,6 +36,7 @@ public class Login {
       } catch (Exception e) {
          System.out.println("Het bestand heeft niet alle goede waarden, probeer nog een keer de instructies te lezen en ze toe te passen");
       }
+      return null;
    }
 }
 
