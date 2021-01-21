@@ -9,7 +9,7 @@ public class SignupDAO {
     SQL sql = new SQL();
     
     public ArrayList<Signup> genericReadQuery(String query){
-        ArrayList<ArrayList<String>> tableList = sql.readQuery("Signup",query);
+        ArrayList<ArrayList<String>> tableList = sql.readQuery("Signup", query);
         ArrayList<Signup> signUps = new ArrayList<>();
         if(tableList.size() > 0){
             for(ArrayList<String> row : tableList){

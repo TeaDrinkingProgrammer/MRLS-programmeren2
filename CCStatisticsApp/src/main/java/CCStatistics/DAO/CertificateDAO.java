@@ -9,7 +9,7 @@ public class CertificateDAO {
     SQL sql = new SQL();
     
     public ArrayList<Certificate> genericReadQuery(String query){
-        ArrayList<ArrayList<String>> tableList = sql.readQuery("Certificate",query);
+        ArrayList<ArrayList<String>> tableList = sql.readQuery("Certificate", query);
         ArrayList<Certificate> certificates = new ArrayList<>();
         if(tableList.size() > 0){
             for(ArrayList<String> row : tableList){
