@@ -12,6 +12,8 @@ public class Login {
    //    System.out.println("username: "+ prop.getProperty("username"));
    //    System.out.println("password: "+ prop.getProperty("password"));
    // }
+
+   // Based of https://www.tutorialspoint.com/how-to-read-the-data-from-a-properties-file-in-java
    public String getLogin() throws IOException {
       FileInputStream file = null;
       Properties prop = null;
