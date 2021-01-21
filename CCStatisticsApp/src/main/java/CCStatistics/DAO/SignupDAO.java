@@ -27,7 +27,7 @@ public class SignupDAO {
         return signUps;
     }
 //Maakt een aanmelding aan (CREATE)
-    public void creatSignup(Date date, String courseName, String email) {
+    public void createSignup(Date date, String courseName, String email) {
         String query = "INSERT INTO Signup (Signupdate, CourseName, StudentEmail) VALUES (" + date + "," + courseName + "," + email + ");";
         sql.cudQuery(query);
     }
@@ -39,6 +39,10 @@ public class SignupDAO {
 //Updatet een aanmelding of meerdere aanmeldingen (UPDATE)   
     public void updateSignup(String columnToChange, String columnToCheck, String changeInto, String valueIs) {
         String query = "UPDATE Signup SET " + columnToChange + "= '" + changeInto + "' WHERE " + columnToCheck + " = '" + valueIs + "';";
+        sql.cudQuery(query);
+    }
+    public void updateSignup(String columnToChange, String columnToCheck, String changeInto, int valueIs) {
+        String query = "UPDATE Signup SET " + columnToChange + "= '" + changeInto + "' WHERE " + columnToCheck + " = " + valueIs + ";";
         sql.cudQuery(query);
     }
 //Deletet een aanmelding of meerdere aanmeldingen (DELETE)

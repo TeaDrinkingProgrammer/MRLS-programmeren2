@@ -5,10 +5,10 @@ import java.util.Date;
 public class Signup {
     private Course course;
     private String email;
-    private Date signupDate;
+    private String signupDate;
     private Certificate certificate;
 
-    public Signup (Course course, Date signupDate) {
+    public Signup (Course course, String signupDate) {
         this.course = course;
         this.signupDate = signupDate;
     }

@@ -6,6 +6,10 @@ import java.util.ArrayList;
 
 
 public class CertificateDAO {
+
+    public CertificateDAO() {
+    }
+
     SQL sql = new SQL();
     
     public ArrayList<Certificate> genericReadQuery(String query){
@@ -26,8 +30,8 @@ public class CertificateDAO {
         return certificates;
     }
 //Maakt een certificate aan (CREATE)
-    public void creatCertificate(double grade, String employeeName) {
-        String query = "INSERT INTO Certificate (EmployeeName, grade) VALUES (" + employeeName + "," + grade + ");";
+    public void createCertificate(double grade, String employeeName) {
+        String query = "INSERT INTO Certificate (EmployeeName, Grade) VALUES ('" + employeeName + "'," + grade + ");";
         sql.cudQuery(query);
     }
 //Leest alle certificaten (READ)
@@ -40,9 +44,14 @@ public class CertificateDAO {
         String query = "UPDATE Certificate SET " + columnToChange + "= '" + changeInto + "' WHERE " + columnToCheck + " = '" + valueIs + "';";
         sql.cudQuery(query);
     }
+
+    public void updateCertificate(String columnToChange, String columnToCheck, String changeInto, Double valueIs) {
+        String query = "UPDATE Certificate SET " + columnToChange + "= '" + changeInto + "' WHERE " + columnToCheck + " = '" + valueIs + "';";
+        sql.cudQuery(query);
+    }
 //Deletet een certificaat of meerdere certificaten (DELETE)
-    public void deleteCertificate(String columnToCheck, String valueIs) {
-        String query = "DELETE FROM Certificate WHERE " + columnToCheck + "= '" + valueIs + "';";
+    public void deleteCertificate(int valueIs) {
+        String query = "DELETE FROM Certificate WHERE CertificateID = '" + valueIs + "';";
         sql.cudQuery(query);
     }
 }
