@@ -140,19 +140,19 @@ public class SQL {
         return columns;
     }
 
-    // public void updateQuery(String table,String query){
+    // public void updateQuery(String query){
     //     this.cudquery(table, query);
     // }
 
-    // public void deleteQuery(String table,String query){
+    // public void deleteQuery(String query){
     //     this.cudquery(table, query);
     // }
 
-    // public void createQuery(String table,String query){
+    // public void createQuery(String query){
     //     this.cudquery(table, query);
     // }
     
-    public void cudQuery(String table,String query){
+    public void cudQuery(String query){
         Login login = new Login();
         // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
         String connectionUrl = null;

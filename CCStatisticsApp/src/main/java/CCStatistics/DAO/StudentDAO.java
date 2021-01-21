@@ -33,18 +33,18 @@ public class StudentDAO{
         return students;
     }
     public ArrayList<Student> getAll() {
-        String query = "SELECT * FROM Course";
+        String query = "SELECT * FROM Course;";
         return this.genericReadQuery(query);
     }
 
     public ArrayList<Student> getCoursesInterestingTo(String courseName) {
-        String query = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourseName FROM InterestingToCourse WHERE CourseName = '" + courseName + "')";
+        String query = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourseName FROM InterestingToCourse WHERE CourseName = '" + courseName + "');";
         return this.genericReadQuery(query);
     }
     
     public void updateCourse(String courseName,String column, String changeInto) {
-        String query = "UPDATE Course SET " + column + "= '" + changeInto +"' WHERE Name = '" + courseName + " ' ";
-        sql.cudQuery("Course",query);
+        String query = "UPDATE Course SET " + column + "= '" + changeInto +"' WHERE Name = '" + courseName + " ';";
+        sql.cudQuery(query);
     }
 
 

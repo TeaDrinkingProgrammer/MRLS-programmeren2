@@ -37,7 +37,7 @@ public class CourseDAO{
     
     public void updateCourse(String courseName,String column, String changeInto) {
         String query = "UPDATE Course SET " + column + "= '" + changeInto +"' WHERE Name = '" + courseName + " ' ";
-        sql.cudQuery("Course",query);
+        sql.cudQuery(query);
     }
 
 
