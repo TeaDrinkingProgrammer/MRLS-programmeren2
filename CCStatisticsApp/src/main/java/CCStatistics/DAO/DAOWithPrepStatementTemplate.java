@@ -79,5 +79,22 @@ public class DAOWithPrepStatementTemplate{
             SQLWithPrepStatement.printSQLException(e);
         }
     return null;
+    }  
+    public ArrayList<ObjectToChange> CUDqueryWithVariable(String inputName) {
+        //De query met ? ipv de waarde
+        String rawquery = "Update query with ? here";
+        //Probeert het eerste deel van de statement te sturen
+        try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
+        //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten
+        preparedStatement.setString(0, inputName);
+        //Stuur de preparedstatement direct naar de goede methode in SQL
+        sql.SomeCUDqueryHere(preparedStatement);
+
+        //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
+        } catch (SQLException e){
+            // print SQL exception information
+            SQLWithPrepStatement.printSQLException(e);
+        }
+
     }   
 }
