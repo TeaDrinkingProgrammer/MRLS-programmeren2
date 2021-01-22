@@ -5,6 +5,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
+=======
+import CCStatistics.Domain.Course;
+import CCStatistics.Domain.EnumLevel;
+
+>>>>>>> 94de5cc31e65554f81f27e0d5cbed626dca2d83a
 //Vervang ObjectToChange met het object dat je hebt (bijv. Student)
 //Vervang listName met de naam van het object --> zie genericReadQuery
 //Vervang inputName met de input die je wilt voor de methode (bijv. emailadress)
