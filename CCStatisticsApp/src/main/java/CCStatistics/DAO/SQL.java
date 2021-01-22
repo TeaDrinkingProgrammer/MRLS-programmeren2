@@ -48,7 +48,6 @@ public class SQL {
             stmt = con.createStatement();
             // Voer de query uit op de database.
             rs = stmt.executeQuery(SQL);
-            //System.out.print(String.format("| %7s | %-32s | %-24s |\n", " ", " ", " ").replace(" ", "-"));
 
             // Als de resultset waarden bevat dan lopen we hier door deze waarden en printen ze.
             // ArrayList 1 is voor de rij, de geneste ArrayList is voor de kolom in de rij.
@@ -117,7 +116,6 @@ public class SQL {
             stmt = con.createStatement();
             // Voer de query uit op de database.
             rs = stmt.executeQuery(SQL);
-            //System.out.print(String.format("| %7s | %-32s | %-24s |\n", " ", " ", " ").replace(" ", "-"));
 
             // Als de resultset waarden bevat dan lopen we hier door deze waarden en printen ze.
             // ArrayList 1 is voor de rij, de geneste ArrayList is voor de kolom in de rij.

@@ -32,7 +32,7 @@ public class CertificateDAO {
 //Maakt een certificate aan (CREATE)
     public void createCertificate(double grade, String employeeName) {
         String query = "INSERT INTO Certificate (EmployeeName, Grade) VALUES ('" + employeeName + "'," + grade + ");";
-        sql.cudQuery(query);
+        sql.createQuery(query);
     }
 //Leest alle certificaten (READ)
     public ArrayList<Certificate> getAllCertificates() {
@@ -42,16 +42,16 @@ public class CertificateDAO {
 //Updatet een certificaat of meerdere certificaten (UPDATE)   
     public void updateCertificate(String columnToChange, String columnToCheck, String changeInto, String valueIs) {
         String query = "UPDATE Certificate SET " + columnToChange + "= '" + changeInto + "' WHERE " + columnToCheck + " = '" + valueIs + "';";
-        sql.cudQuery(query);
+        sql.updateQuery(query);
     }
 
     public void updateCertificate(String columnToChange, String columnToCheck, String changeInto, Double valueIs) {
         String query = "UPDATE Certificate SET " + columnToChange + "= '" + changeInto + "' WHERE " + columnToCheck + " = '" + valueIs + "';";
-        sql.cudQuery(query);
+        sql.updateQuery(query);
     }
 //Deletet een certificaat of meerdere certificaten (DELETE)
     public void deleteCertificate(int valueIs) {
         String query = "DELETE FROM Certificate WHERE CertificateID = '" + valueIs + "';";
-        sql.cudQuery(query);
+        sql.deleteQuery(query);
     }
 }
