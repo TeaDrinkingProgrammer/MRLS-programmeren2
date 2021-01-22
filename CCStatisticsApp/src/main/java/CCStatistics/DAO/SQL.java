@@ -140,17 +140,17 @@ public class SQL {
         return columns;
     }
 
-    // public void updateQuery(String query){
-    //     this.cudquery(table, query);
-    // }
+    public void updateQuery(String query){
+        this.cudQuery(query);
+    }
 
-    // public void deleteQuery(String query){
-    //     this.cudquery(table, query);
-    // }
+    public void deleteQuery(String query){
+        this.cudQuery(query);
+    }
 
-    // public void createQuery(String query){
-    //     this.cudquery(table, query);
-    // }
+    public void createQuery(String query){
+        this.cudQuery( query);
+    }
     
     public void cudQuery(String query){
         Login login = new Login();
