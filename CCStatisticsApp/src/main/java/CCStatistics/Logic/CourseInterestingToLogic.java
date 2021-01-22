@@ -10,7 +10,7 @@ public class CourseInterestingToLogic {
 
     CourseDAOWithPrepStatement courseDAO = new CourseDAOWithPrepStatement();
 
-    public ArrayList<Course> getAllCourses(String loginName) {
+    public ArrayList<Course> getAllCourses() {
         return courseDAO.getAll();
     }
 

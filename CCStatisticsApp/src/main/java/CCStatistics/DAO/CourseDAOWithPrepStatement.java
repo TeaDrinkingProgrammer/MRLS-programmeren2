@@ -51,13 +51,18 @@ public class CourseDAOWithPrepStatement{
         String rawquery = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourseName FROM InterestingToCourse WHERE CourseName = ?)";
         //probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
-        //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten
-        preparedStatement.setString(0, courseName);
+        //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
+        preparedStatement.setString(1, courseName);
         //Geeft deze statement mee aan genericreadquery
 
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         return genericReadQuery(preparedStatement);
         } catch (SQLException e){
+            if(SQLWithPrepStatement.printSQLException(e)){
+                ArrayList<Course> courses = new ArrayList<>();
+                courses.add(new Course("No Course found", "null", "null", LevelEnum.valueOf("Beginner")));
+                return courses;
+            }
             // print SQL exception information
             SQLWithPrepStatement.printSQLException(e);
     }

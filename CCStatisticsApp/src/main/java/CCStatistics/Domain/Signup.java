@@ -1,7 +1,5 @@
 package CCStatistics.Domain;
 
-import java.util.Date;
-
 public class Signup {
     private Course course;
     private String email;

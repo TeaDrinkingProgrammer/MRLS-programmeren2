@@ -1,7 +1,6 @@
 
 package CCStatistics;
 import javafx.application.Application;
-import CCStatistics.DAO.CertificateDAO;
 import CCStatistics.GUI.CourseInteresting;
 
 

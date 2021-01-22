@@ -36,8 +36,7 @@ public class StudentDAOWithPrepStatement{
                 students.add(new Student(email, firstName, lastName, dateOfBirth, gender, street, houseNumber, city, country, postalcode));
             }
         } else{
-            String nullDate = "1-1-1000";
-            students.add(new Student("No Students found!", "null", "null",nullDate,"null","null","null","null","null","null"));
+            students.add(new Student("No Students found!", "null", "null","1-1-1000","null","null","null","null","null","null"));
         }
         return students;
     }
@@ -66,7 +65,12 @@ public class StudentDAOWithPrepStatement{
         return genericReadQuery(preparedStatement);
         } catch (SQLException e){
             // print SQL exception information
-            SQLWithPrepStatement.printSQLException(e);
+            System.out.println(e.getMessage());
+            if(SQLWithPrepStatement.printSQLException(e)){
+                ArrayList<Student> students = new ArrayList<>();
+                students.add(new Student("No Students found!", "null", "null","1-1-1000","null","null","null","null","null","null"));
+                return students;
+            }
     }
     return null;
     }

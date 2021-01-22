@@ -1,7 +1,6 @@
 package CCStatistics.Domain;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Student {
     private String email;
