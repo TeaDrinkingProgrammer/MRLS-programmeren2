@@ -1,11 +1,12 @@
 package CCStatistics.Domain;
 
+import java.util.HashMap;
+
 public class Webcast extends ContentItem {
     private int duration;
     private String URL;
     private String speakerName;
     private String organization;
-
 
     public Webcast(int duration, String URL, String speakerName, String organization) {
         super.contentItemID = contentItemID;
@@ -13,6 +14,7 @@ public class Webcast extends ContentItem {
         super.status = status;
         super.publicationDate = publicationDate;
         super.description = description;
+        super.progress = new HashMap<>();
         this.duration = duration;
         this.URL = URL;
         this.speakerName = speakerName;
@@ -50,5 +52,4 @@ public class Webcast extends ContentItem {
     public void setOrganization(String organization) {
         this.organization = organization;
     }
-
 }

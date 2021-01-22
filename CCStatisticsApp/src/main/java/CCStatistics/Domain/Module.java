@@ -1,11 +1,15 @@
 package CCStatistics.Domain;
 
+import java.util.HashMap;
+
 public class Module extends ContentItem {
     private double version;
     private int followupNr;
     private String contactName;
     private String contactEmail;
 
+    public Module() {
+    }
 
     public Module(int contentItemId, String title, EnumStatus status, String publicationDate, String description, double version, int followupNr, String contactName, String contactEmail) {
         super.contentItemID = contentItemID;
@@ -13,6 +17,7 @@ public class Module extends ContentItem {
         super.status = status;
         super.publicationDate = publicationDate;
         super.description = description;
+        super.progress = new HashMap<>();
         this.version = version;
         this.followupNr = followupNr;
         this.contactName = contactName;
@@ -50,6 +55,4 @@ public class Module extends ContentItem {
     public void setContactEmail(String contactEmail) {
         this.contactEmail = contactEmail;
     }
-
-
 }
