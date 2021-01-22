@@ -1,52 +1,73 @@
 package CCStatistics.DAO;
 
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import CCStatistics.Domain.Course;
+import CCStatistics.Domain.LevelEnum;
 
-import CCStatistics.Domain.Student;
+public class CourseDAOWithPrepStatement{
+    SQLWithPrepStatement sql = null;
+    Connection connection = null;
+    public CourseDAOWithPrepStatement(){
+        //Pakt de connectionURL van login zodat deze aan te passen is. Geeft ook de mogelijkheid voor bijv. meerdere connectionURLS
+        sql = new SQLWithPrepStatement();
+        //Pakt eerst een connection, deze is nodig om een prepared statement op te maken
+        connection = sql.getConnection();
+    }
 
-public class StudentDAO{
-    //Pakt de connectionURL van login zodat deze aan te passen is. Geeft ook de mogelijkheid voor bijv. meerdere connectionURLS
-    SQL sql = new SQL();
-    
-    public ArrayList<Student> genericReadQuery(String query){
-        ArrayList<ArrayList<String>> tableList = sql.readQuery("Student",query);
-        ArrayList<Student> students = new ArrayList<>();
+    public ArrayList<Course> genericReadQuery(PreparedStatement preparedStatement){
+        //Geeft de prepared statement mee aan sql readquery
+        ArrayList<ArrayList<String>> tableList = sql.readQuery("Course",preparedStatement);
+        ArrayList<Course> courses = new ArrayList<>();
         if(tableList.size() > 0){
             for(ArrayList<String> row : tableList){
-                String email = row.get(0);
-                String firstName = row.get(1);
-                String lastName = row.get(2);
-                String dateOfBirth = row.get(3);
-                String gender = row.get(4);
-                String street = row.get(5);
-                String houseNumber = row.get(6);
-                String city = row.get(7);
-                String country = row.get(8);
-                String postalcode = row.get(9);
-                students.add(new Student(email, firstName, lastName, dateOfBirth, gender, street, houseNumber, city, country, postalcode));
+                String name = row.get(0);
+                String subject = row.get(1);
+                String introText = row.get(2);
+                LevelEnum level = LevelEnum.valueOf(row.get(3));
+                courses.add(new Course(name,subject,introText,level));
             }
         } else{
-            String nullDate = "1-1-1000";
-            students.add(new Student("No Students found!", "null", "null",nullDate,"null","null","null","null","null","null"));
+            courses.add(new Course("No courses found!", "Subject", "IntroText", LevelEnum.valueOf("Beginner")));
         }
-        return students;
+        return courses;
     }
-    public ArrayList<Student> getAll() {
-        String query = "SELECT * FROM Course;";
-        return this.genericReadQuery(query);
+    public ArrayList<Course> getAll() {
+        String rawquery = "SELECT * FROM Course";
+        
+        try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
+            return genericReadQuery(preparedStatement);
+            } catch (SQLException e){
+                // print SQL exception information
+                SQLWithPrepStatement.printSQLException(e);
+        }
+        return null;
     }
+    public ArrayList<Course> getCoursesInterestingTo(String courseName) {
+        //de query met ? ipv de waarde
+        String rawquery = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourseName FROM InterestingToCourse WHERE CourseName = ?)";
+        //probeert het eerste deel van de statement te sturen
+        try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
+        //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten
+        preparedStatement.setString(0, courseName);
+        //Geeft deze statement mee aan genericreadquery
 
-    public ArrayList<Student> getModulesPercentage(String contentItem) {
-        String query = "";
-        return this.genericReadQuery(query);
+        //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
+        return genericReadQuery(preparedStatement);
+        } catch (SQLException e){
+            // print SQL exception information
+            SQLWithPrepStatement.printSQLException(e);
     }
+    return null;
+}
     
-    public void updateCourse(String courseName,String column, String changeInto) {
-        String query = "UPDATE Course SET " + column + "= '" + changeInto +"' WHERE Name = '" + courseName + " ';";
-        sql.cudQuery(query);
-    }
+    // public void updateCourse(String courseName,String column, String changeInto) {
+    //     String query = "UPDATE Course SET " + column + "= '" + changeInto +"' WHERE Name = '" + courseName + " ' ";
+    //     sql.cudQuery(query);
+    // }
 
 
 
