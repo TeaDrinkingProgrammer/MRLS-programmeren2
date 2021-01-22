@@ -6,11 +6,11 @@ public class Course {
     private String name;
     private String subject;
     private String introText;
-    private LevelEnum level;
+    private EnumLevel level;
     private ArrayList<Module> modules;
     private ArrayList<Course> interestingCourses;
 
-    public Course(String name, String subject, String introText, LevelEnum level) {
+    public Course(String name, String subject, String introText, EnumLevel level) {
         this.name = name;
         this.subject = subject;
         this.introText = introText;
@@ -39,7 +39,7 @@ public class Course {
         return this.introText;
     }
 
-    public LevelEnum getLevel() {
+    public EnumLevel getLevel() {
         return this.level;
     }
 
