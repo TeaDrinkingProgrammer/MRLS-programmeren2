@@ -8,9 +8,6 @@ public class Module extends ContentItem {
     private String contactName;
     private String contactEmail;
 
-    public Module() {
-    }
-
     public Module(int contentItemId, String title, EnumStatus status, String publicationDate, String description, double version, int followupNr, String contactName, String contactEmail) {
         super.contentItemID = contentItemID;
         super.title = title;
