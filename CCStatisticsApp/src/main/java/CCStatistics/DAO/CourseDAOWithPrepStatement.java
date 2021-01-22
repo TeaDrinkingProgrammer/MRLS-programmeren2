@@ -60,7 +60,7 @@ public class CourseDAOWithPrepStatement{
         } catch (SQLException e){
             if(SQLWithPrepStatement.printSQLException(e)){
                 ArrayList<Course> courses = new ArrayList<>();
-                courses.add(new Course("No Course found", "null", "null", LevelEnum.valueOf("Beginner")));
+                courses.add(new Course("No Course found", "null", "null", EnumLevel.valueOf("Beginner")));
                 return courses;
             }
             // print SQL exception information
