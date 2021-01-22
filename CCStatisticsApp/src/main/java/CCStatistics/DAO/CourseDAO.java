@@ -3,7 +3,7 @@ package CCStatistics.DAO;
 import java.util.ArrayList;
 
 import CCStatistics.Domain.Course;
-import CCStatistics.Domain.LevelEnum;
+import CCStatistics.Domain.EnumLevel;
 
 public class CourseDAO{
     //Pakt de connectionURL van login zodat deze aan te passen is. Geeft ook de mogelijkheid voor bijv. meerdere connectionURLS
@@ -17,11 +17,11 @@ public class CourseDAO{
                 String name = row.get(0);
                 String subject = row.get(1);
                 String introText = row.get(2);
-                LevelEnum level = LevelEnum.valueOf(row.get(3));
+                EnumLevel level = EnumLevel.valueOf(row.get(3));
                 courses.add(new Course(name,subject,introText,level));
             }
         } else{
-            courses.add(new Course("No courses found!", "Subject", "IntroText", LevelEnum.valueOf("Beginner")));
+            courses.add(new Course("No courses found!", "Subject", "IntroText", EnumLevel.valueOf("Beginner")));
         }
         return courses;
     }

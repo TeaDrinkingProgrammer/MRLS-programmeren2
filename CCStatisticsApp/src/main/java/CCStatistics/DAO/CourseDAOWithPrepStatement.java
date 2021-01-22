@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import CCStatistics.Domain.Course;
-import CCStatistics.Domain.LevelEnum;
+import CCStatistics.Domain.EnumLevel;
 
 public class CourseDAOWithPrepStatement{
     SQLWithPrepStatement sql = null;
@@ -27,11 +27,11 @@ public class CourseDAOWithPrepStatement{
                 String name = row.get(0);
                 String subject = row.get(1);
                 String introText = row.get(2);
-                LevelEnum level = LevelEnum.valueOf(row.get(3));
+                EnumLevel level = EnumLevel.valueOf(row.get(3));
                 courses.add(new Course(name,subject,introText,level));
             }
         } else{
-            courses.add(new Course("No courses found!", "Subject", "IntroText", LevelEnum.valueOf("Beginner")));
+            courses.add(new Course("No courses found!", "Subject", "IntroText", EnumLevel.valueOf("Beginner")));
         }
         return courses;
     }

@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import CCStatistics.Domain.Course;
-import CCStatistics.Domain.LevelEnum;
+import CCStatistics.Domain.EnumLevel;
 
 //Vervang ObjectToChange met het object dat je hebt (bijv. Student)
 //Vervang listName met de naam van het object --> zie genericReadQuery
