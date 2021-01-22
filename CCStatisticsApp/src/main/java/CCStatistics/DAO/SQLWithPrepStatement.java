@@ -90,7 +90,6 @@ public class SQLWithPrepStatement {
         try {
             // 'Importeer' de driver die je gedownload hebt.
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            String oldquery = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" + table + "' ORDER BY ORDINAL_POSITION";
             String rawquery = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ? ORDER BY ORDINAL_POSITION";
             Connection connection = this.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(rawquery);
@@ -114,6 +113,46 @@ public class SQLWithPrepStatement {
         }
 
         return columns;
+    }
+
+    public void updateQuery(PreparedStatement preparedStatement){
+        this.cudQuery(preparedStatement);
+    }
+
+    public int deleteQuery(PreparedStatement preparedStatement){
+        int result = 0;
+        try {
+            // 'Importeer' de driver die je gedownload hebt.
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            // Pak de prepared statement en voert hem uit
+            result = preparedStatement.executeUpdate();
+        }
+
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    public void createQuery(PreparedStatement preparedStatement){
+        this.cudQuery( preparedStatement);
+    }
+    
+    public void cudQuery(PreparedStatement preparedStatement){
+        try {
+            // 'Importeer' de driver die je gedownload hebt.
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            // Pak de prepared statement en voert hem uit
+            preparedStatement.executeUpdate();
+        }
+
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 	public static void printSQLException(SQLException ex) {
