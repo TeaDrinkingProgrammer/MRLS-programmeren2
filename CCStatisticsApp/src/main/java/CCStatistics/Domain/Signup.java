@@ -3,12 +3,13 @@ package CCStatistics.Domain;
 import java.util.Date;
 
 public class Signup {
+    private int signupID;
     private Course course;
-    private String email;
     private String signupDate;
     private Certificate certificate;
 
-    public Signup (Course course, String signupDate) {
+    public Signup (int signupID, Course course, String signupDate) {
+        this.signupID = signupID;
         this.course = course;
         this.signupDate = signupDate;
     }

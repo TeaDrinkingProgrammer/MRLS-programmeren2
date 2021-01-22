@@ -8,6 +8,7 @@ public class Course {
     private String introText;
     private LevelEnum level;
     private ArrayList<Module> modules;
+    private ArrayList<Course> interestingCourses;
 
     public Course(String name, String subject, String introText, LevelEnum level) {
         this.name = name;
@@ -15,10 +16,16 @@ public class Course {
         this.introText = introText;
         this.level = level;
         this.modules = null;
-        this.relevantTo = null;
+        this.interestingCourses = null;
     }
-    private ArrayList<Course> relevantTo;
 
+    public void addModule(Module module) {
+        this.modules.add(module);
+    }
+
+    public void addInterestingCourse(Course course) {
+        this.interestingCourses.add(course);
+    }
 
     public String getName() {
         return this.name;
@@ -40,7 +47,7 @@ public class Course {
         return this.modules;
     }
 
-    public ArrayList<Course> getRelevantTo() {
-        return this.relevantTo;
+    public ArrayList<Course> getInterestingCourses() {
+        return this.interestingCourses;
     }
 }

@@ -11,9 +11,9 @@ public class Student {
     private String gender;
     private String street;
     private String houseNumber;
+    private String postalcode;
     private String city;
     private String country;
-    private String postalcode;
     private ArrayList<Signup> signUps;
 
 
@@ -25,9 +25,9 @@ public class Student {
         this.gender = gender;
         this.street = street;
         this.houseNumber = houseNumber;
+        this.postalcode = postalcode;
         this.city = city;
         this.country = country;
-        this.postalcode = postalcode;
     }
 
     public void addSignups(ArrayList<Signup> signUps){
