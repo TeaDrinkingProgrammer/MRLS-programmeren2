@@ -145,4 +145,5 @@ SELECT Course.Name AS Course, COUNT(Signup.CertificateID) AS Passed
 FROM Course 
 	JOIN Signup
 	ON Course.Name = Signup.Course
+WHERE Course.Name = 'TestCourse2'
 GROUP BY Name;
