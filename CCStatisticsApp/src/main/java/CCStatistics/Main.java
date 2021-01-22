@@ -9,6 +9,6 @@ public class Main {
     public static void main(String[] args) {
         // Application.launch(CourseInteresting.class);
         CertificateDAO newOne = new CertificateDAO();
-        newOne.createCertificate(7.5, "Jan");
+        newOne.createCertificate(9, "Geoffrey");
     }
 }

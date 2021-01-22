@@ -28,7 +28,7 @@ public class SignupDAO {
     }
 //Maakt een aanmelding aan (CREATE)
     public void createSignup(Date date, String courseName, String email) {
-        String query = "INSERT INTO Signup (Signupdate, CourseName, StudentEmail) VALUES (" + date + "," + courseName + "," + email + ");";
+        String query = "INSERT INTO Signup (Signupdate, Course, StudentEmail) VALUES (" + date + "," + courseName + "," + email + ");";
         sql.cudQuery(query);
     }
 //Leest alle aanmeldingen (READ)
