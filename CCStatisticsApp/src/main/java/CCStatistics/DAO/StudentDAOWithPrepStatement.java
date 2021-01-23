@@ -65,6 +65,7 @@ public class StudentDAOWithPrepStatement {
         }
         return null;
     }
+
     // Maakt een certificate aan (CREATE)
     public void create(Student student) {
         // De query met ? ipv de waarde
@@ -92,6 +93,70 @@ public class StudentDAOWithPrepStatement {
             SQLWithPrepStatement.printSQLException(e);
         }
     }
+
+    // Leest een student uit (READ)
+    public ArrayList<Student> read(String studentEmail) {
+        // De query met ? ipv de waarde
+        String rawquery = "SELECT * FROM Certificate WHERE Email = ?";
+        // Probeert het eerste deel van de statement te sturen
+        try (PreparedStatement preparedStatement = connection.prepareStatement(rawquery)) {
+            // Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten,
+            // begint op 1 met tellen
+            preparedStatement.setString(1, studentEmail);
+            // Geeft deze statement mee aan genericreadquery
+            return genericReadQuery(preparedStatement);
+            // Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
+        } catch (SQLException e) {
+            // Als er geen resultaat komt, komt er een bepaalde error (zie
+            // printSQLException), dan vangt dit het af en stuurt een not found resultaat"
+            if (SQLWithPrepStatement.printSQLException(e)) {
+                return this.nothingFound();
+            }
+            // print SQL exception information
+            SQLWithPrepStatement.printSQLException(e);
+        }
+        return null;
+    }
+
+    // Updatet een een kolom in de student(UPDATE)
+        public void update(String columnToChange, String columnToCheck, String changeInto, String valueIs) {
+            //De query met ? ipv de waarde
+            String rawquery = "UPDATE Student SET ? = ? WHERE ? = ?;";
+            //Probeert het eerste deel van de statement te sturen
+            try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
+            //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
+            preparedStatement.setString(1, columnToChange);
+            preparedStatement.setString(2, changeInto);
+            preparedStatement.setString(2, columnToCheck);
+            preparedStatement.setString(2, valueIs);
+            //Stuur de preparedstatement direct naar de goede methode in SQL
+            sql.updateQuery(preparedStatement);
+    
+            //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
+            } catch (SQLException e){
+                // print SQL exception information
+                SQLWithPrepStatement.printSQLException(e);
+            }
+        }
+
+        //delete een bepaalde kolom
+        public int delete(String valueToDelete){
+            //De query met ? ipv de waarde
+            String rawquery = "DELETE FROM Signup WHERE SignupID = ?;";
+            //Probeert het eerste deel van de statement te sturen
+            try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
+            //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
+            preparedStatement.setString(1, valueToDelete);
+            //Stuur de preparedstatement direct naar de goede methode in SQL
+            return sql.deleteQuery(preparedStatement);
+    
+            //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
+            } catch (SQLException e){
+                // print SQL exception information
+                SQLWithPrepStatement.printSQLException(e);
+            }
+            return 0;
+        } 
 
     public ArrayList<Student> nothingFound() {
         ArrayList<Student> students = new ArrayList<>();

@@ -128,7 +128,7 @@ public class SignupDAOWithPrepStatement {
             preparedStatement.setString(2, columnToCheck);
             preparedStatement.setString(2, valueIs);
             //Stuur de preparedstatement direct naar de goede methode in SQL
-            sql.createQuery(preparedStatement);
+            sql.updateQuery(preparedStatement);
     
             //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
             } catch (SQLException e){
@@ -137,21 +137,22 @@ public class SignupDAOWithPrepStatement {
             }
         } 
 
-        public void delete(String valueIs){
+        public int delete(String valueToDelete){
             //De query met ? ipv de waarde
             String rawquery = "DELETE FROM Signup WHERE SignupID = ?;";
             //Probeert het eerste deel van de statement te sturen
             try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
             //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
-            preparedStatement.setString(1, valueIs);
+            preparedStatement.setString(1, valueToDelete);
             //Stuur de preparedstatement direct naar de goede methode in SQL
-            sql.createQuery(preparedStatement);
+            return sql.deleteQuery(preparedStatement);
     
             //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
             } catch (SQLException e){
                 // print SQL exception information
                 SQLWithPrepStatement.printSQLException(e);
             }
+            return 0;
         } 
 
     public ArrayList<Signup> nothingFound(){

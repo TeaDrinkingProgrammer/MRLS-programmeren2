@@ -104,13 +104,13 @@ public class CertificateDAOWithPrepStatement{
 
     //Updatet een certificaat of meerdere certificaten (UPDATE)
     //Updatet de EmployeeName in Certificate-tabel
-    public void update(int ID, String changeInto) {
+    public void updateEmployeeName(int ID, String employeeName) {
         //De query met ? ipv de waarde
         String rawquery = "UPDATE Certificate SET EmployeeName = ? WHERE CertificateID = ?;";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
-        preparedStatement.setString(1, changeInto);
+        preparedStatement.setString(1, employeeName);
         preparedStatement.setLong(2, ID);
         //Stuur de preparedstatement direct naar de goede methode in SQL
         sql.createQuery(preparedStatement);
@@ -123,7 +123,7 @@ public class CertificateDAOWithPrepStatement{
     } 
 
     //Updatet de Grade in Certificate-tabel
-    public void update(int ID, double changeInto){
+    public void updateGrade(int ID, double changeInto){
         //De query met ? ipv de waarde
         String rawquery = "UPDATE Certificate SET Grade = ? WHERE CertificateID = ?;";
         //Probeert het eerste deel van de statement te sturen
@@ -132,7 +132,7 @@ public class CertificateDAOWithPrepStatement{
         preparedStatement.setDouble(1, changeInto);
         preparedStatement.setLong(2, ID);
         //Stuur de preparedstatement direct naar de goede methode in SQL
-        sql.createQuery(preparedStatement);
+        sql.updateQuery(preparedStatement);
 
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
@@ -150,7 +150,7 @@ public class CertificateDAOWithPrepStatement{
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
         preparedStatement.setInt(1, ID);
         //Stuur de preparedstatement direct naar de goede methode in SQL
-        sql.createQuery(preparedStatement);
+        sql.deleteQuery(preparedStatement);
 
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
