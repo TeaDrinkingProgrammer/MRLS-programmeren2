@@ -20,8 +20,8 @@ public class StudentLogic implements Logic<Student> {
     }
 //Update student via DAO
     @Override
-    public void update(Student object) {
-        studentDAO.create(object);
+    public void update(Student object, String string) {
+        studentDAO.update(object, string);
     }
 //Verwijder student via DAO
     @Override
