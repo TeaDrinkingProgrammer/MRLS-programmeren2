@@ -151,64 +151,22 @@ GROUP BY Name;
 --Voor een cursist kan aangegeven worden wat de voortgang in een module is.
 --Wanneer er al een modulerecord in progress is:
 --(Te kiezen uit modules)
-SELECT Progress.*
-FROM Progress
-	JOIN ContentItem
-	ON Progress.ContentItemID = ContentItem.ContentItemID
-	JOIN Module
-	ON ContentItem.ModuleID = Module.ModuleID
-WHERE Email = 'student@live.com';
---(Update de gekozen module)
-UPDATE Progress
-SET ContentPerc = 100
-WHERE Email = 'student@live.com' AND ContentItemID = 1;
-
---Wanneer er geen modulerecord in progress is:
---(Te kiezen uit modules)
-SELECT Title
-FROM Module
-WHERE Title NOT IN (
-SELECT Title
-FROM Progress
-	JOIN ContentItem
-	ON Progress.ContentItemID = ContentItem.ContentItemID
-	JOIN Module
-	ON ContentItem.ModuleID = Module.ModuleID
-WHERE Email = 'student@live.com');
---(Insert de gekozen module)
-INSERT INTO Progress
-VALUES ('student@live.com', 1 , 100);
+SELECT Student.Email,Progress.ContentPerc, Module.Title AS ModuleTitle
+FROM (((Student
+	INNER JOIN Progress ON Student.Email = Progress.Email)
+	INNER JOIN ContentItem ON Progress.ContentItemID = ContentItem.ContentItemID)
+	INNER JOIN Module ON ContentItem.ModuleID = Module.ModuleID)
+WHERE Student.Email = 'student@live.com' AND Module.ModuleID = '1'
 -------------------------------------------------------------------------------------
 --Voor een cursus kan aangegeven worden hoeveel procent van een webcast bekeken is.
 --Wanneer er al een webcastrecord in progress is:
 --(Te kiezen uit webcasts)
-SELECT Progress.*
-FROM Progress
-	JOIN ContentItem
-	ON Progress.ContentItemID = ContentItem.ContentItemID
-	JOIN Webcast
-	ON ContentItem.WebcastID = Webcast.WebcastID
-WHERE Email = 'student@live.com';
---(Update de gekozen webcast)
-UPDATE Progress
-SET ContentPerc = 100
-WHERE Email = 'student@live.com' AND ContentItemID = 2;
-
---Wanneer er geen webcastrecord in progress is, kiezen uit:
---(Te kiezen uit webcasts)
-SELECT *
-FROM Webcast
-WHERE Title NOT IN (
-SELECT Title
-FROM Progress
-	JOIN ContentItem
-	ON Progress.ContentItemID = ContentItem.ContentItemID
-	JOIN Webcast
-	ON ContentItem.WebcastID = Webcast.WebcastID
-WHERE Email = 'student@live.com');
---(Insert de gekozen webcast)
-INSERT INTO Progress
-VALUES ('student@live.com', 5 , 100);
+SELECT Student.Email,Progress.ContentPerc, Webcast.Title AS ModuleTitle
+FROM (((Student
+	INNER JOIN Progress ON Student.Email = Progress.Email)
+	INNER JOIN ContentItem ON Progress.ContentItemID = ContentItem.ContentItemID)
+	INNER JOIN Webcast ON ContentItem.ModuleID = Webcast.WebcastID)
+WHERE Student.Email = 'student@live.com' AND Webcast.WebcastID = '1'
 
 --DBCC CHECKIDENT ('[ContentItem]', RESEED, 0);
 --DELETE FROM ContentItem;
