@@ -6,6 +6,11 @@ public class Signup {
     private Course course;
     private Certificate certificate;
 
+    public Signup(String signupDate, Course course) {
+        this.signupDate = signupDate;
+        this.course = course;
+    }
+
     public Signup(int signupID, String signupDate, Course course) {
         this.signupID = signupID;
         this.signupDate = signupDate;

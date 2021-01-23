@@ -18,7 +18,8 @@ public class StudentLogic implements Logic<Student> {
     studentDAO.delete(email);
 }
 //Creëer student via DAO
-    public void create(Student student) {
+    public void create(String email, String firstName, String lastName, String dateOfBirth, String gender, String street, String houseNumber, String postalcode, String city, String country) {
+        Student student = new Student(email, firstName, lastName, dateOfBirth, gender, street, houseNumber, postalcode, city, country);
         studentDAO.create(student);
     }
 //Update student via DAO
