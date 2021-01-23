@@ -158,7 +158,7 @@ FROM (((Student
 	INNER JOIN Module ON ContentItem.ModuleID = Module.ModuleID)
 WHERE Student.Email = 'student@live.com' AND Module.ModuleID = '1'
 -------------------------------------------------------------------------------------
---Voor een cursus kan aangegeven worden hoeveel procent van een webcast bekeken is.
+--Voor een cursist kan aangegeven worden hoeveel procent van een webcast bekeken is.
 --Wanneer er al een webcastrecord in progress is:
 --(Te kiezen uit webcasts)
 SELECT Student.Email,Progress.ContentPerc, Webcast.Title AS ModuleTitle
