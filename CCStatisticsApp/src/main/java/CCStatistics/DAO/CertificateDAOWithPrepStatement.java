@@ -142,13 +142,13 @@ public class CertificateDAOWithPrepStatement{
     } 
     
     //Deletet een certificaat of meerdere certificaten (DELETE)
-    public void delete(String valueIs){
+    public void delete(int ID){
         //De query met ? ipv de waarde
         String rawquery = "DELETE FROM Certificate WHERE CertificateID = ?;";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
-        preparedStatement.setString(1, valueIs);
+        preparedStatement.setInt(1, ID);
         //Stuur de preparedstatement direct naar de goede methode in SQL
         sql.createQuery(preparedStatement);
 
@@ -158,24 +158,6 @@ public class CertificateDAOWithPrepStatement{
             SQLWithPrepStatement.printSQLException(e);
         }
     } 
-
-        //Deletet een certificaat of meerdere certificaten (DELETE)
-        public void delete(Double valueIs){
-            //De query met ? ipv de waarde
-            String rawquery = "DELETE FROM Certificate WHERE CertificateID = ?;";
-            //Probeert het eerste deel van de statement te sturen
-            try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
-            //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
-            preparedStatement.setDouble(1, valueIs);
-            //Stuur de preparedstatement direct naar de goede methode in SQL
-            sql.createQuery(preparedStatement);
-    
-            //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
-            } catch (SQLException e){
-                // print SQL exception information
-                SQLWithPrepStatement.printSQLException(e);
-            }
-        } 
 
         public ArrayList<Certificate> nothingFound(){
             ArrayList<Certificate> certificates = new ArrayList<>();
