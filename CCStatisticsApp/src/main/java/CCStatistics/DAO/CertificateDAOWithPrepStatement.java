@@ -83,35 +83,14 @@ public class CertificateDAOWithPrepStatement{
     }
 
     //Maakt een certificate aan (CREATE)
-    public void create(Certificate certificate) {
+    public void create(String employeeName, Double grade) {
         //De query met ? ipv de waarde
         String rawquery = "INSERT INTO Certificate (EmployeeName, Grade) VALUES (?,?);";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
-        preparedStatement.setString(1, certificate.getEmployeeName());
-        preparedStatement.setDouble(2, certificate.getGrade());
-        //Stuur de preparedstatement direct naar de goede methode in SQL
-        sql.createQuery(preparedStatement);
-
-        //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
-        } catch (SQLException e){
-            // print SQL exception information
-            SQLWithPrepStatement.printSQLException(e);
-        }
-
-    } 
-
-    //Updatet een certificaat of meerdere certificaten (UPDATE)
-    //Updatet de EmployeeName in Certificate-tabel
-    public void updateEmployeeName(int ID, String employeeName) {
-        //De query met ? ipv de waarde
-        String rawquery = "UPDATE Certificate SET EmployeeName = ? WHERE CertificateID = ?;";
-        //Probeert het eerste deel van de statement te sturen
-        try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
-        //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
         preparedStatement.setString(1, employeeName);
-        preparedStatement.setLong(2, ID);
+        preparedStatement.setDouble(2, grade);
         //Stuur de preparedstatement direct naar de goede methode in SQL
         sql.createQuery(preparedStatement);
 
@@ -120,19 +99,21 @@ public class CertificateDAOWithPrepStatement{
             // print SQL exception information
             SQLWithPrepStatement.printSQLException(e);
         }
+
     } 
 
-    //Updatet de Grade in Certificate-tabel
-    public void updateGrade(int ID, double changeInto){
+    //Updatet een certificaat (UPDATE)
+    public void update(String columnToChange, String changeInto, int certificateID) {
         //De query met ? ipv de waarde
-        String rawquery = "UPDATE Certificate SET Grade = ? WHERE CertificateID = ?;";
+        String rawquery = "UPDATE Certificate SET ? = ? WHERE CertificateID = ?;";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
-        preparedStatement.setDouble(1, changeInto);
-        preparedStatement.setLong(2, ID);
+        preparedStatement.setString(1, columnToChange);
+        preparedStatement.setString(2, changeInto);
+        preparedStatement.setInt(2, certificateID);
         //Stuur de preparedstatement direct naar de goede methode in SQL
-        sql.updateQuery(preparedStatement);
+        sql.createQuery(preparedStatement);
 
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
@@ -142,13 +123,13 @@ public class CertificateDAOWithPrepStatement{
     } 
     
     //Deletet een certificaat of meerdere certificaten (DELETE)
-    public void delete(int ID){
+    public void delete(int certificateID){
         //De query met ? ipv de waarde
         String rawquery = "DELETE FROM Certificate WHERE CertificateID = ?;";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
-        preparedStatement.setInt(1, ID);
+        preparedStatement.setInt(1, certificateID);
         //Stuur de preparedstatement direct naar de goede methode in SQL
         sql.deleteQuery(preparedStatement);
 
