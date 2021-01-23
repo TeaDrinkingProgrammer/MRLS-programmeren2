@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import CCStatistics.Domain.DatabaseEntity;
 import CCStatistics.Domain.Signup;
 import CCStatistics.Domain.Student;
 
