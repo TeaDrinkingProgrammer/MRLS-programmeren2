@@ -78,7 +78,7 @@ public class DAOWithPrepStatementTemplate{
     //     }
     // return null;
     // }   
-    // public ArrayList<ObjectToChange> CUDqueryWithVariable(String inputName) {
+    // public void CUDqueryWithVariable(String inputName) {
     //     //De query met ? ipv de waarde
     //     String rawquery = "Update query with ? here";
     //     //Probeert het eerste deel van de statement te sturen
