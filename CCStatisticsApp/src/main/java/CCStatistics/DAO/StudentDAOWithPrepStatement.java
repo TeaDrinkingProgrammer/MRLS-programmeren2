@@ -41,7 +41,7 @@ public class StudentDAOWithPrepStatement {
             }
             SignupDAOWithPrepStatement signupDAO = new SignupDAOWithPrepStatement();
             for (Student student : students) {
-                ArrayList<Signup> signupsList = signupDAO.readStudent(student.getEmail());
+                ArrayList<Signup> signupsList = signupDAO.readSignupFromStudent(student.getEmail());
                 student.addSignups(signupsList);
             }
         } else {
@@ -51,32 +51,9 @@ public class StudentDAOWithPrepStatement {
     }
 
     public ArrayList<Student> getAll() {
-        String rawquery = "SELECT * FROM Students;";
+        String rawquery = "SELECT * FROM Student;";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(rawquery)) {
-            return genericReadQuery(preparedStatement);
-        } catch (SQLException e) {
-            // Als er geen resultaat komt, komt er een bepaalde error (zie
-            // printSQLException), dan vangt dit het af en stuurt een not found resultaat"
-            if (SQLWithPrepStatement.printSQLException(e)) {
-                return this.nothingFound();
-            }
-            // print SQL exception information
-            SQLWithPrepStatement.printSQLException(e);
-        }
-        return null;
-    }
-
-    public ArrayList<Student> getModulesPercentage(String studentEmail) {
-        // de query met ? ipv de waarde
-        String rawquery = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourseName FROM InterestingToCourse WHERE CourseName = ?)";
-        // probeert het eerste deel van de statement te sturen
-        try (PreparedStatement preparedStatement = connection.prepareStatement(rawquery)) {
-            // Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten
-            preparedStatement.setString(0, studentEmail);
-            // Geeft deze statement mee aan genericreadquery
-
-            // Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
             return genericReadQuery(preparedStatement);
         } catch (SQLException e) {
             // Als er geen resultaat komt, komt er een bepaalde error (zie
@@ -92,7 +69,7 @@ public class StudentDAOWithPrepStatement {
     // Maakt een certificate aan (CREATE)
     public void create(Student student) {
         // De query met ? ipv de waarde
-        String rawquery = "INSERT INTO Certificate (Email,FirstName,LastName,DateOfBirth,Gender,Street,HouseNr,PostCode,City,Country) VALUES (?,?,?,?,?,?,?,?,?,?);";
+        String rawquery = "INSERT INTO Student (Email,FirstName,LastName,DateOfBirth,Gender,Street,HouseNr,PostCode,City,Country) VALUES (?,?,?,?,?,?,?,?,?,?);";
         // Probeert het eerste deel van de statement te sturen
         try (PreparedStatement preparedStatement = connection.prepareStatement(rawquery)) {
             // Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten,
