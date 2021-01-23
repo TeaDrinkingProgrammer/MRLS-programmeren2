@@ -1,6 +1,11 @@
 
 package CCStatistics;
+
 import javafx.application.Application;
+import CCStatistics.DAO.CertificateDAOWithPrepStatement;
+import CCStatistics.DAO.CourseDAOWithPrepStatement;
+import CCStatistics.Domain.Certificate;
+import CCStatistics.Domain.Course;
 import CCStatistics.Domain.Student;
 import CCStatistics.GUI.CourseInteresting;
 import CCStatistics.Logic.StudentLogic;
@@ -10,11 +15,37 @@ public class Main {
         //Application.launch(CourseInteresting.class);
         // CertificateDAO newOne = new CertificateDAO();
         // newOne.createCertificate(7.5, "Jan");
-        StudentLogic logic = new StudentLogic();
+        
+        CourseDAOWithPrepStatement testdao = new CourseDAOWithPrepStatement();
+        for(Course certificate : testdao.getAll()){
+            System.out.println(certificate.getName());
+            System.out.println(certificate.getSubject());
+            System.out.println(certificate.getIntroText());
+            System.out.println(certificate.getLevel());
+            System.out.println("--------------------------");
+        }
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        for(Course certificate : testdao.getCoursesInterestingTo("TestCourse1")){
+            System.out.println(certificate.getName());
+            System.out.println(certificate.getSubject());
+            System.out.println(certificate.getIntroText());
+            System.out.println(certificate.getLevel());
+            System.out.println("--------------------------");
+        }
+        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        for(Course certificate : testdao.read("TestCourse1")){
+            System.out.println(certificate.getName());
+            System.out.println(certificate.getSubject());
+            System.out.println(certificate.getIntroText());
+            System.out.println(certificate.getLevel());
+            System.out.println("--------------------------");
+        }
+        // testdao.delete(6);
 
-        Student student = new Student("email@live.com", "firstName", "lastName", "01-01-2020", "M", "street", "Number", "city", "country", "4827GC");
-        logic.create(student);
+        // System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        // testdao.create("Wassim",1.0);
 
+        //testdao.updateGrade(7, 1);
         
     }
 }

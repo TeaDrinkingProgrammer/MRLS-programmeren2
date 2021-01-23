@@ -53,7 +53,7 @@ public class CourseDAOWithPrepStatement{
     }
     public ArrayList<Course> getCoursesInterestingTo(String courseName) {
         //de query met ? ipv de waarde
-        String rawquery = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourseName FROM InterestingToCourse WHERE CourseName = ?)";
+        String rawquery = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourse FROM InterestingToCourse WHERE Name = ?)";
         //probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
@@ -94,6 +94,44 @@ public class CourseDAOWithPrepStatement{
     }
     return null;
     }
+
+    //Updatet een employee
+    public void update(String columnToChange, String changeInto, String courseName) {
+        //De query met ? ipv de waarde
+        String rawquery = "UPDATE Certificate SET ? = ? WHERE CertificateID = ?;";
+        //Probeert het eerste deel van de statement te sturen
+        try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
+        //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
+        preparedStatement.setString(1, columnToChange);
+        preparedStatement.setString(2, changeInto);
+        preparedStatement.setString(2, courseName);
+        //Stuur de preparedstatement direct naar de goede methode in SQL
+        sql.createQuery(preparedStatement);
+
+        //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
+        } catch (SQLException e){
+            // print SQL exception information
+            SQLWithPrepStatement.printSQLException(e);
+        }
+    } 
+
+    //Deletet een certificaat of meerdere certificaten (DELETE)
+    public void delete(String courseName){
+        //De query met ? ipv de waarde
+        String rawquery = "DELETE FROM Certificate WHERE CourseName = ?;";
+        //Probeert het eerste deel van de statement te sturen
+        try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
+        //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
+        preparedStatement.setString(1, courseName);
+        //Stuur de preparedstatement direct naar de goede methode in SQL
+        sql.deleteQuery(preparedStatement);
+
+        //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
+        } catch (SQLException e){
+            // print SQL exception information
+            SQLWithPrepStatement.printSQLException(e);
+        }
+    } 
 
     public ArrayList<Course> nothingFound(){
         ArrayList<Course> courses = new ArrayList<>();
