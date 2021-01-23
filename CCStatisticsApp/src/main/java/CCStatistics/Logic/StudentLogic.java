@@ -13,19 +13,16 @@ public class StudentLogic implements Logic<Student> {
     public ArrayList<Student> getAll() {
         return studentDAO.getAll();
     }
+//Verwijder student via DAO
+    public void delete(String email) {
+    studentDAO.delete(email);
+}
 //Creëer student via DAO
-    @Override
-    public void create(Student object) {
-        studentDAO.create(object);
+    public void create(Student student) {
+        studentDAO.create(student);
     }
 //Update student via DAO
-    @Override
-    public void update(Student object) {
-        studentDAO.create(object);
-    }
-//Verwijder student via DAO
-    @Override
-    public void delete(Student object) {
-        studentDAO.create(object);
+    public void update(Student student, String string) {
+        studentDAO.update(student, string);
     }
 }
