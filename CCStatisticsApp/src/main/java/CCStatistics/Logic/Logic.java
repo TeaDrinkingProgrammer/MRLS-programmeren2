@@ -2,13 +2,14 @@ package CCStatistics.Logic;
 
 import java.util.ArrayList;
 import CCStatistics.Domain.DatabaseEntity;
+import CCStatistics.Domain.Student;
 
-public interface Logic {
-    ArrayList<DatabaseEntity> getAll();
+public interface Logic<T> {
+    ArrayList<T> getAll();
 
-    void create(DatabaseEntity databaseEntity);
+    void create(T object);
 
-    void update(DatabaseEntity databaseEntity);
+    void update(T object);
 
-    void delete(DatabaseEntity databaseEntity);
+    void delete(T object);
 }

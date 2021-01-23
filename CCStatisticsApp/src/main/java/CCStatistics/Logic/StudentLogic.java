@@ -17,18 +17,18 @@ public class StudentLogic implements Logic {
 
 //Creëer student via DAO
     @Override
-    public void create(DatabaseEntity databaseEntity) {
-        studentDAO.CUDqueryWithVariable(inputName)
+    public void create(Object object) {
+        studentDAO.create((Student) object);
     }
-
 //Update student via DAO
     @Override
-    public void update(DatabaseEntity databaseEntity) {
+    public void update(Object object) {
         studentDAO.CUDqueryWithVariable(inputName)
     }
 //Verwijder student via DAO
     @Override
-    public void delete(DatabaseEntity databaseEntity) {
+    public void delete(Object object) {
         studentDAO.CUDqueryWithVariable(inputName)
     }
+
 }
