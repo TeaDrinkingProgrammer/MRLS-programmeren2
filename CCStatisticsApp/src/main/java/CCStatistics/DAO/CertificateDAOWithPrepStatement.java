@@ -132,7 +132,7 @@ public class CertificateDAOWithPrepStatement{
         preparedStatement.setDouble(1, changeInto);
         preparedStatement.setLong(2, ID);
         //Stuur de preparedstatement direct naar de goede methode in SQL
-        sql.createQuery(preparedStatement);
+        sql.updateQuery(preparedStatement);
 
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
@@ -150,7 +150,7 @@ public class CertificateDAOWithPrepStatement{
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
         preparedStatement.setInt(1, ID);
         //Stuur de preparedstatement direct naar de goede methode in SQL
-        sql.createQuery(preparedStatement);
+        sql.deleteQuery(preparedStatement);
 
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
