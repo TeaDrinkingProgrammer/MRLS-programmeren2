@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
+import CCStatistics.Domain.Signup;
 import CCStatistics.Domain.Student;
 
 public class StudentDAOWithPrepStatement{
@@ -35,8 +35,13 @@ public class StudentDAOWithPrepStatement{
                 String postalcode = row.get(9);
                 students.add(new Student(email, firstName, lastName, dateOfBirth, gender, street, houseNumber, city, country, postalcode));
             }
+            SignupDAOWithPrepStatement signupDAO = new SignupDAOWithPrepStatement();
+            for(Student student : students){
+                ArrayList<Signup> signupsList = signupDAO.readStudent(student.getEmail());
+                student.addSignups(signupsList);
+            } 
         } else{
-            students.add(new Student("No Students found!", "null", "null","1-1-1000","null","null","null","null","null","null"));
+            return null;
         }
         return students;
     }
@@ -46,6 +51,10 @@ public class StudentDAOWithPrepStatement{
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
             return genericReadQuery(preparedStatement);
             } catch (SQLException e){
+                //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
+                if(SQLWithPrepStatement.printSQLException(e)){
+                    return this.nothingFound();
+                }
                 // print SQL exception information
                 SQLWithPrepStatement.printSQLException(e);
         }
@@ -64,14 +73,19 @@ public class StudentDAOWithPrepStatement{
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         return genericReadQuery(preparedStatement);
         } catch (SQLException e){
-            // print SQL exception information
-            System.out.println(e.getMessage());
+            //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
             if(SQLWithPrepStatement.printSQLException(e)){
-                ArrayList<Student> students = new ArrayList<>();
-                students.add(new Student("No Students found!", "null", "null","1-1-1000","null","null","null","null","null","null"));
-                return students;
+                return this.nothingFound();
             }
+            // print SQL exception information
+            SQLWithPrepStatement.printSQLException(e);
     }
     return null;
+    }
+
+    public ArrayList<Student> nothingFound(){
+        ArrayList<Student> students = new ArrayList<>();
+        students.add(new Student("NothingFound", "null", "null","1-1-1000","null","null","null","null","null","null"));
+        return students;
     }
 }

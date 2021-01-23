@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import CCStatistics.Domain.Certificate;
 import CCStatistics.Domain.Course;
+import CCStatistics.Domain.EnumLevel;
 import CCStatistics.Domain.Signup;
 
 //Vervang SignUp met het object dat je hebt (bijv. Student)
@@ -64,6 +65,30 @@ public class SignupDAOWithPrepStatement {
 
              //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
             } catch (SQLException e){
+                //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
+                if(SQLWithPrepStatement.printSQLException(e)){
+                    return this.nothingFound();
+                }
+                // print SQL exception information
+                SQLWithPrepStatement.printSQLException(e);
+        }
+        return null;
+    }
+
+    public ArrayList<Signup> readStudent(String studentEmail) {
+        //De Query
+        String rawquery = "SELECT * FROM Signup WHERE StudentEmail = ?";
+        //Probeert het eerste deel van de statement te sturen
+        try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
+            //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
+            preparedStatement.setString(1, studentEmail);
+            return genericReadQuery(preparedStatement);
+             //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
+            } catch (SQLException e){
+                //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
+                if(SQLWithPrepStatement.printSQLException(e)){
+                    return this.nothingFound();
+                }
                 // print SQL exception information
                 SQLWithPrepStatement.printSQLException(e);
         }
@@ -127,4 +152,12 @@ public class SignupDAOWithPrepStatement {
                 SQLWithPrepStatement.printSQLException(e);
             }
         } 
+
+    public ArrayList<Signup> nothingFound(){
+        ArrayList<Signup> signups = new ArrayList<>();
+        Certificate certificate = new Certificate(0, 0, "null");
+        Course course = new Course("null", "null", "null", EnumLevel.Beginner);
+        signups.add(new Signup(0,"nothingFound",course,certificate));
+        return signups;
+    }
 }

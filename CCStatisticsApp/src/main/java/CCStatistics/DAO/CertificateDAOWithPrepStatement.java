@@ -50,6 +50,10 @@ public class CertificateDAOWithPrepStatement{
 
              //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
             } catch (SQLException e){
+                //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
+                if(SQLWithPrepStatement.printSQLException(e)){
+                    return this.nullValue();
+                }
                 // print SQL exception information
                 SQLWithPrepStatement.printSQLException(e);
         }
@@ -68,6 +72,10 @@ public class CertificateDAOWithPrepStatement{
         return genericReadQuery(preparedStatement);
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
+            //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
+            if(SQLWithPrepStatement.printSQLException(e)){
+                return this.nullValue();
+            }
             // print SQL exception information
             SQLWithPrepStatement.printSQLException(e);
         }
@@ -152,4 +160,9 @@ public class CertificateDAOWithPrepStatement{
             SQLWithPrepStatement.printSQLException(e);
         }
     } 
+    public ArrayList<Certificate> nullValue(){
+        ArrayList<Certificate> certificates = new ArrayList<>();
+        certificates.add(new Certificate(0,0.0, "nullValue")); 
+        return certificates;
+    }
 }

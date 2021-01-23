@@ -40,9 +40,7 @@ public class DAOWithPrepStatementTemplate{
     //             listName.add(new ObjectToChange(name,subject,introText,level));
     //         }
     //     } else{
-    //         //Als er geen enkel resultaat wordt dat aangegeven in het object. Dit ziet de gebruiker omdat deze uitgelezen wordt door de GUI
-    //         //HAAL REGEL WEG NA GELEZEN TE HEBBEN -- Plaats de No listname found! op goede plek zodat deze uitgelezen kan worden door de GUI
-    //         listName.add(new ObjectToChange("No listName found!", "item2", "item3", "item4")); 
+    //          return null;
     //     }
     //     return listName;
     // }
@@ -63,7 +61,7 @@ public class DAOWithPrepStatementTemplate{
     //     return null;
     // }
 
-    // public ArrayList<ObjectToChange> SelectQueryWithVariable(String inputName) {
+   // public ArrayList<ObjectToChange> SelectQueryWithVariable(String inputName) {
     //     //De query met ? ipv de waarde
     //     String rawquery = "Select query with ? here";
     //     //Probeert het eerste deel van de statement te sturen
@@ -79,7 +77,7 @@ public class DAOWithPrepStatementTemplate{
     //         SQLWithPrepStatement.printSQLException(e);
     //     }
     // return null;
-    // }  
+    // }   
     // public ArrayList<ObjectToChange> CUDqueryWithVariable(String inputName) {
     //     //De query met ? ipv de waarde
     //     String rawquery = "Update query with ? here";
@@ -97,4 +95,9 @@ public class DAOWithPrepStatementTemplate{
     //     }
 
     // }   
+    // public ArrayList<Certificate> nullValue(){
+    //     ArrayList<Certificate> certificates = new ArrayList<>();
+    //     certificates.add(new Certificate(0,0.0, "No Certificates Found!")); 
+    //     return certificates;
+    // }
 }

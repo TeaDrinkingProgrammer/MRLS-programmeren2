@@ -41,6 +41,10 @@ public class CourseDAOWithPrepStatement{
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
             return genericReadQuery(preparedStatement);
             } catch (SQLException e){
+                //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
+                if(SQLWithPrepStatement.printSQLException(e)){
+                    return this.nothingFound();
+                }
                 // print SQL exception information
                 SQLWithPrepStatement.printSQLException(e);
         }
@@ -58,16 +62,15 @@ public class CourseDAOWithPrepStatement{
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         return genericReadQuery(preparedStatement);
         } catch (SQLException e){
+            //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
             if(SQLWithPrepStatement.printSQLException(e)){
-                ArrayList<Course> courses = new ArrayList<>();
-                courses.add(new Course("No Course found", "null", "null", EnumLevel.valueOf("Beginner")));
-                return courses;
+                return this.nothingFound();
             }
             // print SQL exception information
             SQLWithPrepStatement.printSQLException(e);
     }
     return null;
-    }
+}
 
     public ArrayList<Course> read(String courseName) {
         //de query met ? ipv de waarde
@@ -81,14 +84,19 @@ public class CourseDAOWithPrepStatement{
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         return genericReadQuery(preparedStatement);
         } catch (SQLException e){
+            //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
             if(SQLWithPrepStatement.printSQLException(e)){
-                ArrayList<Course> courses = new ArrayList<>();
-                courses.add(new Course("No Course found", "null", "null", EnumLevel.valueOf("Beginner")));
-                return courses;
+                return this.nothingFound();
             }
             // print SQL exception information
             SQLWithPrepStatement.printSQLException(e);
     }
     return null;
+    }
+
+    public ArrayList<Course> nothingFound(){
+        ArrayList<Course> courses = new ArrayList<>();
+        courses.add(new Course("nothingFound", "null", "null", EnumLevel.valueOf("Beginner")));
+        return courses;
     }
 }
