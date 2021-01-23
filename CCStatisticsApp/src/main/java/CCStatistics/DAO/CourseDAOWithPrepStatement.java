@@ -9,8 +9,8 @@ import CCStatistics.Domain.Course;
 import CCStatistics.Domain.EnumLevel;
 
 public class CourseDAOWithPrepStatement{
-    SQLWithPrepStatement sql = null;
-    Connection connection = null;
+    private SQLWithPrepStatement sql = null;
+    private Connection connection = null;
     public CourseDAOWithPrepStatement(){
         //Pakt de connectionURL van login zodat deze aan te passen is. Geeft ook de mogelijkheid voor bijv. meerdere connectionURLS
         sql = new SQLWithPrepStatement();
@@ -49,6 +49,29 @@ public class CourseDAOWithPrepStatement{
     public ArrayList<Course> getCoursesInterestingTo(String courseName) {
         //de query met ? ipv de waarde
         String rawquery = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourseName FROM InterestingToCourse WHERE CourseName = ?)";
+        //probeert het eerste deel van de statement te sturen
+        try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
+        //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
+        preparedStatement.setString(1, courseName);
+        //Geeft deze statement mee aan genericreadquery
+
+        //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
+        return genericReadQuery(preparedStatement);
+        } catch (SQLException e){
+            if(SQLWithPrepStatement.printSQLException(e)){
+                ArrayList<Course> courses = new ArrayList<>();
+                courses.add(new Course("No Course found", "null", "null", EnumLevel.valueOf("Beginner")));
+                return courses;
+            }
+            // print SQL exception information
+            SQLWithPrepStatement.printSQLException(e);
+    }
+    return null;
+    }
+
+    public ArrayList<Course> read(String courseName) {
+        //de query met ? ipv de waarde
+        String rawquery = "SELECT * FROM Course WHERE Name = ?";
         //probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen

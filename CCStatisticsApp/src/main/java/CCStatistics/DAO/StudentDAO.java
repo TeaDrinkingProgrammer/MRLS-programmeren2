@@ -8,7 +8,7 @@ import CCStatistics.Domain.Student;
 
 public class StudentDAO{
     //Pakt de connectionURL van login zodat deze aan te passen is. Geeft ook de mogelijkheid voor bijv. meerdere connectionURLS
-    SQL sql = new SQL();
+    private SQL sql = new SQL();
     
     public ArrayList<Student> genericReadQuery(String query){
         ArrayList<ArrayList<String>> tableList = sql.readQuery("Student",query);

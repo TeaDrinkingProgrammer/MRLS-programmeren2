@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import CCStatistics.Domain.Certificate;
 
 public class CertificateDAOWithPrepStatement{
-    SQLWithPrepStatement sql = null;
-    Connection connection = null;
+    private SQLWithPrepStatement sql = null;
+    private Connection connection = null;
 
     public CertificateDAOWithPrepStatement(){
         //Pakt de SQL class, deze handelt de verbinding en het sturen en ontvangen van de query's en hun replies
@@ -55,6 +55,24 @@ public class CertificateDAOWithPrepStatement{
         }
         return null;
     }
+
+        //Leest een certificate uit (READ)
+        public ArrayList<Certificate> read(String certificate) {
+        //De query met ? ipv de waarde
+        String rawquery = "SELECT * FROM Certificate WHERE CertificateID = ?";
+        //Probeert het eerste deel van de statement te sturen
+        try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
+        //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
+        preparedStatement.setString(1, certificate);
+        //Geeft deze statement mee aan genericreadquery
+        return genericReadQuery(preparedStatement);
+        //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
+        } catch (SQLException e){
+            // print SQL exception information
+            SQLWithPrepStatement.printSQLException(e);
+        }
+    return null;
+    }  
 
     //Maakt een certificate aan (CREATE)
     public void create(double grade, String employeeName) {

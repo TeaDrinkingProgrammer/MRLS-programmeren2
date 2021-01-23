@@ -10,7 +10,7 @@ public class CertificateDAO {
     public CertificateDAO() {
     }
 
-    SQL sql = new SQL();
+    private SQL sql = new SQL();
     
     public ArrayList<Certificate> genericReadQuery(String query){
         ArrayList<ArrayList<String>> tableList = sql.readQuery("Certificate", query);

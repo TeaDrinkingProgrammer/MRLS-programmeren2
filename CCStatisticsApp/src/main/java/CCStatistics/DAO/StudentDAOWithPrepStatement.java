@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import CCStatistics.Domain.Student;
 
 public class StudentDAOWithPrepStatement{
-    SQLWithPrepStatement sql = null;
-    Connection connection = null;
+    private SQLWithPrepStatement sql = null;
+    private Connection connection = null;
     public StudentDAOWithPrepStatement(){
         //Pakt de SQL class, deze handelt de verbinding en het sturen en ontvangen van de query's en hun replies
         sql = new SQLWithPrepStatement();

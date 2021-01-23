@@ -2,20 +2,20 @@ package CCStatistics.Domain;
 
 public class Signup {
     private int signupID;
-    private Course course;
     private String signupDate;
+    private Course course;
     private Certificate certificate;
 
-    public Signup(int signupID, Course course, String signupDate) {
+    public Signup(int signupID, String signupDate, Course course) {
         this.signupID = signupID;
-        this.course = course;
         this.signupDate = signupDate;
+        this.course = course;
     }
 
-    public Signup(int signupID, Course course, String signupDate, Certificate certificate) {
+    public Signup(int signupID, String signupDate,Course course, Certificate certificate) {
         this.signupID = signupID;
-        this.course = course;
         this.signupDate = signupDate;
+        this.course = course;
         this.certificate = certificate;
     }
 
@@ -31,6 +31,14 @@ public class Signup {
     public void setSignupID(int signupID) {
         this.signupID = signupID;
     }
+    
+    public String getSignupDate() {
+        return this.signupDate;
+    }
+
+    public void setSignupDate(String signupDate) {
+        this.signupDate = signupDate;
+    }
 
     public Course getCourse() {
         return this.course;
@@ -38,14 +46,6 @@ public class Signup {
 
     public void setCourse(Course course) {
         this.course = course;
-    }
-
-    public String getSignupDate() {
-        return this.signupDate;
-    }
-
-    public void setSignupDate(String signupDate) {
-        this.signupDate = signupDate;
     }
 
     public Certificate getCertificate() {
