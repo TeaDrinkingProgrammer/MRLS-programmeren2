@@ -75,7 +75,7 @@ public class SignupDAOWithPrepStatement {
         return null;
     }
 
-    public ArrayList<Signup> readStudent(String studentEmail) {
+    public ArrayList<Signup> readSignupFromStudent(String studentEmail) {
         //De Query
         String rawquery = "SELECT * FROM Signup WHERE StudentEmail = ?";
         //Probeert het eerste deel van de statement te sturen
@@ -95,14 +95,14 @@ public class SignupDAOWithPrepStatement {
         return null;
     }
 
-    public void create(String date, String courseName, String studentEmail) {
+    public void create(Signup signup,String studentEmail) {
         //De query met ? ipv de waarde
         String rawquery = "INSERT INTO Signup (Signupdate, Course, StudentEmail) VALUES (?,?,?);";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
-        preparedStatement.setString(1, date);
-        preparedStatement.setString(2, courseName);
+        preparedStatement.setString(1, signup.getSignupDate());
+        preparedStatement.setString(2, signup.getCourse().getName());
         preparedStatement.setString(3, studentEmail);
         //Stuur de preparedstatement direct naar de goede methode in SQL
         sql.createQuery(preparedStatement);

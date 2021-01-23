@@ -17,8 +17,6 @@ public class SignupDAO {
                 String courseName = row.get(1);
                 String studentEmail = row.get(2);
                 String certificateID = row.get(3);
-//Schrijf code om signup met certificateID en email toe te voegen                
-          //   signUps.add(new Signup(signupDate,courseName,studentEmail,certificateID));
             }
         } else{
             //Date nullDate = ;
