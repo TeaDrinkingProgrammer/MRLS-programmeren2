@@ -1,28 +1,27 @@
 package CCStatistics.Logic;
 
+import java.util.ArrayList;
 import CCStatistics.DAO.CertificateDAOWithPrepStatement;
+import CCStatistics.Domain.Certificate;
 
-public class CertificateLogic implements Logic<Certificate>{
+public class CertificateLogic implements Logic<Certificate> {
     CertificateDAOWithPrepStatement CertificatetDAO = new CertificateDAOWithPrepStatement();
 
 //Haal alle studenten op in de DAO
     @Override
-    public ArrayList<Student> getAll() {
-        return studentDAO.getAll();
-    }
-//Creëer student via DAO
-    @Override
-    public void create(Student object) {
-        studentDAO.create(object);
-    }
-//Update student via DAO
-    @Override
-    public void update(Student object) {
-        studentDAO.create(object);
+    public ArrayList<Certificate> getAll() {
+        return CertificatetDAO.getAll();
     }
 //Verwijder student via DAO
-    @Override
-    public void delete(Student object) {
-        studentDAO.create(object);
+    public void delete(Certificate object) {
+        CertificatetDAO.create(object);
+    }
+//Creëer student via DAO
+    public void create(Certificate object) {
+        CertificatetDAO.create(object);
+    }
+//Update student via DAO
+    public void update(Certificate object) {
+        CertificatetDAO.create(object);
     }
 }
