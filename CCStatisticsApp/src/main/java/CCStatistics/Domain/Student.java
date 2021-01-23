@@ -2,7 +2,7 @@ package CCStatistics.Domain;
 
 import java.util.ArrayList;
 
-public class Student {
+public class Student implements DatabaseEntity {
     private String email;
     private String firstName;
     private String lastName;
@@ -14,7 +14,6 @@ public class Student {
     private String city;
     private String country;
     private ArrayList<Signup> signUps;
-
 
     public Student(String email, String firstName, String lastName, String dateOfBirth, String gender, String street, String houseNumber, String city, String country, String postalcode) {
         this.email = email;
