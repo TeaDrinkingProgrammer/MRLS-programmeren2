@@ -27,8 +27,8 @@ public class CertificateDAOWithPrepStatement{
             for(ArrayList<String> row : tableList){
                 //Pakt per rij alle waarden en slaat ze op in de de arraylist als het goede object
                 int certificateID  = Integer.valueOf(row.get(0));
-                double grade = Double.valueOf(row.get(1));
-                String employeeName = row.get(2);
+                String employeeName = row.get(1);
+                double grade = Double.valueOf(row.get(2));
                 certificates.add(new Certificate(certificateID, grade, employeeName));
             }
         } else{
@@ -61,13 +61,13 @@ public class CertificateDAOWithPrepStatement{
     }
 
         //Leest een certificate uit (READ)
-        public ArrayList<Certificate> read(String certificate) {
+        public ArrayList<Certificate> read(int certificateID) {
         //De query met ? ipv de waarde
         String rawquery = "SELECT * FROM Certificate WHERE CertificateID = ?";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
-        preparedStatement.setString(1, certificate);
+        preparedStatement.setInt(1, certificateID);
         //Geeft deze statement mee aan genericreadquery
         return genericReadQuery(preparedStatement);
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
@@ -80,7 +80,7 @@ public class CertificateDAOWithPrepStatement{
             SQLWithPrepStatement.printSQLException(e);
         }
     return null;
-    }  
+    }
 
     //Maakt een certificate aan (CREATE)
     public void create(Certificate certificate) {
@@ -160,9 +160,28 @@ public class CertificateDAOWithPrepStatement{
             SQLWithPrepStatement.printSQLException(e);
         }
     } 
-    public ArrayList<Certificate> nothingFound(){
-        ArrayList<Certificate> certificates = new ArrayList<>();
-        certificates.add(new Certificate(0,0.0, "nothingFound")); 
-        return certificates;
-    }
+
+        //Deletet een certificaat of meerdere certificaten (DELETE)
+        public void delete(Double valueIs){
+            //De query met ? ipv de waarde
+            String rawquery = "DELETE FROM Certificate WHERE CertificateID = ?;";
+            //Probeert het eerste deel van de statement te sturen
+            try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
+            //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
+            preparedStatement.setDouble(1, valueIs);
+            //Stuur de preparedstatement direct naar de goede methode in SQL
+            sql.createQuery(preparedStatement);
+    
+            //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
+            } catch (SQLException e){
+                // print SQL exception information
+                SQLWithPrepStatement.printSQLException(e);
+            }
+        } 
+
+        public ArrayList<Certificate> nothingFound(){
+            ArrayList<Certificate> certificates = new ArrayList<>();
+            certificates.add(new Certificate(0,0.0, "nothingFound")); 
+            return certificates;
+        }
 }

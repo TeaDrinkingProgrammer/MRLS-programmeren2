@@ -45,9 +45,10 @@ public class SignupDAOWithPrepStatement {
                 CourseDAOWithPrepStatement courseDAO = new CourseDAOWithPrepStatement();
                 Course course = courseDAO.read(courseName).get(0);
                 Certificate certificate = null;
-                if(!certificateID.equals(null) || !certificateID.equals("null")){
+                if(!certificateID.equals("NULL")){
+                    int intCertificateID = Integer.valueOf(certificateID);
                     CertificateDAOWithPrepStatement certificateDAO = new CertificateDAOWithPrepStatement();
-                    certificate = certificateDAO.read(courseName).get(0);
+                    certificate = certificateDAO.read(intCertificateID).get(0);
                 }
                 signUps.add(new Signup(signupID,signupDate,course,certificate));
             }
