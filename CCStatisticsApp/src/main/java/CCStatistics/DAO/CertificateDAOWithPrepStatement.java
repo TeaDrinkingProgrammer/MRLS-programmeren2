@@ -52,7 +52,7 @@ public class CertificateDAOWithPrepStatement{
             } catch (SQLException e){
                 //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
                 if(SQLWithPrepStatement.printSQLException(e)){
-                    return this.nullValue();
+                    return this.nothingFound();
                 }
                 // print SQL exception information
                 SQLWithPrepStatement.printSQLException(e);
@@ -74,7 +74,7 @@ public class CertificateDAOWithPrepStatement{
         } catch (SQLException e){
             //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
             if(SQLWithPrepStatement.printSQLException(e)){
-                return this.nullValue();
+                return this.nothingFound();
             }
             // print SQL exception information
             SQLWithPrepStatement.printSQLException(e);
@@ -160,9 +160,9 @@ public class CertificateDAOWithPrepStatement{
             SQLWithPrepStatement.printSQLException(e);
         }
     } 
-    public ArrayList<Certificate> nullValue(){
+    public ArrayList<Certificate> nothingFound(){
         ArrayList<Certificate> certificates = new ArrayList<>();
-        certificates.add(new Certificate(0,0.0, "nullValue")); 
+        certificates.add(new Certificate(0,0.0, "nothingFound")); 
         return certificates;
     }
 }
