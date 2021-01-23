@@ -26,17 +26,17 @@
 --(N'Module2', 1.5, N'Henk', N'ik@hotmail.com', N'TestCourse1', 2),
 --(N'Module3', 1, N'Marja', N'test@gmail.com', N'TestCourse2', 1),
 --(N'Module4', 2, N'Gerda', N'ja@aol.com', N'TestCourse3', 1),
---(N'Module5', 3, N'Sarah', N'nee@yahoo.com', N'TestCourse4', 1)
+--(N'Module5', 3, N'Sarah', N'nee@yahoo.com', N'TestCourse4', 1),
 --(N'Module6', 2, N'Lars', N'lars@live.com', N'TestCourse2', 2),
 --(N'Module7', 1.3, N'Karin', N'karin@hotmail.com', N'TestCourse2', 3);
 
 --INSERT INTO Webcast
 --VALUES 
---(N'Module1', 11, N'Kees', N'David van der Steen', N'Unilever'),
---(N'Module2', 15, N'Henk', N'Pim van der Spek', N'ASML'),
---(N'Module3', 23, N'Marja', N'Pieter Vos', N'Shell'),
---(N'Module4', 7, N'Gerda', N'Stefan Steen', N'Vodafone'),
---(N'Module5', 29, N'Sarah', N'Kees Naaktgeboren', N'KLM');
+--(N'Webcast1', 11, N'Kees', N'David van der Steen', N'Unilever'),
+--(N'Webcast2', 15, N'Henk', N'Pim van der Spek', N'ASML'),
+--(N'Webcast3', 23, N'Marja', N'Pieter Vos', N'Shell'),
+--(N'Webcast4', 7, N'Gerda', N'Stefan Steen', N'Vodafone'),
+--(N'Webcast5', 29, N'Sarah', N'Kees Naaktgeboren', N'KLM');
 
 --INSERT INTO ContentItem
 --VALUES 
@@ -47,10 +47,11 @@
 --(N'Active', N'Description3', '12-08-2020', null, 2),
 --(N'Active', N'Description6', '11-04-2020', 3, null),
 --(N'Active', N'Description7', '02-19-2020', 6, null),
---(N'Active', N'Description8', '02-10-2020', 7, null);
-
---DBCC CHECKIDENT ('[ContentItem]', RESEED, 0);
---DELETE FROM ContentItem
+--(N'Active', N'Description8', '02-10-2020', 7, null),
+--(N'Active', N'Description9', '08-19-2020', 4, null),
+--(N'Active', N'Description10', '07-11-2020', 5, null),
+--(N'Active', N'Description11', '10-29-2018', null, 3),
+--(N'Active', N'Description12', '07-31-2017', null, 4);
 
 --INSERT INTO Student
 --VALUES 
@@ -78,7 +79,6 @@
 --(N'student2@live.com', 8, 37),
 --(N'student2@live.com', 2, 35),
 --(N'student2@live.com', 5, 42);
-;
 
 SELECT *
 FROM Course;
@@ -147,3 +147,68 @@ FROM Course
 	ON Course.Name = Signup.Course
 WHERE Course.Name = 'TestCourse2'
 GROUP BY Name;
+-------------------------------------------------------------------------------------
+--Voor een cursist kan aangegeven worden wat de voortgang in een module is.
+--Wanneer er al een modulerecord in progress is:
+--(Te kiezen uit modules)
+SELECT Progress.*
+FROM Progress
+	JOIN ContentItem
+	ON Progress.ContentItemID = ContentItem.ContentItemID
+	JOIN Module
+	ON ContentItem.ModuleID = Module.ModuleID
+WHERE Email = 'student@live.com';
+--(Update de gekozen module)
+UPDATE Progress
+SET ContentPerc = 100
+WHERE Email = 'student@live.com' AND ContentItemID = 1;
+
+--Wanneer er geen modulerecord in progress is:
+--(Te kiezen uit modules)
+SELECT Title
+FROM Module
+WHERE Title NOT IN (
+SELECT Title
+FROM Progress
+	JOIN ContentItem
+	ON Progress.ContentItemID = ContentItem.ContentItemID
+	JOIN Module
+	ON ContentItem.ModuleID = Module.ModuleID
+WHERE Email = 'student@live.com');
+--(Insert de gekozen module)
+INSERT INTO Progress
+VALUES ('student@live.com', 1 , 100);
+-------------------------------------------------------------------------------------
+--Voor een cursus kan aangegeven worden hoeveel procent van een webcast bekeken is.
+--Wanneer er al een webcastrecord in progress is:
+--(Te kiezen uit webcasts)
+SELECT Progress.*
+FROM Progress
+	JOIN ContentItem
+	ON Progress.ContentItemID = ContentItem.ContentItemID
+	JOIN Webcast
+	ON ContentItem.WebcastID = Webcast.WebcastID
+WHERE Email = 'student@live.com';
+--(Update de gekozen webcast)
+UPDATE Progress
+SET ContentPerc = 100
+WHERE Email = 'student@live.com' AND ContentItemID = 2;
+
+--Wanneer er geen webcastrecord in progress is, kiezen uit:
+--(Te kiezen uit webcasts)
+SELECT *
+FROM Webcast
+WHERE Title NOT IN (
+SELECT Title
+FROM Progress
+	JOIN ContentItem
+	ON Progress.ContentItemID = ContentItem.ContentItemID
+	JOIN Webcast
+	ON ContentItem.WebcastID = Webcast.WebcastID
+WHERE Email = 'student@live.com');
+--(Insert de gekozen webcast)
+INSERT INTO Progress
+VALUES ('student@live.com', 5 , 100);
+
+--DBCC CHECKIDENT ('[ContentItem]', RESEED, 0);
+--DELETE FROM ContentItem;
