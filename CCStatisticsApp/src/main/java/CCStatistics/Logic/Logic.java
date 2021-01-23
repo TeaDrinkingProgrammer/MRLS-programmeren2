@@ -1,8 +1,6 @@
 package CCStatistics.Logic;
 
 import java.util.ArrayList;
-import CCStatistics.Domain.DatabaseEntity;
-import CCStatistics.Domain.Student;
 
 public interface Logic<T> {
     ArrayList<T> getAll();

@@ -2,7 +2,7 @@ package CCStatistics.Domain;
 
 import java.util.ArrayList;
 
-public class Student implements DatabaseEntity {
+public class Student {
     private String email;
     private String firstName;
     private String lastName;

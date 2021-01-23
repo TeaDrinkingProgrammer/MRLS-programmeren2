@@ -3,10 +3,9 @@ package CCStatistics.Logic;
 import java.util.ArrayList;
 
 import CCStatistics.DAO.StudentDAOWithPrepStatement;
-import CCStatistics.Domain.DatabaseEntity;
 import CCStatistics.Domain.Student;
 
-public class StudentLogic implements Logic {
+public class StudentLogic implements Logic<Student> {
     StudentDAOWithPrepStatement studentDAO = new StudentDAOWithPrepStatement();
 
 //Haal alle studenten op in de DAO
@@ -14,21 +13,19 @@ public class StudentLogic implements Logic {
     public ArrayList<Student> getAll() {
         return studentDAO.getAll();
     }
-
 //Creëer student via DAO
     @Override
-    public void create(Object object) {
-        studentDAO.create((Student) object);
+    public void create(Student object) {
+        studentDAO.create(object);
     }
 //Update student via DAO
     @Override
-    public void update(Object object) {
-        studentDAO.CUDqueryWithVariable(inputName)
+    public void update(Student object) {
+        studentDAO.create(object);
     }
 //Verwijder student via DAO
     @Override
-    public void delete(Object object) {
-        studentDAO.CUDqueryWithVariable(inputName)
+    public void delete(Student object) {
+        studentDAO.create(object);
     }
-
 }
