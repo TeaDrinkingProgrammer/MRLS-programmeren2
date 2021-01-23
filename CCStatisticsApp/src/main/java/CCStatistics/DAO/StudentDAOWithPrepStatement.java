@@ -23,6 +23,7 @@ public class StudentDAOWithPrepStatement {
     public ArrayList<Student> genericReadQuery(PreparedStatement preparedStatement) {
         ArrayList<ArrayList<String>> tableList = sql.readQuery("Student", preparedStatement);
         ArrayList<Student> students = new ArrayList<>();
+        SignupDAOWithPrepStatement signupDAO = new SignupDAOWithPrepStatement();
         if (tableList.size() > 0) {
             for (ArrayList<String> row : tableList) {
                 String email = row.get(0);
@@ -35,13 +36,8 @@ public class StudentDAOWithPrepStatement {
                 String postalcode = row.get(7);
                 String city = row.get(8);
                 String country = row.get(9);
-                students.add(new Student(email, firstName, lastName, dateOfBirth, gender, street, houseNumber,
-                        postalcode, city, country));
-            }
-            SignupDAOWithPrepStatement signupDAO = new SignupDAOWithPrepStatement();
-            for (Student student : students) {
-                ArrayList<Signup> signupsList = signupDAO.readSignupFromStudent(student.getEmail());
-                student.addSignups(signupsList);
+
+                students.add(new Student(email, firstName, lastName, dateOfBirth, gender, street, houseNumber,postalcode, city, country));
             }
         } else {
             return null;
@@ -128,7 +124,7 @@ public class StudentDAOWithPrepStatement {
             // begint op 1 met tellen
             preparedStatement.setString(1, columnToChange);
             preparedStatement.setString(2, changeInto);
-            preparedStatement.setString(2, studentEmail);
+            preparedStatement.setString(3, studentEmail);
             // Stuur de preparedstatement direct naar de goede methode in SQL
             sql.createQuery(preparedStatement);
 

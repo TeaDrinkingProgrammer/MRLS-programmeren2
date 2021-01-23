@@ -116,7 +116,7 @@ public class CourseDAOWithPrepStatement{
     } 
 
     //Deletet een certificaat of meerdere certificaten (DELETE)
-    public void delete(String courseName){
+    public int delete(String courseName){
         //De query met ? ipv de waarde
         String rawquery = "DELETE FROM Certificate WHERE CourseName = ?;";
         //Probeert het eerste deel van de statement te sturen
@@ -124,13 +124,14 @@ public class CourseDAOWithPrepStatement{
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
         preparedStatement.setString(1, courseName);
         //Stuur de preparedstatement direct naar de goede methode in SQL
-        sql.deleteQuery(preparedStatement);
+        return sql.deleteQuery(preparedStatement);
 
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
             // print SQL exception information
             SQLWithPrepStatement.printSQLException(e);
         }
+        return 0;
     } 
 
     public ArrayList<Course> nothingFound(){

@@ -1,27 +1,28 @@
 package CCStatistics.Logic;
 
 import java.util.ArrayList;
-
 import CCStatistics.DAO.CourseDAOWithPrepStatement;
 import CCStatistics.DAO.SignupDAOWithPrepStatement;
 import CCStatistics.DAO.StudentDAOWithPrepStatement;
 import CCStatistics.Domain.Course;
 import CCStatistics.Domain.Signup;
 import CCStatistics.Domain.Student;
+import CCStatistics.DAO.SQLWithPrepStatement;
 
 public class SignupLogic implements Logic<Signup> {
-    SignupDAOWithPrepStatement signupDAO = new SignupDAOWithPrepStatement();
-
-//Haal alle Signup op in de DAO
+    private SignupDAOWithPrepStatement signupDAO = new SignupDAOWithPrepStatement();
+    private SQLWithPrepStatement sql = new SQLWithPrepStatement();
+    private ArrayList<String> columns = new ArrayList<>();
+    //Haal alle Signup op in de DAO
     @Override
     public ArrayList<Signup> getAll() {
         return signupDAO.getAll();
     }
 //Verwijder Signup via DAO
     public String delete(int ID) {
-    int deleted = signupDAO.delete(ID);
-    return String.format("%d records deleted", deleted);
-}
+        int deleted = signupDAO.delete(ID);
+        return String.format("%d records deleted", deleted);
+    }
 //Creëer Signup via DAO
     public String create(String signupDate, String courseTo, String studentEmail) {
         CourseDAOWithPrepStatement courseDAO = new CourseDAOWithPrepStatement();
@@ -55,7 +56,14 @@ public class SignupLogic implements Logic<Signup> {
         return "No such course or student!";
     }
 //Update Signup via DAO
-    public void update(Signup object, String studentEmail) {
-        signupDAO.create(object, studentEmail);
+    public ArrayList<Signup> update(String columnToChange, String changeInto, int signupID) {
+        signupDAO.update(columnToChange, changeInto, signupID);
+        return this.getAll();
+    }
+    public ArrayList<String> getColumns(){
+        if(columns.isEmpty()){
+            columns = sql.getColumns("Signup");
+        }
+        return columns;
     }
 }

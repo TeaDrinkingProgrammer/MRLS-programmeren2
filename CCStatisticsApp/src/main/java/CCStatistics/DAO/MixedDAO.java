@@ -10,6 +10,12 @@ public class MixedDAO {
 
     private MixedSQL sql = null;
     private Connection connection = null;
+    public final String[] averageProgressForCourseColumns = {"Course","ModuleID","AverageProgress"};
+    public final String[] moduleProgressColumns = {"Student Email", "Course", "ModuleID", "Progress"};
+    public final String[] top3WebcastsColumns = {"WebcastID","Title","Viewed"};
+    public final String[] studentsPassedInCourseColumns = {"Course","Passed"};
+    public final String[] progressInModuleColumns = {"Email","ContentPerc","ModuleTitle"};
+    public final String[] progressInWebcastColumns = {"Email","ContentPerc","WebcastTitle"};
 
     public MixedDAO(){
         //Pakt de SQL class, deze handelt de verbinding en het sturen en ontvangen van de query's en hun replies
@@ -25,12 +31,8 @@ public class MixedDAO {
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
         preparedStatement.setString(1, courseName);
-                ArrayList<String> columns = new ArrayList<>();
-                columns.add("Course");
-                columns.add("ModuleID");
-                columns.add("AverageProgress");
                 //Geeft de prepared statement mee aan SQL readquery
-                ArrayList<ArrayList<String>> tableList = sql.readQuery(columns,preparedStatement);
+                ArrayList<ArrayList<String>> tableList = sql.readQuery(averageProgressForCourseColumns,preparedStatement);
                 //Slaat de resultaten op in deze Arraylist
                 ArrayList<String[]> list = new ArrayList<>();
                 if(tableList.size() > 0){
@@ -58,19 +60,14 @@ public class MixedDAO {
 
     public ArrayList<String[]> getModuleProgress(String courseName,String studentEmail) {
         //De query met ? ipv de waarde
-        String rawquery = "SELECT Email AS Account, Name AS Course, Module.ModuleID, ContentPerc AS Progress FROM Progress JOIN ContentItem ON Progress.ContentItemID = ContentItem.ContentItemID JOIN Module ON ContentItem.ModuleID = Module.ModuleID JOIN Course ON Module.Course = Course.Name WHERE Progress.Email = ? AND Course.Name = ?;";
+        String rawquery = "SELECT Email AS Student Email, Name AS Course, Module.ModuleID, ContentPerc AS Progress FROM Progress JOIN ContentItem ON Progress.ContentItemID = ContentItem.ContentItemID JOIN Module ON ContentItem.ModuleID = Module.ModuleID JOIN Course ON Module.Course = Course.Name WHERE Progress.Email = ? AND Course.Name = ?;";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
         preparedStatement.setString(1, studentEmail);
         preparedStatement.setString(2, courseName);
-            ArrayList<String> columns = new ArrayList<>();
-            columns.add("Account");
-            columns.add("Course");
-            columns.add("ModuleID");
-            columns.add("Progress");
                 //Geeft de prepared statement mee aan SQL readquery
-                ArrayList<ArrayList<String>> tableList = sql.readQuery(columns,preparedStatement);
+                ArrayList<ArrayList<String>> tableList = sql.readQuery(moduleProgressColumns,preparedStatement);
                 //Slaat de resultaten op in deze Arraylist
                 ArrayList<String[]> list = new ArrayList<>();
                 if(tableList.size() > 0){
@@ -104,12 +101,8 @@ public class MixedDAO {
         String rawquery = "SELECT TOP 3 Webcast.WebcastID, Webcast.Title, COUNT(Progress.ContentItemID) AS Viewed FROM Webcast JOIN ContentItem ON Webcast.WebcastID = ContentItem.WebcastID JOIN Progress ON ContentItem.ContentItemID = Progress.ContentItemID GROUP BY Webcast.WebcastID, Webcast.Title ORDER BY Viewed DESC;";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
-                ArrayList<String> columns = new ArrayList<>();
-                columns.add("WebcastID");
-                columns.add("Title");
-                columns.add("Viewed");
                 //Geeft de prepared statement mee aan SQL readquery
-                ArrayList<ArrayList<String>> tableList = sql.readQuery(columns,preparedStatement);
+                ArrayList<ArrayList<String>> tableList = sql.readQuery(top3WebcastsColumns,preparedStatement);
                 //Slaat de resultaten op in deze Arraylist
                 ArrayList<String[]> list = new ArrayList<>();
                 if(tableList.size() > 0){
@@ -142,12 +135,8 @@ public class MixedDAO {
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
                 //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
                 preparedStatement.setString(1, courseInput);
-
-                ArrayList<String> columns = new ArrayList<>();
-                columns.add("Course");
-                columns.add("Passed");
                 //Geeft de prepared statement mee aan SQL readquery
-                ArrayList<ArrayList<String>> tableList = sql.readQuery(columns,preparedStatement);
+                ArrayList<ArrayList<String>> tableList = sql.readQuery(studentsPassedInCourseColumns,preparedStatement);
                 //Slaat de resultaten op in deze Arraylist
                 ArrayList<String[]> list = new ArrayList<>();
                 if(tableList.size() > 0){
@@ -180,13 +169,8 @@ public class MixedDAO {
                 //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
                 preparedStatement.setString(1, studentEmail);
                 preparedStatement.setInt(2, moduleID);
-
-                ArrayList<String> columns = new ArrayList<>();
-                columns.add("Email");
-                columns.add("ContentPerc");
-                columns.add("ModuleTitle");
                 //Geeft de prepared statement mee aan SQL readquery
-                ArrayList<ArrayList<String>> tableList = sql.readQuery(columns,preparedStatement);
+                ArrayList<ArrayList<String>> tableList = sql.readQuery(progressInModuleColumns,preparedStatement);
                 //Slaat de resultaten op in deze Arraylist
                 ArrayList<String[]> list = new ArrayList<>();
                 if(tableList.size() > 0){
@@ -215,19 +199,14 @@ public class MixedDAO {
 
     public ArrayList<String[]> getProgressInWebcast(String studentEmail,int webcastID) {
         //De query met ? ipv de waarde
-        String rawquery = "   SELECT Student.Email,Progress.ContentPerc, Webcast.Title AS WebcastTitle FROM (((Student INNER JOIN Progress ON Student.Email = Progress.Email) INNER JOIN ContentItem ON Progress.ContentItemID = ContentItem.ContentItemID) INNER JOIN Webcast ON ContentItem.ModuleID = Webcast.WebcastID) WHERE Student.Email = ? AND Webcast.WebcastID = ?";
+        String rawquery = "SELECT Student.Email,Progress.ContentPerc, Webcast.Title AS WebcastTitle FROM (((Student INNER JOIN Progress ON Student.Email = Progress.Email) INNER JOIN ContentItem ON Progress.ContentItemID = ContentItem.ContentItemID) INNER JOIN Webcast ON ContentItem.ModuleID = Webcast.WebcastID) WHERE Student.Email = ? AND Webcast.WebcastID = ?";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
                 //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
                 preparedStatement.setString(1, studentEmail);
                 preparedStatement.setInt(2, webcastID);
-
-                ArrayList<String> columns = new ArrayList<>();
-                columns.add("Email");
-                columns.add("ContentPerc");
-                columns.add("WebcastTitle");
                 //Geeft de prepared statement mee aan SQL readquery
-                ArrayList<ArrayList<String>> tableList = sql.readQuery(columns,preparedStatement);
+                ArrayList<ArrayList<String>> tableList = sql.readQuery(progressInWebcastColumns,preparedStatement);
                 //Slaat de resultaten op in deze Arraylist
                 ArrayList<String[]> list = new ArrayList<>();
                 if(tableList.size() > 0){

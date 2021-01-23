@@ -4,10 +4,12 @@ package CCStatistics;
 import javafx.application.Application;
 import CCStatistics.DAO.CertificateDAOWithPrepStatement;
 import CCStatistics.DAO.CourseDAOWithPrepStatement;
+import CCStatistics.DAO.MixedDAO;
 import CCStatistics.Domain.Certificate;
 import CCStatistics.Domain.Course;
 import CCStatistics.Domain.Student;
 import CCStatistics.GUI.CourseInteresting;
+import CCStatistics.Logic.MixedLogic;
 import CCStatistics.Logic.StudentLogic;
 
 public class Main {    
@@ -16,30 +18,43 @@ public class Main {
         // CertificateDAO newOne = new CertificateDAO();
         // newOne.createCertificate(7.5, "Jan");
         
-        CourseDAOWithPrepStatement testdao = new CourseDAOWithPrepStatement();
-        for(Course certificate : testdao.getAll()){
-            System.out.println(certificate.getName());
-            System.out.println(certificate.getSubject());
-            System.out.println(certificate.getIntroText());
-            System.out.println(certificate.getLevel());
-            System.out.println("--------------------------");
+       MixedDAO testdao = new MixedDAO();
+        for(String[] stringArray: testdao.getTop3Webcasts()){
+            for(String string : stringArray){
+                System.out.println(string);
+            }
         }
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        for(Course certificate : testdao.getCoursesInterestingTo("TestCourse1")){
-            System.out.println(certificate.getName());
-            System.out.println(certificate.getSubject());
-            System.out.println(certificate.getIntroText());
-            System.out.println(certificate.getLevel());
-            System.out.println("--------------------------");
+        System.out.println("%%%%%%%%%%");
+        MixedLogic newOne = new MixedLogic();
+        for (String[] stringArray : newOne.getAverageProgressForCourse("TestCourse1")) {
+            for (String string : stringArray) {
+                System.out.println(string);
+            }
         }
-        System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        for(Course certificate : testdao.read("TestCourse1")){
-            System.out.println(certificate.getName());
-            System.out.println(certificate.getSubject());
-            System.out.println(certificate.getIntroText());
-            System.out.println(certificate.getLevel());
-            System.out.println("--------------------------");
+        System.out.println("%%%%%%%%%%");
+        for (String[] stringArray : newOne.getProgressInWebcast("student@live.com", 1)) {
+            for (String string : stringArray) {
+                System.out.println(string);
+            }
         }
+        
+
+        // System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        // for(Course certificate : testdao.getCoursesInterestingTo("TestCourse1")){
+        //     System.out.println(certificate.getName());
+        //     System.out.println(certificate.getSubject());
+        //     System.out.println(certificate.getIntroText());
+        //     System.out.println(certificate.getLevel());
+        //     System.out.println("--------------------------");
+        // }
+        // System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        // for(Course certificate : testdao.read("TestCourse1")){
+        //     System.out.println(certificate.getName());
+        //     System.out.println(certificate.getSubject());
+        //     System.out.println(certificate.getIntroText());
+        //     System.out.println(certificate.getLevel());
+        //     System.out.println("--------------------------");
+        // }
         // testdao.delete(6);
 
         // System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");

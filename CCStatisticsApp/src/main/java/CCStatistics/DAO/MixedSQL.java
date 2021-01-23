@@ -14,7 +14,7 @@ public class MixedSQL {
         return sqlWithPrepStatement.getConnection();
     }
     
-    public ArrayList<ArrayList<String>> readQuery(ArrayList<String> columns,PreparedStatement preparedStatement){
+    public ArrayList<ArrayList<String>> readQuery(String[] columns,PreparedStatement preparedStatement){
         // ResultSet is de tabel die we van de database terugkrijgen.
         // We kunnen door de rows heen stappen en iedere kolom lezen.
         ResultSet rs = null;

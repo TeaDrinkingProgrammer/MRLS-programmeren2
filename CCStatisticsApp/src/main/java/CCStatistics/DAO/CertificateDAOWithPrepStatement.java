@@ -83,14 +83,14 @@ public class CertificateDAOWithPrepStatement{
     }
 
     //Maakt een certificate aan (CREATE)
-    public void create(String employeeName, Double grade) {
+    public void create(Certificate certificate) {
         //De query met ? ipv de waarde
         String rawquery = "INSERT INTO Certificate (EmployeeName, Grade) VALUES (?,?);";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
-        preparedStatement.setString(1, employeeName);
-        preparedStatement.setDouble(2, grade);
+        preparedStatement.setString(1, certificate.getEmployeeName());
+        preparedStatement.setDouble(2, certificate.getGrade());
         //Stuur de preparedstatement direct naar de goede methode in SQL
         sql.createQuery(preparedStatement);
 
@@ -123,7 +123,7 @@ public class CertificateDAOWithPrepStatement{
     } 
     
     //Deletet een certificaat of meerdere certificaten (DELETE)
-    public void delete(int certificateID){
+    public int delete(int certificateID){
         //De query met ? ipv de waarde
         String rawquery = "DELETE FROM Certificate WHERE CertificateID = ?;";
         //Probeert het eerste deel van de statement te sturen
@@ -131,13 +131,14 @@ public class CertificateDAOWithPrepStatement{
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
         preparedStatement.setInt(1, certificateID);
         //Stuur de preparedstatement direct naar de goede methode in SQL
-        sql.deleteQuery(preparedStatement);
+        return sql.deleteQuery(preparedStatement);
 
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
             // print SQL exception information
             SQLWithPrepStatement.printSQLException(e);
         }
+        return 0;
     } 
 
         public ArrayList<Certificate> nothingFound(){
