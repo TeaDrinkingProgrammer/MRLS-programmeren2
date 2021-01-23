@@ -11,6 +11,7 @@ import CCStatistics.Domain.EnumLevel;
 public class CourseDAOWithPrepStatement{
     private SQLWithPrepStatement sql = null;
     private Connection connection = null;
+    
     public CourseDAOWithPrepStatement(){
         //Pakt de connectionURL van login zodat deze aan te passen is. Geeft ook de mogelijkheid voor bijv. meerdere connectionURLS
         sql = new SQLWithPrepStatement();
