@@ -46,7 +46,7 @@ public class ValidationFormatLogic {
         throw new IllegalArgumentException();
     }
 
-    //Formatting postcode methode
+    //Formatting date methode
     public static String formatDate(/* non_null */ int day, int month, int year) {
         
         if (day < 10 && month < 10) {
@@ -71,8 +71,6 @@ public class ValidationFormatLogic {
 
         return gender; 
     }
-
-    
 
     //Validatie grade methode
     public static boolean isValidGrade(double grade) {

@@ -66,7 +66,7 @@ public class SignupLogic implements Logic<Signup> {
         }
 
         if (containsStudent && containsCourse) {
-            String formattedSignupDate = String.format("%d-%d-%d", month, day, year);
+            String formattedSignupDate = ValidationFormatLogic.formatDate(day, month, year);
             Signup signup = new Signup(formattedSignupDate, courseFound);
             signupDAO.create(signup, studentEmail);
             return "Signup added.";
