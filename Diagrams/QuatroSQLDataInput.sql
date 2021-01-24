@@ -147,26 +147,22 @@ FROM Course
 	ON Course.Name = Signup.Course
 WHERE Course.Name = 'TestCourse2'
 GROUP BY Name;
--------------------------------------------------------------------------------------
+
 --Voor een cursist kan aangegeven worden wat de voortgang in een module is.
---Wanneer er al een modulerecord in progress is:
---(Te kiezen uit modules)
 SELECT Student.Email,Progress.ContentPerc, Module.Title AS ModuleTitle
 FROM (((Student
 	INNER JOIN Progress ON Student.Email = Progress.Email)
 	INNER JOIN ContentItem ON Progress.ContentItemID = ContentItem.ContentItemID)
 	INNER JOIN Module ON ContentItem.ModuleID = Module.ModuleID)
-WHERE Student.Email = 'student@live.com' AND Module.ModuleID = '1'
--------------------------------------------------------------------------------------
+WHERE Student.Email = 'student@live.com' AND Module.ModuleID = '1';
+
 --Voor een cursist kan aangegeven worden hoeveel procent van een webcast bekeken is.
---Wanneer er al een webcastrecord in progress is:
---(Te kiezen uit webcasts)
 SELECT Student.Email,Progress.ContentPerc, Webcast.Title AS ModuleTitle
 FROM (((Student
 	INNER JOIN Progress ON Student.Email = Progress.Email)
 	INNER JOIN ContentItem ON Progress.ContentItemID = ContentItem.ContentItemID)
 	INNER JOIN Webcast ON ContentItem.ModuleID = Webcast.WebcastID)
-WHERE Student.Email = 'student@live.com' AND Webcast.WebcastID = '1'
+WHERE Student.Email = 'student@live.com' AND Webcast.WebcastID = '1';
 
 --DBCC CHECKIDENT ('[ContentItem]', RESEED, 0);
 --DELETE FROM ContentItem;
