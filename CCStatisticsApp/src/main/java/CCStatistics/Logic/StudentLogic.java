@@ -32,6 +32,7 @@ public class StudentLogic implements Logic<Student> {
         int day = Integer.valueOf(dateParts[0]);
         int month = Integer.valueOf(dateParts[1]);
         int year = Integer.valueOf(dateParts[2]);
+        
         String formattedPostalCode = null;
 
         try {
@@ -45,8 +46,9 @@ public class StudentLogic implements Logic<Student> {
         }
 
         if (ValidationFormatLogic.validateMailAddress(email) && ValidationFormatLogic.validateDate(day, month, year)) {
-            String formattedDateOfBirth = String.format("%d-%d-%d", month, day, year);            
-            Student student = new Student(email, firstName, lastName, formattedDateOfBirth, gender, street, houseNumber, formattedPostalCode, city, country);
+            String formattedDateOfBirth = ValidationFormatLogic.formatDate(day, month, year);   
+            String formattedGender = ValidationFormatLogic.formatGender(gender);
+            Student student = new Student(email, firstName, lastName, formattedDateOfBirth, formattedGender, street, houseNumber, formattedPostalCode, city, country);
             studentDAO.create(student);
             return "Student added.";
         }

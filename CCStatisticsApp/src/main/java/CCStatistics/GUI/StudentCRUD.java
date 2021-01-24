@@ -55,7 +55,7 @@ public class StudentCRUD extends Application {
         
         TextField inputGet = new TextField();
         inputGet.setPromptText("Student email here");
-         Button getButton = new Button("Get info about student");
+         Button getButton = new Button("Get student");
 
          getButton.setOnAction(actionEvent ->  {
             data.clear();
@@ -109,7 +109,7 @@ public class StudentCRUD extends Application {
         ,houseNumberCol,postalcodeCol,countryCol);
 
         actionScreen.setMaxWidth(500);
-        table.setMaxWidth(350);
+        table.setMaxWidth(420);
         inputGet.setMaxWidth(350);
 
         actionScreen.add(screenTitle,0,0);
@@ -142,8 +142,8 @@ public class StudentCRUD extends Application {
         createInputs.get(0).setPromptText("Email");
         createInputs.get(1).setPromptText("FirstName");
         createInputs.get(2).setPromptText("LastName");
-        createInputs.get(3).setPromptText("DateOfBirth");
-        createInputs.get(4).setPromptText("Gender");
+        createInputs.get(3).setPromptText("DateOfBirth (d-m-y)");
+        createInputs.get(4).setPromptText("Gender (M/V)");
         createInputs.get(5).setPromptText("Street");
         createInputs.get(6).setPromptText("HouseNumber");
         createInputs.get(7).setPromptText("Postalcode");

@@ -34,7 +34,7 @@ public class ValidationFormatLogic {
         return true;
     }
 
-    //Validatie postcode methode
+    //Validatie en formatting postcode methode
     public static String formatPostalCode(/* non_null */ String postalCode) {
         
         if(Integer.valueOf(postalCode.trim().substring(0, 4)) > 999 &&
@@ -52,6 +52,34 @@ public class ValidationFormatLogic {
         
         throw new IllegalArgumentException();
     }
+
+    //Formatting postcode methode
+    public static String formatDate(/* non_null */ int day, int month, int year) {
+        
+        if (day < 10 && month < 10) {
+            return String.format("0%d-0%d-%d", month, day, year);   
+        } else if (day < 10) {
+            return String.format("%d-0%d-%d", month, day, year);   
+        } else if (month < 10) {
+            return String.format("0%d-%d-%d", month, day, year);
+        }
+
+        return String.format("%d-%d-%d", month, day, year);   
+    }
+
+    //Formatting gender methode
+    public static String formatGender(/* non_null */ String gender) {
+        
+        if (gender.equals("m")) {
+            return "M";
+        } else if (gender.equals("v")) {
+            return "V";
+        }
+
+        return gender; 
+    }
+
+    
 
     //Validatie grade methode
     public static boolean isValidGrade(double grade) {
