@@ -7,10 +7,7 @@ import CCStatistics.GUI.HomeScreen;
 
 public class Main {    
     public static void main(String[] args) {
-        //StudentLogic sl = new StudentLogic();
-        //sl.update("FirstName","Michael","student@live.com");
         Application.launch(HomeScreen.class);
-        //Application.launch(CourseInteresting.class);
     //TestData voor de DAOs
 
     //    MixedDAO testdao = new MixedDAO();

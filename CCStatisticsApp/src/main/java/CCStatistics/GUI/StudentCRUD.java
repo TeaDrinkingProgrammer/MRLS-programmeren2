@@ -46,11 +46,7 @@ public class StudentCRUD {
         // Input voor de select queries
         TextField inputGet = new TextField();
         inputGet.setPromptText("Student email here");
-<<<<<<< HEAD
         Button getButton = new Button("Get info about student");
-=======
-         Button getButton = new Button("Get student");
->>>>>>> b3b217a3384bc690e10229c585669bfeb7a29d6b
 
         getButton.setOnAction(actionEvent -> {
             data.clear();
@@ -106,13 +102,8 @@ public class StudentCRUD {
         table.getColumns().addAll(emailCol, firstNameCol, lastNameCol, dateOfBirthCol, genderCol, streetCol,
                 houseNumberCol, postalcodeCol, countryCol);
 
-<<<<<<< HEAD
         ReadBox.setMaxWidth(500);
         table.setMaxWidth(350);
-=======
-        actionScreen.setMaxWidth(500);
-        table.setMaxWidth(420);
->>>>>>> b3b217a3384bc690e10229c585669bfeb7a29d6b
         inputGet.setMaxWidth(350);
 
         // Voegt alles van de linkerkant van het scherm toe

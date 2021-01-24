@@ -47,15 +47,9 @@ public class StudentLogic implements Logic<Student> {
         }
 
         if (ValidationFormatLogic.validateMailAddress(email) && ValidationFormatLogic.validateDate(day, month, year)) {
-<<<<<<< HEAD
-            String formattedDateOfBirth = String.format("%d-%d-%d", month, day, year);
-            Student student = new Student(email, firstName, lastName, formattedDateOfBirth, gender, street, houseNumber,
-                    formattedPostalCode, city, country);
-=======
             String formattedDateOfBirth = ValidationFormatLogic.formatDate(day, month, year);   
             String formattedGender = ValidationFormatLogic.formatGender(gender);
             Student student = new Student(email, firstName, lastName, formattedDateOfBirth, formattedGender, street, houseNumber, formattedPostalCode, city, country);
->>>>>>> b3b217a3384bc690e10229c585669bfeb7a29d6b
             studentDAO.create(student);
             return "Student added.";
         }
