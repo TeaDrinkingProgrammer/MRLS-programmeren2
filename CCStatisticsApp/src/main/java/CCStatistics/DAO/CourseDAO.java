@@ -97,7 +97,7 @@ public class CourseDAO {
     //Updatet een employee
     public void update(String columnToChange, String changeInto, String courseName) {
         //De query met ? ipv de waarde
-        String rawquery = "UPDATE Course SET ? = ? WHERE CertificateID = ?;";
+        String rawquery = "UPDATE Course SET ? = ? WHERE Name = ?;";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen
@@ -117,7 +117,7 @@ public class CourseDAO {
     //Deletet een certificaat of meerdere certificaten (DELETE)
     public int delete(String courseName){
         //De query met ? ipv de waarde
-        String rawquery = "DELETE FROM Course WHERE CourseName = ?;";
+        String rawquery = "DELETE FROM Course WHERE Name = ?;";
         //Probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen

@@ -80,7 +80,7 @@ public class SignupDAO {
 
     public ArrayList<Signup> readSignupFromStudent(String studentEmail) {
         // De Query
-        String rawquery = "SELECT * FROM Signup WHERE StudentEmail = ?";
+        String rawquery = "SELECT * FROM Signup WHERE SignupID = ?";
         // Probeert het eerste deel van de statement te sturen
         try (PreparedStatement preparedStatement = connection.prepareStatement(rawquery)) {
             // Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten,
@@ -102,7 +102,7 @@ public class SignupDAO {
 
     public void create(Signup signup, String studentEmail) {
         // De query met ? ipv de waarde
-        String rawquery = "INSERT INTO Signup (Signupdate, Course, StudentEmail) VALUES (?,?,?);";
+        String rawquery = "INSERT INTO Signup (SignupDate, Course, StudentEmail) VALUES (?,?,?);";
         // Probeert het eerste deel van de statement te sturen
         try (PreparedStatement preparedStatement = connection.prepareStatement(rawquery)) {
             // Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten,
@@ -124,7 +124,7 @@ public class SignupDAO {
     // Updatet een signup (UPDATE)
     public void update(String columnToChange, String changeInto, int signupID) {
         // De query met ? ipv de waarde
-        String rawquery = "UPDATE Signup SET ? = ? WHERE signupID = ?;";
+        String rawquery = "UPDATE Signup SET ? = ? WHERE SignupID = ?;";
         // Probeert het eerste deel van de statement te sturen
         try (PreparedStatement preparedStatement = connection.prepareStatement(rawquery)) {
             // Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten,
