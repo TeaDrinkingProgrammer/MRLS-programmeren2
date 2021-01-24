@@ -1,14 +1,11 @@
 
-package CCStatistics.Logic;
+package CCStatistics.Tests;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import CCStatistics.Logic.ValidationFormatLogic;
 
-public class ValidationLogicTest {
+public class ValidationFormatLogicTest {
     //--------------------DATUM VALIDATIETEST
      /**
     * @desc Validates is a given date in the form of day, month and year is valid.
@@ -28,7 +25,7 @@ public class ValidationLogicTest {
         int year = 2021;
         
         //Act
-        boolean result = ValidationLogic.validateDate(day, month, year);
+        boolean result = ValidationFormatLogic.validateDate(day, month, year);
         
         //Assert
         assertEquals(true, result);
@@ -42,7 +39,7 @@ public class ValidationLogicTest {
         int year = 2021;
         
         //Act
-        boolean result = ValidationLogic.validateDate(day, month, year);
+        boolean result = ValidationFormatLogic.validateDate(day, month, year);
         
         //Assert
         assertEquals(true, result);
@@ -56,7 +53,7 @@ public class ValidationLogicTest {
         int year = 2021;
         
         //Act
-        boolean result = ValidationLogic.validateDate(day, month, year);
+        boolean result = ValidationFormatLogic.validateDate(day, month, year);
         
         //Assert
         assertEquals(true, result);
@@ -70,7 +67,7 @@ public class ValidationLogicTest {
         int year = 2021;
         
         //Act
-        boolean result = ValidationLogic.validateDate(day, month, year);
+        boolean result = ValidationFormatLogic.validateDate(day, month, year);
         
         //Assert
         assertEquals(true, result);
@@ -92,7 +89,7 @@ public class ValidationLogicTest {
         int year = 2021;
         
         //Act
-        boolean result = ValidationLogic.validateDate(day, month, year);
+        boolean result = ValidationFormatLogic.validateDate(day, month, year);
         
         //Assert
         assertEquals(true, result);
@@ -106,7 +103,7 @@ public class ValidationLogicTest {
         int year = 2021;
         
         //Act
-        boolean result = ValidationLogic.validateDate(day, month, year);
+        boolean result = ValidationFormatLogic.validateDate(day, month, year);
         
         //Assert
         assertEquals(true, result);
@@ -127,7 +124,7 @@ public class ValidationLogicTest {
         int year = 2020;
         
         //Act
-        boolean result = ValidationLogic.validateDate(day, month, year);
+        boolean result = ValidationFormatLogic.validateDate(day, month, year);
         
         //Assert
         assertEquals(true, result);
@@ -141,7 +138,7 @@ public class ValidationLogicTest {
         int year = 2004;
         
         //Act
-        boolean result = ValidationLogic.validateDate(day, month, year);
+        boolean result = ValidationFormatLogic.validateDate(day, month, year);
         
         //Assert
         assertEquals(true, result);
@@ -163,7 +160,7 @@ public class ValidationLogicTest {
         int year = 2021;
         
         //Act
-        boolean result = ValidationLogic.validateDate(day, month, year);
+        boolean result = ValidationFormatLogic.validateDate(day, month, year);
         
         //Assert
         assertEquals(true, result);
@@ -177,7 +174,7 @@ public class ValidationLogicTest {
         int year = 1998;
         
         //Act
-        boolean result = ValidationLogic.validateDate(day, month, year);
+        boolean result = ValidationFormatLogic.validateDate(day, month, year);
         
         //Assert
         assertEquals(true, result);
@@ -197,7 +194,7 @@ public class ValidationLogicTest {
         int year = 2021;
         
         //Act
-        boolean result = ValidationLogic.validateDate(day, month, year);
+        boolean result = ValidationFormatLogic.validateDate(day, month, year);
         
         //Assert
         assertEquals(false, result);
@@ -220,7 +217,7 @@ public class ValidationLogicTest {
         //Arrange
         String aString = "mailboxsubdomain.tld";
         //Act
-        boolean result = ValidationLogic.validateMailAddress(aString);
+        boolean result = ValidationFormatLogic.validateMailAddress(aString);
         //Assert
         assertEquals(false, result);
     }
@@ -230,7 +227,7 @@ public class ValidationLogicTest {
         //Arrange
         String aString = "@subdomain.tld";
         //Act
-        boolean result = ValidationLogic.validateMailAddress(aString);
+        boolean result = ValidationFormatLogic.validateMailAddress(aString);
         //Assert
         assertEquals(false, result);
     }
@@ -248,7 +245,7 @@ public class ValidationLogicTest {
         //Arrange
         String aString = "mailbox@subdomain.subdomain.tld";
         //Act
-        boolean result = ValidationLogic.validateMailAddress(aString);
+        boolean result = ValidationFormatLogic.validateMailAddress(aString);
         //Assert
         assertEquals(false, result);
     }
@@ -265,7 +262,7 @@ public class ValidationLogicTest {
         //Arrange
         String aString = "mailbox@.tld";
         //Act
-        boolean result = ValidationLogic.validateMailAddress(aString);
+        boolean result = ValidationFormatLogic.validateMailAddress(aString);
         //Assert
         assertEquals(false, result);
     }
@@ -282,7 +279,7 @@ public class ValidationLogicTest {
         //Arrange
         String aString = "mailbox@subdomain.";
         //Act
-        boolean result = ValidationLogic.validateMailAddress(aString);
+        boolean result = ValidationFormatLogic.validateMailAddress(aString);
         //Assert
         assertEquals(false, result);
     }
@@ -299,7 +296,7 @@ public class ValidationLogicTest {
         //Arrange
         String aString = "mailbox@subdomain.tld";
         //Act
-        boolean result = ValidationLogic.validateMailAddress(aString);
+        boolean result = ValidationFormatLogic.validateMailAddress(aString);
         //Assert
         assertEquals(true, result);
         
@@ -321,7 +318,7 @@ public class ValidationLogicTest {
         //Arrange
         String aString = null;
         //Act
-        String result = ValidationLogic.formatPostalCode(aString);
+        String result = ValidationFormatLogic.formatPostalCode(aString);
     }
     
     /** @subcontract valid postalCode {
@@ -340,7 +337,7 @@ public class ValidationLogicTest {
         //Arrange
         String aString = " 1111 aa ";
         //Act
-        String result = ValidationLogic.formatPostalCode(aString);
+        String result = ValidationFormatLogic.formatPostalCode(aString);
         //Assert
         assertEquals("1111 AA", result);
     }
@@ -356,7 +353,7 @@ public class ValidationLogicTest {
         //Arrange
         String aString = "111aa";
         //Act
-        String result = ValidationLogic.formatPostalCode(aString);
+        String result = ValidationFormatLogic.formatPostalCode(aString);
     }
     
     @Test(expected = IllegalArgumentException.class)
@@ -364,7 +361,7 @@ public class ValidationLogicTest {
         //Arrange
         String aString = "1111aaa";
         //Act
-        String result = ValidationLogic.formatPostalCode(aString);
+        String result = ValidationFormatLogic.formatPostalCode(aString);
     }
     
     @Test(expected = IllegalArgumentException.class)
@@ -372,7 +369,7 @@ public class ValidationLogicTest {
         //Arrange
         String aString = "Some text 123";
         //Act
-        String result = ValidationLogic.formatPostalCode(aString);
+        String result = ValidationFormatLogic.formatPostalCode(aString);
     }
     
     //--------------------GRADE VALIDATIETEST
@@ -390,7 +387,7 @@ public class ValidationLogicTest {
         //Arrange
         double grade = 5;
         //Act
-        boolean result = ValidationLogic.isValidGrade(grade);
+        boolean result = ValidationFormatLogic.isValidGrade(grade);
         //Assert
         assertEquals(true, result);
     }
@@ -400,7 +397,7 @@ public class ValidationLogicTest {
         //Arrange
         double grade = 0;
         //Act
-        boolean result = ValidationLogic.isValidGrade(grade);
+        boolean result = ValidationFormatLogic.isValidGrade(grade);
         //Assert
         assertEquals(true, result);
     }
@@ -410,7 +407,7 @@ public class ValidationLogicTest {
         //Arrange
         double grade = 10;
         //Act
-        boolean result = ValidationLogic.isValidGrade(grade);
+        boolean result = ValidationFormatLogic.isValidGrade(grade);
         //Assert
         assertEquals(true, result);
     }
@@ -426,7 +423,7 @@ public class ValidationLogicTest {
         //Arrange
         double grade = -0.1;
         //Act
-        boolean result = ValidationLogic.isValidGrade(grade);
+        boolean result = ValidationFormatLogic.isValidGrade(grade);
         //Assert
         assertEquals(false, result);
     }
@@ -442,7 +439,7 @@ public class ValidationLogicTest {
         //Arrange
         double grade = 10.1;
         //Act
-        boolean result = ValidationLogic.isValidGrade(grade);
+        boolean result = ValidationFormatLogic.isValidGrade(grade);
         //Assert
         assertEquals(false, result);
     }
