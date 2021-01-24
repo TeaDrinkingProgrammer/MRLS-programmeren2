@@ -22,34 +22,36 @@ public class HomeScreen extends Application {
         GridPane actionScreen = new GridPane();
 
         Label appTitle = new Label("Codecademy Statistics");
-        Label welcomeText = new Label("Some Text");
+        Label welcomeText = new Label("Welcome Text");
         Label versionText = new Label("v1.0");
 
-        VBox homeScreen = new VBox();
         VBox appTitleBox = new VBox();
         BorderPane footer = new BorderPane();
         
-        //menu.add(welcomeText,1,0);
-
         appTitleBox.getChildren().add(appTitle);
-        footer.setRight(versionText);
-        
         appTitleBox.setAlignment(Pos.CENTER);
         appTitle.setFont(new Font("Arial", 20));
-        
-        homeScreen.setPadding(new Insets(10, 10, 10, 10));
-        homeScreen.setSpacing(50);
+
+        footer.setRight(versionText);
+
+        actionScreen.getChildren().add(welcomeText);
+        actionScreen.setPrefWidth(1000);
+        actionScreen.setAlignment(Pos.CENTER);        
 
         mainLayout.setTop(appTitleBox);
         mainLayout.setLeft(menu);
         mainLayout.setCenter(actionScreen);
         mainLayout.setBottom(footer);
+        BorderPane.setMargin(appTitleBox, new Insets(0, 0, 20, 0));
+        BorderPane.setMargin(menu, new Insets(0, 50, 0, 0));
+        mainLayout.setPadding(new Insets(10, 10, 10, 10));
 
-        Scene view = new Scene(mainLayout, 315, 325);
+        Scene view = new Scene(mainLayout, 500, 350);
 
         window.setTitle("Codecademy Statistics");
         window.setScene(view);
         window.show();
+
         // Label appTitle = new Label("Codecademy Statistics");
         // Button nav1 = new Button("Courses");
         // Button nav2 = new Button("Students");
