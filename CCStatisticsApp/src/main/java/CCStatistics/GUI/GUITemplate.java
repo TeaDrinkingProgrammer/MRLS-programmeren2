@@ -17,24 +17,22 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class UDScreen extends Application {
+public class GUITemplate extends Application {
 
     public void start(Stage window) {
         
         BorderPane mainLayout = new BorderPane();
         Menu menuClass = new Menu();
         GridPane menu= menuClass.getMenu();
-        BorderPane subPane = new BorderPane();
         GridPane actionScreen= new GridPane();
-        // Accordion menu= menuClass.getMenu();
         Label screenTitle = new Label("Update/Delete something");
 
         actionScreen.add(screenTitle,0,0);
         
-        BorderPane.setMargin(menu, new Insets(0, 20, 0,0));
         mainLayout.setLeft(menu);
+        BorderPane.setMargin(menu, new Insets(0, 20, 0, 0));
+        mainLayout.setPadding(new Insets(10,10,10,10));
         mainLayout.setCenter(actionScreen);
-        //mainLayout.setBottom(footer);
 
         Scene view = new Scene(mainLayout, 315, 325);
         window.setTitle("UDScreen");
