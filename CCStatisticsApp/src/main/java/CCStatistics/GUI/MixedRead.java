@@ -1,9 +1,11 @@
 package CCStatistics.GUI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import CCStatistics.Domain.Certificate;
 import CCStatistics.Domain.Webcast;
+import CCStatistics.Logic.StudentLogic;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,10 +32,12 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class UDScreen extends Application {
+public class MixedRead extends Application {
     private final ObservableList<Webcast> data = FXCollections.observableArrayList(new Webcast(10, "Test.com", "ofwawa", "Anycompany"));
+    private StudentLogic studentLogic = new StudentLogic();
     public void start(Stage window) {
-        
+        ArrayList<String[]> getAll = new ArrayList<>();
+
         BorderPane mainLayout = new BorderPane();
         Menu menuClass = new Menu();
         GridPane menu = menuClass.getMenu();
@@ -47,8 +51,9 @@ public class UDScreen extends Application {
         TextField inputGetAll = new TextField();
         inputGetAll.setPromptText("Get all X");
 
-        Button getAll = new Button("Get all");
+        Button getAllButton = new Button("Get all");
 
+        
         TableView table = new TableView();
         table.setEditable(false);
     
@@ -56,9 +61,9 @@ public class UDScreen extends Application {
         TableColumn lastNameCol = new TableColumn("Last Name");
         TableColumn addressCol = new TableColumn("Email");
 
-        ObservableList<ObservableList> csvData = FXCollections.observableArrayList(); 
-
-    //     for(List<String> dataList : data) {
+    //     ObservableList<ObservableList> csvData = FXCollections.observableArrayList(); 
+        
+    //     for(String[] dataList : studentLogic.getAll()) {
     //         ObservableList<String> row = FXCollections.observableArrayList();
     //        for( String rowData : dataList) {
     //          row.add(rowData); 
@@ -76,7 +81,7 @@ public class UDScreen extends Application {
         actionScreen.add(explaination1,0,3);
         actionScreen.add(new Label(""),0,4);
         actionScreen.add(inputGetAll,0,5);
-        actionScreen.add(getAll,1,5);
+        actionScreen.add(getAllButton,1,5);
         actionScreen.add(table,0,6);
 
         mainLayout.setLeft(menu);
