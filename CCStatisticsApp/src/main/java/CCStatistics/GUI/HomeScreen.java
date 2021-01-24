@@ -25,28 +25,30 @@ public class HomeScreen extends Application {
         Label welcomeText = new Label("Welcome Text");
         Label versionText = new Label("v1.0");
 
-        VBox appTitleBox = new VBox();
+        VBox contentPane = new VBox();
         BorderPane footer = new BorderPane();
         
-        appTitleBox.getChildren().add(appTitle);
-        appTitleBox.setAlignment(Pos.CENTER);
+        // appTitleBox.getChildren().add(appTitle);
+        // appTitleBox.setAlignment(Pos.CENTER);
         appTitle.setFont(new Font("Arial", 20));
 
         footer.setRight(versionText);
 
-        actionScreen.getChildren().add(welcomeText);
-        actionScreen.setPrefWidth(1000);
-        actionScreen.setAlignment(Pos.CENTER);        
+        contentPane.getChildren().addAll(appTitle, welcomeText);
 
-        mainLayout.setTop(appTitleBox);
+        actionScreen.getChildren().addAll(contentPane);
+        actionScreen.setMinWidth(500);
+        actionScreen.setAlignment(Pos.TOP_LEFT);        
+
+        // mainLayout.setTop(appTitleBox);
         mainLayout.setLeft(menu);
         mainLayout.setCenter(actionScreen);
         mainLayout.setBottom(footer);
-        BorderPane.setMargin(appTitleBox, new Insets(0, 0, 20, 0));
-        BorderPane.setMargin(menu, new Insets(0, 50, 0, 0));
+        // BorderPane.setMargin(appTitleBox, new Insets(0, 0, 20, 0));
+        BorderPane.setMargin(menu, new Insets(0, 20, 0, 0));
         mainLayout.setPadding(new Insets(10, 10, 10, 10));
 
-        Scene view = new Scene(mainLayout, 500, 350);
+        Scene view = new Scene(mainLayout, 700, 350);
 
         window.setTitle("Codecademy Statistics");
         window.setScene(view);
