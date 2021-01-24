@@ -160,7 +160,7 @@ public class StudentCRUD extends Application {
            }
            if(canCreate){
             studentLogic.create(createInputs.get(0).getText(), createInputs.get(1).getText(), createInputs.get(2).getText(), createInputs.get(3).getText(), 
-            createInputs.get(4).getText(), createInputs.get(5).getText(), createInputs.get(6).getText(), createInputs.get(7).getText(), createInputs.get(8).getText(), createInputs.get(10).getText());
+            createInputs.get(4).getText(), createInputs.get(5).getText(), createInputs.get(6).getText(), createInputs.get(7).getText(), createInputs.get(8).getText(), createInputs.get(9).getText());
            }
         });
 
