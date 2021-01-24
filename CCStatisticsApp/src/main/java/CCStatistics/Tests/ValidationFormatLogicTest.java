@@ -333,13 +333,13 @@ public class ValidationFormatLogicTest {
      */
     
     @Test
-    public void testFormatPostalCodeRequires_1111_aa_Ensures1111_AA() {
+    public void testFormatPostalCodeRequires_1111_aa_Ensures1111AA() {
         //Arrange
         String aString = " 1111 aa ";
         //Act
         String result = ValidationFormatLogic.formatPostalCode(aString);
         //Assert
-        assertEquals("1111 AA", result);
+        assertEquals("1111AA", result);
     }
     
     /** @subcontract invalid postalCode {

@@ -43,7 +43,7 @@ public class ValidationFormatLogic {
             Character.isLetter(postalCode.trim().substring(4).trim().toUpperCase().charAt(0)) && 
             Character.isLetter(postalCode.trim().substring(4).trim().toUpperCase().charAt(1))) {
 
-            postalCode = postalCode.trim().substring(0, 4).trim() + " " + postalCode.trim().substring(4).trim().toUpperCase();
+            postalCode = postalCode.trim().substring(0, 4).trim() + postalCode.trim().substring(4).trim().toUpperCase();
 
             return postalCode;
         } else if (postalCode == null) {
