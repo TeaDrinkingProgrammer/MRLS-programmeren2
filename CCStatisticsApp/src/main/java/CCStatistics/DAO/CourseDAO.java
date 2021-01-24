@@ -52,7 +52,7 @@ public class CourseDAO {
     }
     public ArrayList<Course> getCoursesInterestingTo(String courseName) {
         //de query met ? ipv de waarde
-        String rawquery = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourse FROM InterestingToCourse WHERE Name = ?)";
+        String rawquery = "SELECT * FROM Course WHERE Name IN(SELECT InterestingCourse FROM InterestingToCourse WHERE Course = ?)";
         //probeert het eerste deel van de statement te sturen
         try(PreparedStatement preparedStatement = connection.prepareStatement(rawquery)){
         //Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten, begint op 1 met tellen

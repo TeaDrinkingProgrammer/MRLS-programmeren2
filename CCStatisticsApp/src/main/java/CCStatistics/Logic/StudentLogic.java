@@ -9,11 +9,15 @@ public class StudentLogic implements Logic<Student> {
     private StudentDAO studentDAO = new StudentDAO();
     private SQL sql = new SQL();
     private ArrayList<String> columns = new ArrayList<>();
-    
+
 //Haal alle studenten op in de DAO
     @Override
     public ArrayList<Student> getAll() {
         return studentDAO.getAll();
+    }
+
+    public ArrayList<Student> read(String email) {
+        return studentDAO.read(email);
     }
 
 //Verwijder student via DAO
