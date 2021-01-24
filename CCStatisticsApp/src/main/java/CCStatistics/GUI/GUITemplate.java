@@ -25,7 +25,7 @@ public class GUITemplate extends Application {
         Menu menuClass = new Menu();
         GridPane menu= menuClass.getMenu();
         GridPane actionScreen= new GridPane();
-        Label screenTitle = new Label("Update/Delete something");
+        Label screenTitle = new Label("Some text");
 
         actionScreen.add(screenTitle,0,0);
         
@@ -35,7 +35,7 @@ public class GUITemplate extends Application {
         mainLayout.setCenter(actionScreen);
 
         Scene view = new Scene(mainLayout, 315, 325);
-        window.setTitle("UDScreen");
+        window.setTitle("Template");
         window.setScene(view);
         window.show();
     }
