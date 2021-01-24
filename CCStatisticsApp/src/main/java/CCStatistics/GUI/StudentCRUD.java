@@ -46,7 +46,11 @@ public class StudentCRUD {
         // Input voor de select queries
         TextField inputGet = new TextField();
         inputGet.setPromptText("Student email here");
+<<<<<<< HEAD
         Button getButton = new Button("Get info about student");
+=======
+         Button getButton = new Button("Get student");
+>>>>>>> b3b217a3384bc690e10229c585669bfeb7a29d6b
 
         getButton.setOnAction(actionEvent -> {
             data.clear();
@@ -102,8 +106,13 @@ public class StudentCRUD {
         table.getColumns().addAll(emailCol, firstNameCol, lastNameCol, dateOfBirthCol, genderCol, streetCol,
                 houseNumberCol, postalcodeCol, countryCol);
 
+<<<<<<< HEAD
         ReadBox.setMaxWidth(500);
         table.setMaxWidth(350);
+=======
+        actionScreen.setMaxWidth(500);
+        table.setMaxWidth(420);
+>>>>>>> b3b217a3384bc690e10229c585669bfeb7a29d6b
         inputGet.setMaxWidth(350);
 
         // Voegt alles van de linkerkant van het scherm toe
@@ -126,8 +135,8 @@ public class StudentCRUD {
         createInputs.get(0).setPromptText("Email");
         createInputs.get(1).setPromptText("FirstName");
         createInputs.get(2).setPromptText("LastName");
-        createInputs.get(3).setPromptText("DateOfBirth");
-        createInputs.get(4).setPromptText("Gender");
+        createInputs.get(3).setPromptText("DateOfBirth (d-m-y)");
+        createInputs.get(4).setPromptText("Gender (M/V)");
         createInputs.get(5).setPromptText("Street");
         createInputs.get(6).setPromptText("HouseNumber");
         createInputs.get(7).setPromptText("Postalcode");
