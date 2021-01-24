@@ -11,6 +11,7 @@ import CCStatistics.Domain.Student;
 import CCStatistics.GUI.CourseInteresting;
 import CCStatistics.GUI.GUITemplate;
 import CCStatistics.GUI.HomeScreen;
+import CCStatistics.GUI.StudentCRUD;
 import CCStatistics.GUI.UDScreen;
 import CCStatistics.Logic.MixedLogic;
 import CCStatistics.Logic.StudentLogic;
@@ -19,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
         //Application.launch(HomeScreen.class);
         //Application.launch(GUITemplate.class);
-        Application.launch(UDScreen.class);
+        Application.launch(StudentCRUD.class);
         // CertificateDAO newOne = new CertificateDAO();
         // newOne.createCertificate(7.5, "Jan");
         
