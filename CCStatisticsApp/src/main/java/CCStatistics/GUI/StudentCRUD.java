@@ -54,12 +54,25 @@ public class StudentCRUD extends Application {
         
         TextField inputGet = new TextField();
         inputGet.setPromptText("Student email here");
+         Button getButton = new Button("Get info about student");
 
-        Button getButton = new Button("Get info about student");
+         getButton.setOnAction(actionEvent ->  {
+            data.clear();
+            if(!inputGet.getText().isEmpty()){
+                for(Student student :studentLogic.read(inputGet.getText())){
+                    data.add(student);
+                } 
+            }
+        });
+
         Button getAllButton = new Button("Get info about all students");
-        for(Student student :studentLogic.getAll()){
-            data.add(student);
-        }
+        getAllButton.setOnAction(actionEvent ->  {
+            data.clear();
+            for(Student student :studentLogic.getAll()){
+                data.add(student);
+            } 
+        });
+
         TableView table = new TableView();
         table.setEditable(false);
     
@@ -110,7 +123,7 @@ public class StudentCRUD extends Application {
 
         //updateDeleteBox begins here
        // studentLogic.create("email", firstName, lastName, dateOfBirth, gender, street, houseNumber, postalcode, city, country);
-        Label updateInfo = new Label("Here you can update a student");
+        Label updateInfo = new Label("Here you can Create a student");
         TextField updateInputEmail = new TextField();
         TextField updateInputFirstName = new TextField();
         TextField updateInputLastName = new TextField();
@@ -133,28 +146,36 @@ public class StudentCRUD extends Application {
         updateInputCountry.setPromptText("Country");
         Button updateButton = new Button("Create Student");
 
+       updateButton.setOnAction(actionEvent ->  {
+            data.clear();
+            for(Student student :studentLogic.getAll()){
+                data.add(student);
+            } 
+        });
+
         Label deleteInfo = new Label("Here you can delete a student");
         TextField deleteInput = new TextField();
         deleteInput.setPromptText("studentEmail here");
         Button deleteButton = new Button("Delete");
 
-        updateDeleteBox.add(updateInputEmail,0,0);
-        updateDeleteBox.add(updateInputFirstName,1,0);
-        updateDeleteBox.add(updateInputLastName,0,1);
-        updateDeleteBox.add(updateInputDateOfBirth,1,1);
-        updateDeleteBox.add(updateInputGender,0,2);
-        updateDeleteBox.add(updateInputStreet,1,2);
-        updateDeleteBox.add(updateInputHouseNumber,0,3);
-        updateDeleteBox.add(updateInputPostalCode,1,3);
-        updateDeleteBox.add(updateInputCity,0,4);
-        updateDeleteBox.add(updateInputCountry,1,4);
-        updateDeleteBox.add(updateButton,0,5);
+        updateDeleteBox.add(updateInfo,0,0);
+        updateDeleteBox.add(updateInputEmail,0,1);
+        updateDeleteBox.add(updateInputFirstName,1,1);
+        updateDeleteBox.add(updateInputLastName,0,2);
+        updateDeleteBox.add(updateInputDateOfBirth,1,2);
+        updateDeleteBox.add(updateInputGender,0,3);
+        updateDeleteBox.add(updateInputStreet,1,3);
+        updateDeleteBox.add(updateInputHouseNumber,0,4);
+        updateDeleteBox.add(updateInputPostalCode,1,4);
+        updateDeleteBox.add(updateInputCity,0,5);
+        updateDeleteBox.add(updateInputCountry,1,5);
+        updateDeleteBox.add(updateButton,0,6);
 
-        updateDeleteBox.add(new Label(""),0,6);
+        updateDeleteBox.add(new Label(""),0,7);
 
-        updateDeleteBox.add(deleteInfo,0,7);
-        updateDeleteBox.add(deleteInput,0,8);
-        updateDeleteBox.add(deleteButton,1,8);
+        updateDeleteBox.add(deleteInfo,0,8);
+        updateDeleteBox.add(deleteInput,0,9);
+        updateDeleteBox.add(deleteButton,1,10);
 
 
         subLayout.setLeft(actionScreen);
