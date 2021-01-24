@@ -1,7 +1,5 @@
 package CCStatistics.Domain;
 
 public enum EnumStatus {
-    Concept,
-    Active,
-    Archived
+    Concept, Active, Archived
 }

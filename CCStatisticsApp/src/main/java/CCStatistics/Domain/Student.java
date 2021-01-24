@@ -15,7 +15,8 @@ public class Student {
     private String country;
     private ArrayList<Signup> signUps;
 
-    public Student(String email, String firstName, String lastName, String dateOfBirth, String gender, String street, String houseNumber, String postalCode, String city, String country) {
+    public Student(String email, String firstName, String lastName, String dateOfBirth, String gender, String street,
+            String houseNumber, String postalCode, String city, String country) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,8 +29,8 @@ public class Student {
         this.country = country;
     }
 
-    public void addSignups(ArrayList<Signup> signUps){
-       this.signUps = signUps;
+    public void addSignups(ArrayList<Signup> signUps) {
+        this.signUps = signUps;
     }
 
     public String getEmail() {

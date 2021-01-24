@@ -14,19 +14,19 @@ public class SignupLogic implements Logic<Signup> {
     private SQL sql = new SQL();
     private ArrayList<String> columns = new ArrayList<>();
 
-//Haal alle Signup op in de DAO
+    // Haal alle Signup op in de DAO
     @Override
     public ArrayList<Signup> getAll() {
         return signupDAO.getAll();
     }
 
-//Verwijder Signup via DAO
+    // Verwijder Signup via DAO
     public String delete(int ID) {
         int deleted = signupDAO.delete(ID);
         return String.format("%d records deleted", deleted);
     }
 
-//Creëer Signup via DAO
+    // Creëer Signup via DAO
     public String create(String signupDate, String courseTo, String studentEmail) {
         CourseDAO courseDAO = new CourseDAO();
         StudentDAO studentDAO = new StudentDAO();
@@ -56,7 +56,8 @@ public class SignupLogic implements Logic<Signup> {
         int month = Integer.valueOf(dateParts[1]);
         int year = Integer.valueOf(dateParts[2]);
 
-        if (!ValidationFormatLogic.validateDate(day, month, year) && !ValidationFormatLogic.validateMailAddress(studentEmail)) {
+        if (!ValidationFormatLogic.validateDate(day, month, year)
+                && !ValidationFormatLogic.validateMailAddress(studentEmail)) {
             return "No valid signup date and student email.";
         } else if (!ValidationFormatLogic.validateDate(day, month, year)) {
             return "No valid signup date.";
@@ -74,15 +75,15 @@ public class SignupLogic implements Logic<Signup> {
         return "No such course or student!";
     }
 
-//Update Signup via DAO
+    // Update Signup via DAO
     public ArrayList<Signup> update(String columnToChange, String changeInto, int signupID) {
         signupDAO.update(columnToChange, changeInto, signupID);
         return this.getAll();
     }
 
-//Gets columnnames
-    public ArrayList<String> getColumns(){
-        if(columns.isEmpty()){
+    // Gets columnnames
+    public ArrayList<String> getColumns() {
+        if (columns.isEmpty()) {
             columns = sql.getColumns("Signup");
         }
         return columns;

@@ -10,19 +10,19 @@ public class CertificateLogic implements Logic<Certificate> {
     private SQL sql = new SQL();
     private ArrayList<String> columns = new ArrayList<>();
 
-//Haal alle studenten op in de DAO
+    // Haal alle studenten op in de DAO
     @Override
     public ArrayList<Certificate> getAll() {
         return certificateDAO.getAll();
     }
 
-//Verwijder student via DAO
+    // Verwijder student via DAO
     public String delete(int ID) {
         int deleted = certificateDAO.delete(ID);
         return String.format("%d records deleted", deleted);
     }
-    
-//Creëer student via DAO
+
+    // Creëer student via DAO
     public String create(String EmployeeName, double grade) {
         if (!ValidationFormatLogic.isValidGrade(grade)) {
             return "Grade is not valid. Choose 0-10.";
@@ -32,15 +32,15 @@ public class CertificateLogic implements Logic<Certificate> {
         return "Certificate added.";
     }
 
-//Update student via DAO
+    // Update student via DAO
     public ArrayList<Certificate> update(String columnToChange, String changeInto, int certificateID) {
         certificateDAO.update(columnToChange, changeInto, certificateID);
         return this.getAll();
     }
-    
-//Gets columnnames
-    public ArrayList<String> getColumns(){
-        if(columns.isEmpty()){
+
+    // Gets columnnames
+    public ArrayList<String> getColumns() {
+        if (columns.isEmpty()) {
             columns = sql.getColumns("Certificate");
         }
         return columns;

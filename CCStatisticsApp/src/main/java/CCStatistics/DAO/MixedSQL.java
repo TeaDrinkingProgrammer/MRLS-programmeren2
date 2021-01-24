@@ -10,11 +10,13 @@ import java.util.ArrayList;
 
 public class MixedSQL {
     private SQL sql = new SQL();
-    public Connection getConnection(){
+
+    public Connection getConnection() {
         return sql.getConnection();
     }
-    
-    public ArrayList<ArrayList<String>> readQuery(String[] columns,PreparedStatement preparedStatement){
+
+    // Read query voor alle items uit MixedDAO
+    public ArrayList<ArrayList<String>> readQuery(String[] columns, PreparedStatement preparedStatement) {
         // ResultSet is de tabel die we van de database terugkrijgen.
         // We kunnen door de rows heen stappen en iedere kolom lezen.
         ResultSet rs = null;
@@ -27,14 +29,15 @@ public class MixedSQL {
             // Pak de prepared statement en voert hem uit
             rs = preparedStatement.executeQuery();
 
-            // Als de resultset waarden bevat dan lopen we hier door deze waarden en printen ze.
+            // Als de resultset waarden bevat dan lopen we hier door deze waarden en printen
+            // ze.
             // ArrayList 1 is voor de rij, de geneste ArrayList is voor de kolom in de rij.
-            
+
             while (rs.next()) {
-                //row (i)
+                // row (i)
                 ArrayList<String> strings = new ArrayList<>();
-                for(String column : columns){
-                    //column j in row i wordt toegevoegd.
+                for (String column : columns) {
+                    // column j in row i wordt toegevoegd.
                     strings.add(rs.getString(column));
                 }
                 tableList.add(strings);
@@ -44,42 +47,18 @@ public class MixedSQL {
         // Handle any errors that may have occurred.
         catch (Exception e) {
             e.printStackTrace();
-        }
-        finally {
-            if (rs != null) try { rs.close(); } catch(Exception e) {}
+        } finally {
+            if (rs != null)
+                try {
+                    rs.close();
+                } catch (Exception e) {
+                }
         }
 
         return tableList;
     }
 
-    // public void updateQuery(PreparedStatement preparedStatement){
-    //     this.cudQuery(preparedStatement);
-    // }
-
-    // public int deleteQuery(PreparedStatement preparedStatement){
-    //     return sql.deleteQuery(preparedStatement);
-    // }
-
-    // public void createQuery(PreparedStatement preparedStatement){
-    //     this.cudQuery( preparedStatement);
-    // }
-    
-    // public void cudQuery(PreparedStatement preparedStatement){
-    //     try {
-    //         // 'Importeer' de driver die je gedownload hebt.
-    //         Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-
-    //         // Pak de prepared statement en voert hem uit
-    //         preparedStatement.executeUpdate();
-    //     }
-
-    //     // Handle any errors that may have occurred.
-    //     catch (Exception e) {
-    //         e.printStackTrace();
-    //     }
-    // }
-
-	public static Boolean printSQLException(SQLException ex) {
+    public static Boolean printSQLException(SQLException ex) {
         return SQL.printSQLException(ex);
     }
 

@@ -1,7 +1,6 @@
 package CCStatistics.Logic;
 
 import java.util.ArrayList;
-// import CCStatistics.DAO.CourseDAO;
 import CCStatistics.DAO.CourseDAO;
 import CCStatistics.Domain.Course;
 
@@ -17,7 +16,7 @@ public class CourseInterestingToLogic {
         if (courseDAO.getCoursesInterestingTo(courseName).isEmpty()) {
             return null;
         }
-        
+
         return courseDAO.getCoursesInterestingTo(courseName);
     }
 }

@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import CCStatistics.Domain.Signup;
 import CCStatistics.Domain.Student;
 
 public class StudentDAO {
@@ -20,12 +19,16 @@ public class StudentDAO {
         connection = sql.getConnection();
     }
 
+    // De Generic Read Query handelt alle readqueries uiteindelijk af.
     public ArrayList<Student> genericReadQuery(PreparedStatement preparedStatement) {
+        // Geeft de prepared statement mee aan SQL readquery
         ArrayList<ArrayList<String>> tableList = sql.readQuery("Student", preparedStatement);
+        // Slaat de resultaten op in deze Arraylist
         ArrayList<Student> students = new ArrayList<>();
-        SignupDAO signupDAO = new SignupDAO();
         if (tableList.size() > 0) {
             for (ArrayList<String> row : tableList) {
+                // Pakt per rij alle waarden en slaat ze op in de de arraylist als het goede
+                // object
                 String email = row.get(0);
                 String firstName = row.get(1);
                 String lastName = row.get(2);
@@ -37,14 +40,16 @@ public class StudentDAO {
                 String city = row.get(8);
                 String country = row.get(9);
 
-                students.add(new Student(email, firstName, lastName, dateOfBirth, gender, street, houseNumber,postalcode, city, country));
+                students.add(new Student(email, firstName, lastName, dateOfBirth, gender, street, houseNumber,
+                        postalcode, city, country));
             }
         } else {
-            return null;
+            return this.nothingFound();
         }
         return students;
     }
 
+    // Leest alle Studenten (READ)
     public ArrayList<Student> getAll() {
         String rawquery = "SELECT * FROM Student;";
 
@@ -62,7 +67,7 @@ public class StudentDAO {
         return null;
     }
 
-    // Maakt een certificate aan (CREATE)
+    // Maakt een Student aan (CREATE)
     public void create(Student student) {
         // De query met ? ipv de waarde
         String rawquery = "INSERT INTO Student (Email,FirstName,LastName,DateOfBirth,Gender,Street,HouseNr,PostCode,City,Country) VALUES (?,?,?,?,?,?,?,?,?,?);";
@@ -114,7 +119,7 @@ public class StudentDAO {
         return null;
     }
 
-    // Updatet een certificaat (UPDATE)
+    // Updatet een student (UPDATE), (werkt niet)
     public void update(String columnToChange, String changeInto, String studentEmail) {
         // De query met ? ipv de waarde
         String rawquery = "UPDATE Student SET ? = ? WHERE Email = ?;";
@@ -135,7 +140,7 @@ public class StudentDAO {
         }
     }
 
-    // delete een bepaalde kolom
+    // Delete een student (DELETE)
     public int delete(String studentEmail) {
         // De query met ? ipv de waarde
         String rawquery = "DELETE FROM Student WHERE Email = ?;";
@@ -155,6 +160,8 @@ public class StudentDAO {
         return 0;
     }
 
+    // Geeft deze waarde terug als er niets gevonden is ipv null om errors te
+    // voorkomen
     public ArrayList<Student> nothingFound() {
         ArrayList<Student> students = new ArrayList<>();
         students.add(new Student("NothingFound", "null", "null", "1-1-1000", "null", "null", "null", "null", "null",

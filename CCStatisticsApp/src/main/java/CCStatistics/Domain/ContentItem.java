@@ -13,6 +13,7 @@ public abstract class ContentItem {
     public void addParticipant(Student student) {
         progress.put(student, 0.0);
     }
+
     public void advanceParticipant(Student student, double advanceByPerc) {
         progress.put(student, advanceByPerc);
     }

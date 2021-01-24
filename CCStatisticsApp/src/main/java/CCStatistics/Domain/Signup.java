@@ -17,7 +17,7 @@ public class Signup {
         this.course = course;
     }
 
-    public Signup(int signupID, String signupDate,Course course, Certificate certificate) {
+    public Signup(int signupID, String signupDate, Course course, Certificate certificate) {
         this.signupID = signupID;
         this.signupDate = signupDate;
         this.course = course;
@@ -36,7 +36,7 @@ public class Signup {
     public void setSignupID(int signupID) {
         this.signupID = signupID;
     }
-    
+
     public String getSignupDate() {
         return this.signupDate;
     }

@@ -2,28 +2,17 @@
 package CCStatistics;
 
 import javafx.application.Application;
-import CCStatistics.DAO.CertificateDAO;
-import CCStatistics.DAO.CourseDAO;
-import CCStatistics.DAO.MixedDAO;
-import CCStatistics.Domain.Certificate;
-import CCStatistics.Domain.Course;
-import CCStatistics.Domain.Student;
-import CCStatistics.GUI.CourseInteresting;
-import CCStatistics.GUI.GUITemplate;
 import CCStatistics.GUI.HomeScreen;
-import CCStatistics.GUI.StudentCRUD;
-import CCStatistics.GUI.UDScreen;
-import CCStatistics.Logic.MixedLogic;
-import CCStatistics.Logic.StudentLogic;
+
 
 public class Main {    
     public static void main(String[] args) {
-        //Application.launch(HomeScreen.class);
-        //Application.launch(GUITemplate.class);
-        Application.launch(StudentCRUD.class);
-        // CertificateDAO newOne = new CertificateDAO();
-        // newOne.createCertificate(7.5, "Jan");
-        
+        //StudentLogic sl = new StudentLogic();
+        //sl.update("FirstName","Michael","student@live.com");
+        Application.launch(HomeScreen.class);
+        //Application.launch(CourseInteresting.class);
+    //TestData voor de DAOs
+
     //    MixedDAO testdao = new MixedDAO();
     //     for(String[] stringArray: testdao.getTop3Webcasts()){
     //         for(String string : stringArray){
@@ -62,10 +51,6 @@ public class Main {
         //     System.out.println("--------------------------");
         // }
         // testdao.delete(6);
-
-        // System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
-        // testdao.create("Wassim",1.0);
-
         //testdao.updateGrade(7, 1);
         
     }

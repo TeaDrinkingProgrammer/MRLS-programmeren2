@@ -9,12 +9,6 @@ import CCStatistics.Domain.Course;
 import CCStatistics.Domain.EnumLevel;
 import CCStatistics.Domain.Signup;
 
-//Vervang SignUp met het object dat je hebt (bijv. Student)
-//Vervang signUps met de naam van het object --> zie genericReadQuery
-//Vervang inputName met de input die je wilt voor de methode (bijv. emailadress)
-//Vervang signup met de naam van de table in de database
-//Na gebruik deze comments weghalen
-
 public class SignupDAO {
     private SQL sql = null;
     private Connection connection = null;
@@ -28,6 +22,7 @@ public class SignupDAO {
         connection = sql.getConnection();
     }
 
+    // De Generic Read Query handelt alle readqueries uiteindelijk af.
     public ArrayList<Signup> genericReadQuery(PreparedStatement preparedStatement) {
         // Geeft de prepared statement mee aan SQL readquery
         ArrayList<ArrayList<String>> tableList = sql.readQuery("Signup", preparedStatement);
@@ -56,6 +51,7 @@ public class SignupDAO {
         return signUps;
     }
 
+    // Leest alle Signup (READ)
     public ArrayList<Signup> getAll() {
         // De Query
         String rawquery = "SELECT * FROM Signup";
@@ -78,28 +74,35 @@ public class SignupDAO {
         return null;
     }
 
-    public ArrayList<Signup> readSignupFromStudent(String studentEmail) {
-        // De Query
-        String rawquery = "SELECT * FROM Signup WHERE SignupID = ?";
-        // Probeert het eerste deel van de statement te sturen
-        try (PreparedStatement preparedStatement = connection.prepareStatement(rawquery)) {
-            // Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten,
-            // begint op 1 met tellen
-            preparedStatement.setString(1, studentEmail);
-            return genericReadQuery(preparedStatement);
-            // Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
-        } catch (SQLException e) {
-            // Als er geen resultaat komt, komt er een bepaalde error (zie
-            // printSQLException), dan vangt dit het af en stuurt een not found resultaat"
-            if (SQL.printSQLException(e)) {
-                return this.nothingFound();
-            }
-            // print SQL exception information
-            SQL.printSQLException(e);
-        }
-        return null;
-    }
+    // Leest een Signup uit voor een bepaalde student (READ), wordt niet meer
+    // gebruikt
 
+    // public ArrayList<Signup> readSignupFromStudent(String studentEmail) {
+    // // De Query
+    // String rawquery = "SELECT * FROM Signup WHERE SignupID = ?";
+    // // Probeert het eerste deel van de statement te sturen
+    // try (PreparedStatement preparedStatement =
+    // connection.prepareStatement(rawquery)) {
+    // // Stuurt de eerste waarde mee om in de plaats van het vraagteken te zetten,
+    // // begint op 1 met tellen
+    // preparedStatement.setString(1, studentEmail);
+    // return genericReadQuery(preparedStatement);
+    // // Omdat de verbinding ook fout kan gaan is hier ook een catch voor
+    // SQLexception
+    // } catch (SQLException e) {
+    // // Als er geen resultaat komt, komt er een bepaalde error (zie
+    // // printSQLException), dan vangt dit het af en stuurt een not found
+    // resultaat"
+    // if (SQL.printSQLException(e)) {
+    // return this.nothingFound();
+    // }
+    // // print SQL exception information
+    // SQL.printSQLException(e);
+    // }
+    // return null;
+    // }
+
+    // Maakt een Signup aan (CREATE)
     public void create(Signup signup, String studentEmail) {
         // De query met ? ipv de waarde
         String rawquery = "INSERT INTO Signup (SignupDate, Course, StudentEmail) VALUES (?,?,?);";
@@ -121,7 +124,7 @@ public class SignupDAO {
 
     }
 
-    // Updatet een signup (UPDATE)
+    // Updatet een signup (UPDATE) (werkt niet)
     public void update(String columnToChange, String changeInto, int signupID) {
         // De query met ? ipv de waarde
         String rawquery = "UPDATE Signup SET ? = ? WHERE SignupID = ?;";
@@ -142,6 +145,7 @@ public class SignupDAO {
         }
     }
 
+    // Deletet een signup (DELETE)
     public int delete(int signupID) {
         // De query met ? ipv de waarde
         String rawquery = "DELETE FROM Signup WHERE SignupID = ?;";
@@ -161,6 +165,8 @@ public class SignupDAO {
         return 0;
     }
 
+    // Geeft deze waarde terug als er niets gevonden is ipv null om errors te
+    // voorkomen
     public ArrayList<Signup> nothingFound() {
         ArrayList<Signup> signups = new ArrayList<>();
         Certificate certificate = new Certificate(0, 0, "null");

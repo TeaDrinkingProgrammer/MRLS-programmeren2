@@ -6,81 +6,100 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class Menu {
     GridPane menu;
-    // Accordion menu;
+    // Het menu werkt qua layout, maar heeft geen links
 
-    public Menu(){
+    public Menu(Stage window) {
+        // Vraagt studentCRUD pagina op
+        StudentCRUD studentCRUD = new StudentCRUD();
+
+        CourseInteresting courseInteresting = new CourseInteresting();
         menu = new GridPane();
-        // menu = new Accordion();
         Accordion accordion = new Accordion();
 
+        // maakt een pane met daarin een VBox. Hierin zit een knop die naar de
+        // studentCRUD leidt
         TitledPane crudStudent = new TitledPane();
         VBox submenuCrudStudent = new VBox();
-        crudStudent.setText("CRUD Student");
+        crudStudent.setText("Student");
+        Button studentButton = new Button("Student");
+        submenuCrudStudent.setPadding(new Insets(5, 5, 5, 5));
+        submenuCrudStudent.getChildren().add(studentButton);
+
         crudStudent.setContent(submenuCrudStudent);
 
-        submenuCrudStudent.setSpacing(4);
-        submenuCrudStudent.setPadding(new Insets(5, 5, 5, 5));
-        submenuCrudStudent.getChildren().add(new Button("Create"));
-        submenuCrudStudent.getChildren().add(new Button("Read"));
-        submenuCrudStudent.getChildren().add(new Button("Update"));
-        submenuCrudStudent.getChildren().add(new Button("Delete"));
+        studentButton.setOnAction(actionEvent -> {
+            window.setScene(studentCRUD.getStudentView(window));
+        });
 
+        // maakt een pane met daarin een VBox. Hierin zit een knop die naar de Courses
+        // leidt
+        TitledPane courseInterestingPane = new TitledPane();
+        VBox submenuCourseInteresting = new VBox();
+        courseInterestingPane.setText("Courses");
+        Button courseInterestingButton = new Button("Courses");
+        submenuCourseInteresting.setPadding(new Insets(5, 5, 5, 5));
+        submenuCourseInteresting.getChildren().add(courseInterestingButton);
 
-        TitledPane crudCertificate = new TitledPane();
-        VBox submenuCrudCertificate = new VBox();
-        crudCertificate.setText("CRUD Certificate");
-        crudCertificate.setContent(submenuCrudCertificate);
+        courseInterestingPane.setContent(submenuCourseInteresting);
 
-        submenuCrudCertificate.setSpacing(4);
-        submenuCrudCertificate.getChildren().add(new Button("Create"));
-        submenuCrudCertificate.getChildren().add(new Button("Read"));
-        submenuCrudCertificate.getChildren().add(new Button("Update"));
-        submenuCrudCertificate.getChildren().add(new Button("Delete"));
+        courseInterestingButton.setOnAction(actionEvent -> {
+            window.setScene(courseInteresting.getCoursesInterestingView(window));
+        });
 
+        // Hieronder zijn ook de andere paginas gedefinieerd, maar deze zijn
+        // uiteindelijk niet geimplementeerd
 
-        TitledPane crudSignup = new TitledPane();
-        VBox submenuCrudSignup = new VBox();
-        crudSignup.setText("CRUD SignUp");
-        crudSignup.setContent(submenuCrudSignup);
+        // TitledPane crudCertificate = new TitledPane();
+        // VBox submenuCrudCertificate = new VBox();
+        // crudCertificate.setText("CRUD Certificate");
+        // crudCertificate.setContent(submenuCrudCertificate);
 
-        submenuCrudSignup.setSpacing(4);
-        submenuCrudSignup.getChildren().add(new Button("Create"));
-        submenuCrudSignup.getChildren().add(new Button("Read"));
-        submenuCrudSignup.getChildren().add(new Button("Update"));
-        submenuCrudSignup.getChildren().add(new Button("Delete"));
+        // submenuCrudCertificate.setSpacing(4);
+        // submenuCrudCertificate.getChildren().add(new Button("Create"));
+        // submenuCrudCertificate.getChildren().add(new Button("Read"));
+        // submenuCrudCertificate.getChildren().add(new Button("Update"));
+        // submenuCrudCertificate.getChildren().add(new Button("Delete"));
 
+        // TitledPane crudSignup = new TitledPane();
+        // VBox submenuCrudSignup = new VBox();
+        // crudSignup.setText("CRUD SignUp");
+        // crudSignup.setContent(submenuCrudSignup);
 
-        TitledPane rudCourse = new TitledPane();
-        VBox submenurudCourse = new VBox();
-        rudCourse.setText("RUD Course");
-        rudCourse.setContent(submenurudCourse);
+        // submenuCrudSignup.setSpacing(4);
+        // submenuCrudSignup.getChildren().add(new Button("Create"));
+        // submenuCrudSignup.getChildren().add(new Button("Read"));
+        // submenuCrudSignup.getChildren().add(new Button("Update"));
+        // submenuCrudSignup.getChildren().add(new Button("Delete"));
 
-        submenurudCourse.setSpacing(4);
-        submenurudCourse.getChildren().add(new Button("Read"));
-        submenurudCourse.getChildren().add(new Button("Update"));
-        submenurudCourse.getChildren().add(new Button("Delete"));
+        // TitledPane rudCourse = new TitledPane();
+        // VBox submenurudCourse = new VBox();
+        // rudCourse.setText("RUD Course");
+        // rudCourse.setContent(submenurudCourse);
 
-        TitledPane materials = new TitledPane();
-        VBox submenuMaterials = new VBox();
-        materials.setText("Materials");
-        materials.setContent(submenuMaterials);
+        // submenurudCourse.setSpacing(4);
+        // submenurudCourse.getChildren().add(new Button("Read"));
+        // submenurudCourse.getChildren().add(new Button("Update"));
+        // submenurudCourse.getChildren().add(new Button("Delete"));
 
-        submenuMaterials.setSpacing(4);
-        submenuMaterials.getChildren().add(new Button("Webcasts"));
-        submenuMaterials.getChildren().add(new Button("Modules"));
+        // TitledPane materials = new TitledPane();
+        // VBox submenuMaterials = new VBox();
+        // materials.setText("Materials");
+        // materials.setContent(submenuMaterials);
 
-        accordion.getPanes().addAll(crudStudent,crudCertificate,crudSignup,rudCourse,materials);
-        menu.add(accordion,0,0);
-        //menu = accordion;
+        // submenuMaterials.setSpacing(4);
+        // submenuMaterials.getChildren().add(new Button("Webcasts"));
+        // submenuMaterials.getChildren().add(new Button("Modules"));
+
+        accordion.getPanes().addAll(crudStudent, courseInterestingPane);
+        menu.add(accordion, 0, 0);
 
     }
-    public GridPane getMenu(){
+
+    public GridPane getMenu() {
         return menu;
     }
-    // public Accordion getMenu(){
-    //     return menu;
-    // }
 }
