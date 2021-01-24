@@ -27,7 +27,6 @@ public class StudentCRUD {
     private Scene studentView;
 
     public void studentCrudScreen(Stage window) {
-        ArrayList<String[]> getAll = new ArrayList<>();
         // MainLayout bevat links het menu en rechts de inhoud. Deze kant (subLayout) is
         // weer ondergedeelt in het deel voor de select queries (ReadBox) en update,
         // delete en create queries (CUDBox)
