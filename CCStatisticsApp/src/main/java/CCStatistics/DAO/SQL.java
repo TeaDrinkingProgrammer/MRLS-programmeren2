@@ -3,35 +3,47 @@ package CCStatistics.DAO;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class SQL {
-    public ArrayList<ArrayList<String>> readQuery(String table,String query){
+    
+    public Connection getConnection(){
+        //pakt login
         Login login = new Login();
-
-        ArrayList<String> columns = this.getColumns(table);
-        // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
         String connectionUrl = null;
         try {
-           if(login.getLogin().equals(null)){
-            throw new NullPointerException();
-           } else{
-            connectionUrl = login.getLogin();
-           }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } catch(NullPointerException npe){
-            npe.printStackTrace();
-        }
-        //TODO: Handle exception properly
-        // Connection beheert informatie over de connectie met de database.
-        Connection con = null;
+            if(login.getLogin().equals(null)){
+             throw new NullPointerException();
+            } else{
+             connectionUrl = login.getLogin();
+            }
+         } catch (IOException ioe) {
+             ioe.printStackTrace();
+         } catch(NullPointerException npe){
+             npe.printStackTrace();
+         }
+         //TODO: handle exception op een goed manier
 
-        // Statement zorgt dat we een SQL query kunnen uitvoeren.
-        Statement stmt = null;
+         //probeert met logingegevens een verbinding te maken
+         try {
+             Connection connection = DriverManager.getConnection(connectionUrl);
+        return connection;
+    } catch (SQLException e) {
 
+        // print SQL exception information
+        printSQLException(e);
+    }
+    //Dit zou nooit moeten kunnen. Een verbinding gaat óf goed óf throwt een exception
+    return null;
+    }
+
+    public ArrayList<ArrayList<String>> readQuery(String table,PreparedStatement preparedStatement){
+        //Pakt de columns van getColumns om typefouten te voorkomen
+        ArrayList<String> columns = this.getColumns(table);
+        
         // ResultSet is de tabel die we van de database terugkrijgen.
         // We kunnen door de rows heen stappen en iedere kolom lezen.
         ResultSet rs = null;
@@ -40,14 +52,9 @@ public class SQL {
         try {
             // 'Importeer' de driver die je gedownload hebt.
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            // Maak de verbinding met de database.
-            con = DriverManager.getConnection(connectionUrl);
 
-            // Stel een SQL query samen.
-            String SQL = query;
-            stmt = con.createStatement();
-            // Voer de query uit op de database.
-            rs = stmt.executeQuery(SQL);
+            // Pak de prepared statement en voert hem uit
+            rs = preparedStatement.executeQuery();
 
             // Als de resultset waarden bevat dan lopen we hier door deze waarden en printen ze.
             // ArrayList 1 is voor de rij, de geneste ArrayList is voor de kolom in de rij.
@@ -69,37 +76,12 @@ public class SQL {
         }
         finally {
             if (rs != null) try { rs.close(); } catch(Exception e) {}
-            if (stmt != null) try { stmt.close(); } catch(Exception e) {}
-            if (con != null) try { con.close(); } catch(Exception e) {}
         }
 
         return tableList;
     }
 
     public ArrayList<String> getColumns(String table){
-        Login login = new Login();
-        
-
-        // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
-        String connectionUrl = null;
-        try {
-           if(login.getLogin().equals(null)){
-            throw new NullPointerException();
-           } else{
-            connectionUrl = login.getLogin();
-           }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } catch(NullPointerException npe){
-            npe.printStackTrace();
-        }
-
-        // Connection beheert informatie over de connectie met de database.
-        Connection con = null;
-
-        // Statement zorgt dat we een SQL query kunnen uitvoeren.
-        Statement stmt = null;
-
         // ResultSet is de tabel die we van de database terugkrijgen.
         // We kunnen door de rows heen stappen en iedere kolom lezen.
         ResultSet rs = null;
@@ -108,15 +90,12 @@ public class SQL {
         try {
             // 'Importeer' de driver die je gedownload hebt.
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            // Maak de verbinding met de database.
-            con = DriverManager.getConnection(connectionUrl);
-
-            // Stel een SQL query samen.
-            String SQL = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '" + table + "' ORDER BY ORDINAL_POSITION";
-            stmt = con.createStatement();
-            // Voer de query uit op de database.
-            rs = stmt.executeQuery(SQL);
-
+            String rawquery = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ? ORDER BY ORDINAL_POSITION";
+            Connection connection = this.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(rawquery);
+            preparedStatement.setString(1, table);
+            // Pak de prepared statement en voer hem uit
+            rs = preparedStatement.executeQuery();
             // Als de resultset waarden bevat dan lopen we hier door deze waarden en printen ze.
             // ArrayList 1 is voor de rij, de geneste ArrayList is voor de kolom in de rij.
 
@@ -131,74 +110,71 @@ public class SQL {
         }
         finally {
             if (rs != null) try { rs.close(); } catch(Exception e) {}
-            if (stmt != null) try { stmt.close(); } catch(Exception e) {}
-            if (con != null) try { con.close(); } catch(Exception e) {}
         }
 
         return columns;
     }
 
-    public void updateQuery(String query){
-        this.cudQuery(query);
+    public void updateQuery(PreparedStatement preparedStatement){
+        this.cudQuery(preparedStatement);
     }
 
-    public void deleteQuery(String query){
-        this.cudQuery(query);
-    }
-
-    public void createQuery(String query){
-        this.cudQuery( query);
-    }
-    
-    public void cudQuery(String query){
-        Login login = new Login();
-        // Dit zijn de instellingen voor de verbinding. Vervang de databaseName indien deze voor jou anders is.
-        String connectionUrl = null;
-        try {
-           if(login.getLogin().equals(null)){
-            throw new NullPointerException();
-           } else{
-            connectionUrl = login.getLogin();
-           }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        } catch(NullPointerException npe){
-            npe.printStackTrace();
-        }
-
-        // Connection beheert informatie over de connectie met de database.
-        Connection con = null;
-
-        // Statement zorgt dat we een SQL query kunnen uitvoeren.
-        Statement stmt = null;
-
-        // ResultSet is de tabel die we van de database terugkrijgen.
-        // We kunnen door de rows heen stappen en iedere kolom lezen.
-        //ResultSet rs = null;
-
+    public int deleteQuery(PreparedStatement preparedStatement){
+        int result = 0;
         try {
             // 'Importeer' de driver die je gedownload hebt.
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            // Maak de verbinding met de database.
-            con = DriverManager.getConnection(connectionUrl);
 
-            // Stel een SQL query samen.
-            String SQL = query;
-            stmt = con.createStatement();
-            // Voer de query uit op de database.
-            stmt.executeUpdate(SQL);
+            // Pak de prepared statement en voert hem uit
+            result = preparedStatement.executeUpdate();
         }
 
         // Handle any errors that may have occurred.
         catch (Exception e) {
             e.printStackTrace();
         }
-        finally {
-            // if (rs != null) try { rs.close(); } catch(Exception e) {}
-            if (stmt != null) try { stmt.close(); } catch(Exception e) {}
-            if (con != null) try { con.close(); } catch(Exception e) {}
+        return result;
+    }
+
+    public void createQuery(PreparedStatement preparedStatement){
+        this.cudQuery( preparedStatement);
+    }
+    
+    public void cudQuery(PreparedStatement preparedStatement){
+        try {
+            // 'Importeer' de driver die je gedownload hebt.
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+
+            // Pak de prepared statement en voert hem uit
+            preparedStatement.executeUpdate();
         }
 
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
 
+	public static Boolean printSQLException(SQLException ex) {
+        for (Throwable e: ex) {
+            if (e instanceof SQLException) {
+                e.printStackTrace(System.err);
+                System.err.println("A SQL Error has occured");
+                System.err.println("SQLState: " + ((SQLException) e).getSQLState());
+                System.err.println("Error Code: " + ((SQLException) e).getErrorCode());
+                System.err.println("Message: " + e.getMessage());
+                Throwable t = ex.getCause();
+                if(e.getMessage().equals("The index 0 is out of range")){
+                    return true;
+                }
+                while (t != null) {
+                    System.out.println("Cause: " + t);
+                    t = t.getCause();
+                }
+            }
+            
+        }
+        return false;
+    }
+
+}

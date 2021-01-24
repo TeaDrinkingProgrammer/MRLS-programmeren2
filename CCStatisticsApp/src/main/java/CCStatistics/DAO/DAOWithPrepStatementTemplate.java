@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import CCStatistics.Domain.Course;
 import CCStatistics.Domain.EnumLevel;
 

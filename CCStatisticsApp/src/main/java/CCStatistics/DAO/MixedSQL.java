@@ -9,9 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MixedSQL {
-    private SQLWithPrepStatement sqlWithPrepStatement = new SQLWithPrepStatement();
+    private SQL sql = new SQL();
     public Connection getConnection(){
-        return sqlWithPrepStatement.getConnection();
+        return sql.getConnection();
     }
     
     public ArrayList<ArrayList<String>> readQuery(String[] columns,PreparedStatement preparedStatement){
@@ -57,7 +57,7 @@ public class MixedSQL {
     // }
 
     // public int deleteQuery(PreparedStatement preparedStatement){
-    //     return sqlWithPrepStatement.deleteQuery(preparedStatement);
+    //     return sql.deleteQuery(preparedStatement);
     // }
 
     // public void createQuery(PreparedStatement preparedStatement){
@@ -80,7 +80,7 @@ public class MixedSQL {
     // }
 
 	public static Boolean printSQLException(SQLException ex) {
-        return SQLWithPrepStatement.printSQLException(ex);
+        return SQL.printSQLException(ex);
     }
 
 }

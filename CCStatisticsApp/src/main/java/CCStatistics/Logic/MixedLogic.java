@@ -1,7 +1,6 @@
 package CCStatistics.Logic;
 
 import java.util.ArrayList;
-
 import CCStatistics.DAO.MixedDAO;
 
 public class MixedLogic {

@@ -1,14 +1,13 @@
 package CCStatistics.Logic;
 
 import java.util.ArrayList;
-
 // import CCStatistics.DAO.CourseDAO;
-import CCStatistics.DAO.CourseDAOWithPrepStatement;
+import CCStatistics.DAO.CourseDAO;
 import CCStatistics.Domain.Course;
 
 public class CourseInterestingToLogic {
 
-    CourseDAOWithPrepStatement courseDAO = new CourseDAOWithPrepStatement();
+    CourseDAO courseDAO = new CourseDAO();
 
     public ArrayList<Course> getAllCourses() {
         return courseDAO.getAll();

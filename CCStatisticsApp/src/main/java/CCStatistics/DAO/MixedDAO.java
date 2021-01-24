@@ -49,11 +49,11 @@ public class MixedDAO {
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
             //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
-            if(SQLWithPrepStatement.printSQLException(e)){
+            if(SQL.printSQLException(e)){
                 return this.nothingFound();
             }
             // print SQL exception information
-            SQLWithPrepStatement.printSQLException(e);
+            SQL.printSQLException(e);
         }
     return null;
     }
@@ -84,11 +84,11 @@ public class MixedDAO {
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
             //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
-            if(SQLWithPrepStatement.printSQLException(e)){
+            if(SQL.printSQLException(e)){
                 return this.nothingFound();
             }
             // print SQL exception information
-            SQLWithPrepStatement.printSQLException(e);
+            SQL.printSQLException(e);
         }
     return null;
     } 
@@ -119,11 +119,11 @@ public class MixedDAO {
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
             //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
-            if(SQLWithPrepStatement.printSQLException(e)){
+            if(SQL.printSQLException(e)){
                 return this.nothingFound();
             }
             // print SQL exception information
-            SQLWithPrepStatement.printSQLException(e);
+            SQL.printSQLException(e);
         }
     return null;
     } 
@@ -152,11 +152,11 @@ public class MixedDAO {
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
             //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
-            if(SQLWithPrepStatement.printSQLException(e)){
+            if(SQL.printSQLException(e)){
                 return this.nothingFound();
             }
             // print SQL exception information
-            SQLWithPrepStatement.printSQLException(e);
+            SQL.printSQLException(e);
         }
     return null;
     }
@@ -187,11 +187,11 @@ public class MixedDAO {
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
             //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
-            if(SQLWithPrepStatement.printSQLException(e)){
+            if(SQL.printSQLException(e)){
                 return this.nothingFound();
             }
             // print SQL exception information
-            SQLWithPrepStatement.printSQLException(e);
+            SQL.printSQLException(e);
         }
     return null;
     }
@@ -223,11 +223,11 @@ public class MixedDAO {
         //Omdat de verbinding ook fout kan gaan is hier ook een catch voor SQLexception
         } catch (SQLException e){
             //Als er geen resultaat komt, komt er een bepaalde error (zie printSQLException), dan vangt dit het af en stuurt een not found resultaat"
-            if(SQLWithPrepStatement.printSQLException(e)){
+            if(SQL.printSQLException(e)){
                 return this.nothingFound();
             }
             // print SQL exception information
-            SQLWithPrepStatement.printSQLException(e);
+            SQL.printSQLException(e);
         }
     return null;
     } 

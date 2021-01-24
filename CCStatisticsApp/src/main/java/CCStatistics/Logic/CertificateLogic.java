@@ -1,13 +1,13 @@
 package CCStatistics.Logic;
 
 import java.util.ArrayList;
-import CCStatistics.DAO.CertificateDAOWithPrepStatement;
-import CCStatistics.DAO.SQLWithPrepStatement;
+import CCStatistics.DAO.CertificateDAO;
+import CCStatistics.DAO.SQL;
 import CCStatistics.Domain.Certificate;
 
 public class CertificateLogic implements Logic<Certificate> {
-    private CertificateDAOWithPrepStatement certificateDAO = new CertificateDAOWithPrepStatement();
-    private SQLWithPrepStatement sql = new SQLWithPrepStatement();
+    private CertificateDAO certificateDAO = new CertificateDAO();
+    private SQL sql = new SQL();
     private ArrayList<String> columns = new ArrayList<>();
 //Haal alle studenten op in de DAO
     @Override

@@ -2,8 +2,8 @@
 package CCStatistics;
 
 import javafx.application.Application;
-import CCStatistics.DAO.CertificateDAOWithPrepStatement;
-import CCStatistics.DAO.CourseDAOWithPrepStatement;
+import CCStatistics.DAO.CertificateDAO;
+import CCStatistics.DAO.CourseDAO;
 import CCStatistics.DAO.MixedDAO;
 import CCStatistics.Domain.Certificate;
 import CCStatistics.Domain.Course;

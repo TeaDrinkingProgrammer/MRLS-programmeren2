@@ -1,14 +1,13 @@
 package CCStatistics.Logic;
 
 import java.util.ArrayList;
-
-import CCStatistics.DAO.SQLWithPrepStatement;
-import CCStatistics.DAO.StudentDAOWithPrepStatement;
+import CCStatistics.DAO.SQL;
+import CCStatistics.DAO.StudentDAO;
 import CCStatistics.Domain.Student;
 
 public class StudentLogic implements Logic<Student> {
-    private StudentDAOWithPrepStatement studentDAO = new StudentDAOWithPrepStatement();
-    private SQLWithPrepStatement sql = new SQLWithPrepStatement();
+    private StudentDAO studentDAO = new StudentDAO();
+    private SQL sql = new SQL();
     private ArrayList<String> columns = new ArrayList<>();
 //Haal alle studenten op in de DAO
     @Override
