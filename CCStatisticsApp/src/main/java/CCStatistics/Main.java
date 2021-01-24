@@ -18,7 +18,8 @@ import CCStatistics.Logic.StudentLogic;
 public class Main {    
     public static void main(String[] args) {
         //Application.launch(HomeScreen.class);
-        Application.launch(GUITemplate.class);
+        //Application.launch(GUITemplate.class);
+        Application.launch(UDScreen.class);
         // CertificateDAO newOne = new CertificateDAO();
         // newOne.createCertificate(7.5, "Jan");
         
