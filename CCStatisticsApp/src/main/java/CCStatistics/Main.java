@@ -9,34 +9,37 @@ import CCStatistics.Domain.Certificate;
 import CCStatistics.Domain.Course;
 import CCStatistics.Domain.Student;
 import CCStatistics.GUI.CourseInteresting;
+import CCStatistics.GUI.HomeScreen;
+import CCStatistics.GUI.UDScreen;
 import CCStatistics.Logic.MixedLogic;
 import CCStatistics.Logic.StudentLogic;
 
 public class Main {    
     public static void main(String[] args) {
-        //Application.launch(CourseInteresting.class);
+        Application.launch(HomeScreen.class);
+        //Application.launch(UDScreen.class);
         // CertificateDAO newOne = new CertificateDAO();
         // newOne.createCertificate(7.5, "Jan");
         
-       MixedDAO testdao = new MixedDAO();
-        for(String[] stringArray: testdao.getTop3Webcasts()){
-            for(String string : stringArray){
-                System.out.println(string);
-            }
-        }
-        System.out.println("%%%%%%%%%%");
-        MixedLogic newOne = new MixedLogic();
-        for (String[] stringArray : newOne.getAverageProgressForCourse("TestCourse1")) {
-            for (String string : stringArray) {
-                System.out.println(string);
-            }
-        }
-        System.out.println("%%%%%%%%%%");
-        for (String[] stringArray : newOne.getProgressInWebcast("student@live.com", 1)) {
-            for (String string : stringArray) {
-                System.out.println(string);
-            }
-        }
+    //    MixedDAO testdao = new MixedDAO();
+    //     for(String[] stringArray: testdao.getTop3Webcasts()){
+    //         for(String string : stringArray){
+    //             System.out.println(string);
+    //         }
+    //     }
+    //     System.out.println("%%%%%%%%%%");
+    //     MixedLogic newOne = new MixedLogic();
+    //     for (String[] stringArray : newOne.getAverageProgressForCourse("TestCourse1")) {
+    //         for (String string : stringArray) {
+    //             System.out.println(string);
+    //         }
+    //     }
+    //     System.out.println("%%%%%%%%%%");
+    //     for (String[] stringArray : newOne.getProgressInWebcast("student@live.com", 1)) {
+    //         for (String string : stringArray) {
+    //             System.out.println(string);
+    //         }
+    //     }
         
 
         // System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%");
