@@ -77,7 +77,7 @@ public class StudentDAO {
             preparedStatement.setString(5, student.getGender());
             preparedStatement.setString(6, student.getStreet());
             preparedStatement.setString(7, student.getHouseNumber());
-            preparedStatement.setString(8, student.getPostalcode());
+            preparedStatement.setString(8, student.getPostalCode());
             preparedStatement.setString(9, student.getCity());
             preparedStatement.setString(10, student.getCountry());
             // Stuur de preparedstatement direct naar de goede methode in SQL

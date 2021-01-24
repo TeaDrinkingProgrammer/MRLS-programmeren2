@@ -5,7 +5,7 @@ public class Certificate {
     private double grade;
     private String employeeName;
 
-    public Certificate( double grade, String employeeName) {
+    public Certificate(double grade, String employeeName) {
         this.grade = grade;
         this.employeeName = employeeName;
     }

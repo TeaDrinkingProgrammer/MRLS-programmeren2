@@ -6,7 +6,7 @@ import CCStatistics.DAO.MixedDAO;
 public class MixedLogic {
     MixedDAO mixedDAO = new MixedDAO();
 
-    //Voor een geselecteerde cursus, geef per module de gemiddelde voortgang in percentage van de totale lengte, voor alle accounts.
+//Voor een geselecteerde cursus, geef per module de gemiddelde voortgang in percentage van de totale lengte, voor alle accounts.
     public ArrayList<String[]> getAverageProgressForCourse(String courseName) {
         return mixedDAO.getAverageProgressForCourse(courseName);
     }
@@ -15,7 +15,7 @@ public class MixedLogic {
         return mixedDAO.averageProgressForCourseColumns;
     }
 
-    //Voor een geselecteerd account en geselecteerde cursus, geef per module de voortgang als percentage.
+//Voor een geselecteerd account en geselecteerde cursus, geef per module de voortgang als percentage.
     public ArrayList<String[]> getModuleProgress(String courseName,String studentEmail) {
         return mixedDAO.getModuleProgress(courseName, studentEmail);
     }
@@ -24,7 +24,7 @@ public class MixedLogic {
         return mixedDAO.moduleProgressColumns;
     }
 
-    //Geef een top 3 van meest bekeken webcasts.
+//Geef een top 3 van meest bekeken webcasts.
     public ArrayList<String[]> getTop3Webcasts() {
         return mixedDAO.getTop3Webcasts();
     }
@@ -33,7 +33,7 @@ public class MixedLogic {
         return mixedDAO.top3WebcastsColumns;
     }
 
-    //Voor een geselecteerde cursus, geef hoeveel cursisten deze in het geheel behaald hebben.
+//Voor een geselecteerde cursus, geef hoeveel cursisten deze in het geheel behaald hebben.
     public ArrayList<String[]> getStudentsPassedInCourse(String courseInput) {
         return mixedDAO.getStudentsPassedInCourse(courseInput);
     }
@@ -42,7 +42,7 @@ public class MixedLogic {
         return mixedDAO.studentsPassedInCourseColumns;
     }
     
-    //Voor een cursist kan aangegeven worden wat de voortgang in een module is.
+//Voor een cursist kan aangegeven worden wat de voortgang in een module is.
     public ArrayList<String[]> getProgressInModule(String studentEmail,int moduleID) {
         return mixedDAO.getProgressInModule(studentEmail, moduleID);
     }
@@ -51,7 +51,7 @@ public class MixedLogic {
         return mixedDAO.progressInModuleColumns;
     }
 
-    //Voor een cursist kan aangegeven worden hoeveel procent van een webcast bekeken is. 
+//Voor een cursist kan aangegeven worden hoeveel procent van een webcast bekeken is. 
     public ArrayList<String[]> getProgressInWebcast(String studentEmail,int webcastID) {
         return mixedDAO.getProgressInWebcast("student@live.com", 1);
     }

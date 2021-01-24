@@ -10,12 +10,12 @@ public class Student {
     private String gender;
     private String street;
     private String houseNumber;
-    private String postalcode;
+    private String postalCode;
     private String city;
     private String country;
     private ArrayList<Signup> signUps;
 
-    public Student(String email, String firstName, String lastName, String dateOfBirth, String gender, String street, String houseNumber, String postalcode, String city, String country) {
+    public Student(String email, String firstName, String lastName, String dateOfBirth, String gender, String street, String houseNumber, String postalCode, String city, String country) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -23,7 +23,7 @@ public class Student {
         this.gender = gender;
         this.street = street;
         this.houseNumber = houseNumber;
-        this.postalcode = postalcode;
+        this.postalCode = postalCode;
         this.city = city;
         this.country = country;
     }
@@ -88,12 +88,12 @@ public class Student {
         this.houseNumber = houseNumber;
     }
 
-    public String getPostalcode() {
-        return this.postalcode;
+    public String getPostalCode() {
+        return this.postalCode;
     }
 
-    public void setPostalcode(String postalcode) {
-        this.postalcode = postalcode;
+    public void setPostalcode(String postalCode) {
+        this.postalCode = postalCode;
     }
 
     public String getCity() {
